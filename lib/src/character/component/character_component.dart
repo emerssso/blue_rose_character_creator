@@ -1,7 +1,9 @@
+import 'dart:async';
 import 'package:angular/angular.dart';
 import 'package:angular_components/angular_components.dart';
 import 'package:angular_forms/angular_forms.dart';
 import 'package:blue_rose_character_creator/src/character/character.dart';
+import 'package:blue_rose_character_creator/src/character/character_class.dart';
 import 'package:blue_rose_character_creator/src/character/race.dart';
 
 /// UI form for a character
@@ -15,39 +17,63 @@ import 'package:blue_rose_character_creator/src/character/race.dart';
     NgModel,
   ],
 )
-class CharacterComponent implements OnInit{
+class CharacterComponent implements OnInit {
   var character = new Character();
-  String selectedRace;
 
-  ItemRenderer<Race> raceRenderer =
-      new CachingItemRenderer<Race>((race) => raceToString(race));
+  var race = new DropDownDelegate<Race>(
+      Race.values.sublist(0, 5),
+      (race) => raceToString(race),
+      Race.unknown);
 
-  StringSelectionOptions<Race> get raceOptions => new RaceSelectionOptions();
-
-  SelectionModel<Race> selectionModel = new SelectionModel<Race>
-      .withList(selectedValues: [Race.human]);
+  var characterClass = new DropDownDelegate<CharacterClass>(
+      CharacterClass.values.sublist(0, 3),
+      (cc) => characterClassToString(cc),
+      CharacterClass.unknown);
 
   @override
   ngOnInit() {
-    selectionModel.selectionChanges.listen(
-            (selected) =>
-            character.race = selected[0].added.first ?? Race.unknown
-    );
+    race.listen((selected) => character.race = selected ?? Race.unknown);
+    characterClass.listen((selected) =>
+        character.characterClass = selected ?? CharacterClass.unknown);
   }
 
   showRace(Race race) {
     return raceToString(race);
   }
+
+  showClass(CharacterClass cc) {
+    return characterClassToString(cc);
+  }
 }
 
-List<String> races = ["Human", "Night Person", "Rhydan", "Sea-folk", "Vata"];
+class DropDownDelegate<T> {
+  final StringSelectionOptions<T> options;
+  final ItemRenderer<T> renderer;
+  final SelectionModel<T> selection;
 
-class RaceSelectionOptions extends StringSelectionOptions<Race>
-    implements Selectable {
-  RaceSelectionOptions() : super(Race.values.sublist(0, 5));
+  DropDownDelegate(List<T> optionList, String toString(T), T initialSelection)
+      : options = new StringSelectionOptions<T>(optionList),
+        renderer = new CachingItemRenderer<T>(toString),
+        selection =
+            new SelectionModel<T>.withList(selectedValues: [initialSelection]) {
+  }
 
-  @override
-  SelectableOption getSelectable(item) => SelectableOption.Selectable;
+  StreamSubscription<List<SelectionChangeRecord<T>>> listen(void onData(T)) =>
+      selection.selectionChanges
+          .listen((selected) => onData(selected[0].added.first));
+}
+
+characterClassToString(CharacterClass cc) {
+  switch (cc) {
+    case CharacterClass.warrior:
+      return "Warrior";
+    case CharacterClass.expert:
+      return "Expert";
+    case CharacterClass.adept:
+      return "Adept";
+    default:
+      return "Unknown";
+  }
 }
 
 raceToString(Race race) {

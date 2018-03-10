@@ -7,10 +7,15 @@
 
   <material-dropdown-select
       [buttonText]="character.race == null ? 'Race' : showRace(character.race)"
-      [options]="raceOptions"
-      [itemRenderer]="raceRenderer"
-      [selection]="selectionModel"
-  >
+      [options]="race.options"
+      [itemRenderer]="race.renderer"
+      [selection]="race.selection">
   </material-dropdown-select>
 
+  <material-dropdown-select
+      [buttonText]="character.characterClass == null? 'Class' : showClass(character.characterClass)"
+      [options]="characterClass.options"
+      [itemRenderer]="characterClass.renderer"
+      [selection]="characterClass.selection">
+  </material-dropdown-select>
 </div>
