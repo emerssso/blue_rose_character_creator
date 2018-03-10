@@ -1,0 +1,16 @@
+<div>
+  <material-input
+      label="Name"
+      autoFocus floatingLabel style="width:80%"
+      [(ngModel)]="character.name">
+  </material-input>
+
+  <material-dropdown-select
+      [buttonText]="character.race == null ? 'Race' : showRace(character.race)"
+      [options]="raceOptions"
+      [itemRenderer]="raceRenderer"
+      [selection]="selectionModel"
+  >
+  </material-dropdown-select>
+
+</div>
