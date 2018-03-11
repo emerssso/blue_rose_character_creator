@@ -1,21 +1,34 @@
 <div>
-  <material-input
-      label="Name"
+  <material-input id="name"
+      label="Character Name"
       autoFocus floatingLabel style="width:80%"
       [(ngModel)]="character.name">
   </material-input>
+</div>
 
+<div>
   <material-dropdown-select
       [buttonText]="character.race == null ? 'Race' : showRace(character.race)"
       [options]="race.options"
       [itemRenderer]="race.renderer"
-      [selection]="race.selection">
+      [selection]="race.selection"
+      [width]="2">
   </material-dropdown-select>
+</div>
 
+<div>
   <material-dropdown-select
       [buttonText]="character.characterClass == null? 'Class' : showClass(character.characterClass)"
       [options]="characterClass.options"
       [itemRenderer]="characterClass.renderer"
-      [selection]="characterClass.selection">
+      [selection]="characterClass.selection"
+      [width]="2">
   </material-dropdown-select>
+</div>
+
+<div>
+  <material-fab raised id="generate-character"
+      (trigger)="generateCharacter()">
+    <material-icon icon="face"></material-icon>
+  </material-fab>
 </div>
