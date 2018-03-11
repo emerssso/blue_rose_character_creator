@@ -1,4 +1,6 @@
 language: dart
+dart-task:
+  -build
 deploy:
   provider: pages
   skip-cleanup: true
