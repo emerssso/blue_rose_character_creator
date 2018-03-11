@@ -19,7 +19,7 @@ import 'package:blue_rose_character_creator/src/drop_down_delegate.dart';
   ],
 )
 class CharacterComponent implements OnInit {
-  var character = new Character();
+  var character = new Character(level: 1);
 
   var race = new DropDownDelegate<Race>(
       Race.values.sublist(0, 5),
@@ -47,6 +47,6 @@ class CharacterComponent implements OnInit {
   }
 
   generateCharacter() {
-    character = new Character();
+    character.fillCharacterSheet();
   }
 }
