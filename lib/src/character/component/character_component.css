@@ -3,3 +3,13 @@
   color: white;
   float: right;
 }
+
+.card {
+  margin: 8px;
+  padding: 8px;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+}
+
+.wrap {
+  width: fit-content;
+}

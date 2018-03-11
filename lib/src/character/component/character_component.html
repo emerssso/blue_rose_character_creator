@@ -1,12 +1,10 @@
-<div>
+<div class="card">
   <material-input id="name"
       label="Character Name"
       autoFocus floatingLabel style="width:80%"
       [(ngModel)]="character.name">
   </material-input>
-</div>
-
-<div>
+<br/>
   <material-dropdown-select
       [buttonText]="character.race == null ? 'Race' : showRace(character.race)"
       [options]="race.options"
@@ -14,9 +12,7 @@
       [selection]="race.selection"
       [width]="2">
   </material-dropdown-select>
-</div>
 
-<div>
   <material-dropdown-select
       [buttonText]="character.characterClass == null? 'Class' : showClass(character.characterClass)"
       [options]="characterClass.options"
@@ -26,9 +22,49 @@
   </material-dropdown-select>
 </div>
 
-<div>
-  <material-fab raised id="generate-character"
-      (trigger)="generateCharacter()">
-    <material-icon icon="face"></material-icon>
-  </material-fab>
+<material-fab raised id="generate-character"
+    (trigger)="generateCharacter()">
+  <material-icon icon="face"></material-icon>
+</material-fab>
+
+<div *ngIf="character.isFilled" class="card wrap">
+  <h3>Abilities</h3>
+  <table>
+    <tr>
+      <td>Accuracy:</td>
+      <td>{{character.accuracy}}</td>
+    </tr>
+    <tr>
+      <td>Communication:</td>
+      <td>{{character.communication}}</td>
+    </tr>
+    <tr>
+      <td>Constitution:</td>
+      <td>{{character.constitution}}</td>
+    </tr>
+    <tr>
+      <td>Dexterity:</td>
+      <td>{{character.constitution}}</td>
+    </tr>
+    <tr>
+      <td>Fighting:</td>
+      <td>{{character.fighting}}</td>
+    </tr>
+    <tr>
+      <td>Intelligence:</td>
+      <td>{{character.intelligence}}</td>
+    </tr>
+    <tr>
+      <td>Perception:</td>
+      <td>{{character.perception}}</td>
+    </tr>
+    <tr>
+      <td>Strength:</td>
+      <td>{{character.strength}}</td>
+    </tr>
+    <tr>
+      <td>Willpower:</td>
+      <td>{{character.willpower}}</td>
+    </tr>
+  </table>
 </div>

@@ -14,15 +14,15 @@ class Character {
 
   Map<Stat, int> stats = new Map();
 
-  int get accuracy => stats[Stat.accuracy];
-  int get communication => stats[Stat.communication];
-  int get constitution => stats[Stat.constitution];
-  int get dexterity => stats[Stat.dexterity];
-  int get fighting => stats[Stat.fighting];
-  int get intelligence => stats[Stat.intelligence];
-  int get perception => stats[Stat.perception];
-  int get strength => stats[Stat.strength];
-  int get willpower => stats[Stat.willpower];
+  int get accuracy => stats[Stat.accuracy] ?? 0;
+  int get communication => stats[Stat.communication] ?? 0;
+  int get constitution => stats[Stat.constitution] ?? 0;
+  int get dexterity => stats[Stat.dexterity] ?? 0;
+  int get fighting => stats[Stat.fighting] ?? 0;
+  int get intelligence => stats[Stat.intelligence] ?? 0;
+  int get perception => stats[Stat.perception] ?? 0;
+  int get strength => stats[Stat.strength] ?? 0;
+  int get willpower => stats[Stat.willpower] ?? 0;
 
   Character({this.name, this.race, this.background,
     this.characterClass, this.level});
@@ -39,6 +39,10 @@ class Character {
     for(int i = 0; i < statOrder.length; i++) {
       stats[statOrder[i]] = bonuses[i];
     }
+  }
+
+  bool get isFilled {
+    return stats.isNotEmpty;
   }
 }
 
