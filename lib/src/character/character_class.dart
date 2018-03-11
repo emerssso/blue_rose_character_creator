@@ -5,7 +5,7 @@ import 'package:blue_rose_character_creator/src/character/stat.dart';
 
 enum CharacterClass { warrior, expert, adept, unknown }
 
-characterClassToString(CharacterClass cc) {
+String characterClassToString(CharacterClass cc) {
   switch (cc) {
     case CharacterClass.warrior:
       return "Warrior";

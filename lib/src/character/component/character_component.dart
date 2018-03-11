@@ -23,12 +23,12 @@ class CharacterComponent implements OnInit {
 
   var race = new DropDownDelegate<Race>(
       Race.values.sublist(0, 5),
-      (race) => raceToString(race),
+      raceToString,
       Race.unknown);
 
   var characterClass = new DropDownDelegate<CharacterClass>(
       CharacterClass.values.sublist(0, 3),
-      (cc) => characterClassToString(cc),
+      characterClassToString,
       CharacterClass.unknown);
 
   @override
@@ -38,15 +38,9 @@ class CharacterComponent implements OnInit {
         character.characterClass = selected ?? CharacterClass.unknown);
   }
 
-  showRace(Race race) {
-    return raceToString(race);
-  }
+  showRace(Race race) => raceToString(race);
 
-  showClass(CharacterClass cc) {
-    return characterClassToString(cc);
-  }
+  showClass(CharacterClass cc) => characterClassToString(cc);
 
-  generateCharacter() {
-    character.fillCharacterSheet();
-  }
+  generateCharacter() => character.fillCharacterSheet();
 }

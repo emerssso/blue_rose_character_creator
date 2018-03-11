@@ -2,7 +2,7 @@ enum Race {
   human, nightPerson, rhydan, seaFolk, vata, unknown
 }
 
-raceToString(Race race) {
+String raceToString(Race race) {
   switch (race) {
     case Race.human:
       return "Human";
