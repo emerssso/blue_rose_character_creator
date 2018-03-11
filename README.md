@@ -1,7 +1,10 @@
-# blue_rose_character_creator
+# Blue Rose Character Creator 
+[![Build Status](https://travis-ci.org/emerssso/blue_rose_character_creator.svg?branch=master)](https://travis-ci.org/emerssso/blue_rose_character_creator)
 
-A web app that uses [AngularDart](https://webdev.dartlang.org/angular) and
+Try it on [Github Pages](https://emerssso.github.io/blue_rose_character_creator/)!
+
+A web app to help automate the creation of characters for the Blue Rose RPG, 
+based on [Rachael Tatman's implementation](https://github.com/rctatman/blue-rose-character-generator) in R.
+
+Built using [AngularDart](https://webdev.dartlang.org/angular) and
 [AngularDart Components](https://webdev.dartlang.org/components).
-
-Created from templates made available by Stagehand under a BSD-style
-[license](https://github.com/dart-lang/stagehand/blob/master/LICENSE).
