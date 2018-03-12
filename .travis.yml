@@ -4,7 +4,7 @@ deploy:
   provider: pages
   skip-cleanup: true
   github-token: $GITHUB_TOKEN
-  local-dir: build
+  local-dir: build/web
   verbose: true
   on:
     branch: master
