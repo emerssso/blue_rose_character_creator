@@ -1,41 +1,47 @@
 import 'dart:math';
 import 'package:blue_rose_character_creator/src/character/character_class.dart';
 import 'package:blue_rose_character_creator/src/character/race.dart';
-import 'package:blue_rose_character_creator/src/character/stat.dart';
+import 'package:blue_rose_character_creator/src/character/ability.dart';
+import 'package:blue_rose_character_creator/src/character/calling_destiny_fate.dart';
 
 /// Models a Blue Rose character
 class Character {
   String name;
   Race race = Race.unknown;
   String background;
-
   CharacterClass characterClass = CharacterClass.unknown;
   int level;
 
-  Map<Stat, int> stats = new Map();
+  String calling;
+  String destiny;
+  String fate;
+  bool destinyAscendant;
 
-  int get accuracy => stats[Stat.accuracy] ?? 0;
+  Map<Ability, int> _abilities = new Map();
 
-  int get communication => stats[Stat.communication] ?? 0;
-
-  int get constitution => stats[Stat.constitution] ?? 0;
-
-  int get dexterity => stats[Stat.dexterity] ?? 0;
-
-  int get fighting => stats[Stat.fighting] ?? 0;
-
-  int get intelligence => stats[Stat.intelligence] ?? 0;
-
-  int get perception => stats[Stat.perception] ?? 0;
-
-  int get strength => stats[Stat.strength] ?? 0;
-
-  int get willpower => stats[Stat.willpower] ?? 0;
+  int get accuracy => _abilities[Ability.accuracy] ?? 0;
+  int get communication => _abilities[Ability.communication] ?? 0;
+  int get constitution => _abilities[Ability.constitution] ?? 0;
+  int get dexterity => _abilities[Ability.dexterity] ?? 0;
+  int get fighting => _abilities[Ability.fighting] ?? 0;
+  int get intelligence => _abilities[Ability.intelligence] ?? 0;
+  int get perception => _abilities[Ability.perception] ?? 0;
+  int get strength => _abilities[Ability.strength] ?? 0;
+  int get willpower => _abilities[Ability.willpower] ?? 0;
 
   Character(
       {this.name, this.race, this.background, this.characterClass, this.level});
 
   void fillCharacterSheet() {
+    fillAbilities();
+
+    calling = callings[rng.nextInt(callings.length)];
+    destiny = destinies[rng.nextInt(destinies.length)];
+    fate = fates[rng.nextInt(fates.length)];
+    destinyAscendant = rng.nextInt(2) == 1;
+  }
+
+  void fillAbilities() {
     List<int> bonuses =
         new List.generate(9, (i) => Xd6(3))
             .map((k) => rollToBonus[k])
@@ -43,14 +49,14 @@ class Character {
 
     bonuses.sort((i, j) => j - i);
 
-    List<Stat> statOrder = statPriorityListForClass(characterClass);
+    List<Ability> statOrder = statPriorityListForClass(characterClass);
 
     for (int i = 0; i < statOrder.length; i++) {
-      stats[statOrder[i]] = bonuses[i];
+      _abilities[statOrder[i]] = bonuses[i];
     }
   }
 
-  bool get isFilled => stats.isNotEmpty;
+  bool get isFilled => _abilities.isNotEmpty;
 }
 
 var rng = new Random();

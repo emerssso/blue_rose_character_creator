@@ -22,9 +22,7 @@ class CharacterComponent implements OnInit {
   var character = new Character(level: 1);
 
   var race = new DropDownDelegate<Race>(
-      Race.values.sublist(0, 5),
-      raceToString,
-      Race.unknown);
+      Race.values.sublist(0, 5), raceToString, Race.unknown);
 
   var characterClass = new DropDownDelegate<CharacterClass>(
       CharacterClass.values.sublist(0, 3),
@@ -41,6 +39,12 @@ class CharacterComponent implements OnInit {
   showRace(Race race) => raceToString(race);
 
   showClass(CharacterClass cc) => characterClassToString(cc);
+
+  String destinyAscendant() =>
+      character.destinyAscendant ? "(ascendant)" : "";
+
+  String fateAscendant() =>
+      character.destinyAscendant ? "" : "(ascendant)";
 
   generateCharacter() => character.fillCharacterSheet();
 }

@@ -1,4 +1,4 @@
-enum Stat {
+enum Ability {
   accuracy,
   communication,
   constitution,

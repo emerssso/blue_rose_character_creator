@@ -27,7 +27,8 @@
   <material-icon icon="face"></material-icon>
 </material-fab>
 
-<div *ngIf="character.isFilled" class="card wrap">
+<div *ngIf="character.isFilled" >
+  <div class="card wrap">
   <h3>Abilities</h3>
   <table>
     <tr>
@@ -67,4 +68,10 @@
       <td>{{character.willpower}}</td>
     </tr>
   </table>
+  </div>
+  <div class="card wrap">
+    <b>Calling: </b> {{character.calling}}<br/>
+    <b>Destiny: </b> {{character.destiny}} <i>{{destinyAscendant()}}</i><br/>
+    <b>Fate: </b> {{character.fate}} <i>{{fateAscendant()}}</i><br/>
+  </div>
 </div>

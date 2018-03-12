@@ -1,7 +1,7 @@
 import 'dart:math';
 /// Models the three Blue Rose Classes as an enum
 
-import 'package:blue_rose_character_creator/src/character/stat.dart';
+import 'package:blue_rose_character_creator/src/character/ability.dart';
 
 enum CharacterClass { warrior, expert, adept, unknown }
 
@@ -18,46 +18,46 @@ String characterClassToString(CharacterClass cc) {
   }
 }
 
-List<Stat> warriorPrimary = [
-  Stat.constitution,
-  Stat.dexterity,
-  Stat.fighting,
-  Stat.strength
+List<Ability> warriorPrimary = [
+  Ability.constitution,
+  Ability.dexterity,
+  Ability.fighting,
+  Ability.strength
 ];
-List<Stat> warriorSecondary = [
-  Stat.accuracy,
-  Stat.communication,
-  Stat.intelligence,
-  Stat.perception,
-  Stat.willpower
-];
-
-List<Stat> expertPrimary = [
-  Stat.accuracy,
-  Stat.communication,
-  Stat.dexterity,
-  Stat.perception
-];
-List<Stat> expertSecondary = [
-  Stat.constitution,
-  Stat.fighting,
-  Stat.intelligence,
-  Stat.strength,
-  Stat.willpower
+List<Ability> warriorSecondary = [
+  Ability.accuracy,
+  Ability.communication,
+  Ability.intelligence,
+  Ability.perception,
+  Ability.willpower
 ];
 
-List<Stat> adeptPrimary = [
-  Stat.accuracy,
-  Stat.intelligence,
-  Stat.perception,
-  Stat.willpower
+List<Ability> expertPrimary = [
+  Ability.accuracy,
+  Ability.communication,
+  Ability.dexterity,
+  Ability.perception
 ];
-List<Stat> adeptSecondary = [
-  Stat.communication,
-  Stat.constitution,
-  Stat.dexterity,
-  Stat.fighting,
-  Stat.strength
+List<Ability> expertSecondary = [
+  Ability.constitution,
+  Ability.fighting,
+  Ability.intelligence,
+  Ability.strength,
+  Ability.willpower
+];
+
+List<Ability> adeptPrimary = [
+  Ability.accuracy,
+  Ability.intelligence,
+  Ability.perception,
+  Ability.willpower
+];
+List<Ability> adeptSecondary = [
+  Ability.communication,
+  Ability.constitution,
+  Ability.dexterity,
+  Ability.fighting,
+  Ability.strength
 ];
 
 //Stat,Adept,Warrior,Expert
@@ -73,9 +73,9 @@ List<Stat> adeptSecondary = [
 
 Random rng = new Random();
 
-List<Stat> statPriorityListForClass(CharacterClass cc) {
-  List<Stat> primary;
-  List<Stat> secondary;
+List<Ability> statPriorityListForClass(CharacterClass cc) {
+  List<Ability> primary;
+  List<Ability> secondary;
 
   switch (cc) {
     case CharacterClass.warrior:
@@ -91,7 +91,7 @@ List<Stat> statPriorityListForClass(CharacterClass cc) {
       secondary = new List.from(adeptSecondary);
       break;
     case CharacterClass.unknown:
-      primary = new List<Stat>();
+      primary = new List<Ability>();
       secondary = primary;
   }
 
