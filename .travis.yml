@@ -1,6 +1,5 @@
 language: dart
-dart-task:
-  -build
+script: pub build --mode=release --output=build
 deploy:
   provider: pages
   skip-cleanup: true
