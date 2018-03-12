@@ -69,6 +69,8 @@ class Character {
   }
 
   void increase(Ability ability) => _abilities[ability]++;
+
+  int getAbilityBonus(Ability ability) => _abilities[ability];
 }
 
 Map<int, int> rollToAbilityBonus = new Map.unmodifiable(new Map.fromIterables(

@@ -4,7 +4,7 @@ import 'package:angular_forms/angular_forms.dart';
 import 'package:blue_rose_character_creator/src/character/ability.dart';
 import 'package:blue_rose_character_creator/src/character/character.dart';
 import 'package:blue_rose_character_creator/src/character/character_class.dart';
-import 'package:blue_rose_character_creator/src/character/component/ability_row_component.dart';
+import 'package:blue_rose_character_creator/src/character/component/abilities_component.dart';
 import 'package:blue_rose_character_creator/src/character/race.dart';
 import 'package:blue_rose_character_creator/src/drop_down_delegate.dart';
 
@@ -18,7 +18,7 @@ import 'package:blue_rose_character_creator/src/drop_down_delegate.dart';
     materialDirectives,
     MaterialDropdownSelectComponent,
     NgModel,
-    AbilityRowComponent,
+    AbilitiesComponent,
   ],
   providers: const [materialProviders],
 )
