@@ -1,8 +1,10 @@
 import 'package:angular/angular.dart';
 import 'package:angular_components/angular_components.dart';
 import 'package:angular_forms/angular_forms.dart';
+import 'package:blue_rose_character_creator/src/character/ability.dart';
 import 'package:blue_rose_character_creator/src/character/character.dart';
 import 'package:blue_rose_character_creator/src/character/character_class.dart';
+import 'package:blue_rose_character_creator/src/character/component/ability_row_component.dart';
 import 'package:blue_rose_character_creator/src/character/race.dart';
 import 'package:blue_rose_character_creator/src/drop_down_delegate.dart';
 
@@ -16,10 +18,12 @@ import 'package:blue_rose_character_creator/src/drop_down_delegate.dart';
     materialDirectives,
     MaterialDropdownSelectComponent,
     NgModel,
+    AbilityRowComponent,
   ],
+  providers: const [materialProviders],
 )
 class CharacterComponent implements OnInit {
-  var character = new Character(level: 1);
+  var character = new Character(Race.human, CharacterClass.warrior);
 
   var race = new DropDownDelegate<Race>(
       Race.values.sublist(0, 5), raceToString, Race.unknown);
@@ -31,20 +35,26 @@ class CharacterComponent implements OnInit {
 
   @override
   ngOnInit() {
-    race.listen((selected) => character.race = selected ?? Race.unknown);
+    race.listen((selected) =>
+        _regenerateCharacter(selected, character.characterClass));
+
     characterClass.listen((selected) =>
-        character.characterClass = selected ?? CharacterClass.unknown);
+        _regenerateCharacter(character.race, selected));
   }
 
-  showRace(Race race) => raceToString(race);
+  _regenerateCharacter(Race race, CharacterClass characterClass) =>
+      character = new Character(race, characterClass);
 
-  showClass(CharacterClass cc) => characterClassToString(cc);
+  String get raceName => raceToString(character?.race);
 
-  String destinyAscendant() =>
-      character.destinyAscendant ? "(ascendant)" : "";
+  String get characterClassName =>
+      characterClassToString(character?.characterClass);
 
-  String fateAscendant() =>
-      character.destinyAscendant ? "" : "(ascendant)";
 
-  generateCharacter() => character.fillCharacterSheet();
+  String destinyAscendant() => character.destinyAscendant ? "(ascendant)" : "";
+
+  String fateAscendant() => character.destinyAscendant ? "" : "(ascendant)";
+
+  List<String> get accuracyFocuses =>
+      character.focuses[Ability.accuracy].map((focus) => focus.domain);
 }

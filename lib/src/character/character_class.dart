@@ -14,7 +14,7 @@ String characterClassToString(CharacterClass cc) {
     case CharacterClass.adept:
       return "Adept";
     default:
-      return "Unknown";
+      return "Class";
   }
 }
 

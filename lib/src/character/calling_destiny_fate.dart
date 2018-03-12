@@ -1,4 +1,12 @@
-List<String> callings = new List.unmodifiable(const [
+import 'package:blue_rose_character_creator/src/character/dice.dart';
+
+drawCalling() => drawFrom(_callings);
+
+drawDestiny() => drawFrom(_destinies);
+
+drawFate() => drawFrom(_fates);
+
+List<String> _callings = new List.unmodifiable(const [
   "Adventure and excitement",
   "Mastery of the arcane",
   "Oneness with spirit",
@@ -23,7 +31,7 @@ List<String> callings = new List.unmodifiable(const [
   "Exploration and discovery",
 ]);
 
-List<String> destinies = new List.unmodifiable(const[
+List<String> _destinies = new List.unmodifiable(const[
   "Courageous",
   "Compromising",
   "Stalwart",
@@ -82,7 +90,7 @@ List<String> destinies = new List.unmodifiable(const[
   "Resourceful"
 ]);
 
-List<String> fates = new List.unmodifiable(const [
+List<String> _fates = new List.unmodifiable(const [
   "Cowardly",
   "Indecisive",
   "Treacherous",
