@@ -6,6 +6,5 @@ deploy:
   github-token: $GITHUB_TOKEN
   local-dir: build/web
   verbose: true
-  keep-history: true
   on:
     branch: master
