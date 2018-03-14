@@ -45,4 +45,10 @@
       {{ group }}
     </li>
   </div>
+  <div class="card wrap" *ngIf="character.talents.isNotEmpty">
+    <h3>Talents</h3>
+    <li *ngFor="let talent of character.talents">
+      {{talent.name}} ({{renderDegree(talent.degree)}})
+    </li>
+  </div>
 </div>

@@ -6,6 +6,7 @@ import 'package:blue_rose_character_creator/src/character/character.dart';
 import 'package:blue_rose_character_creator/src/character/character_class.dart';
 import 'package:blue_rose_character_creator/src/character/component/abilities_component.dart';
 import 'package:blue_rose_character_creator/src/character/race.dart';
+import 'package:blue_rose_character_creator/src/character/talent.dart';
 import 'package:blue_rose_character_creator/src/drop_down_delegate.dart';
 
 /// UI form for a character
@@ -57,4 +58,12 @@ class CharacterComponent implements OnInit {
 
   List<String> get accuracyFocuses =>
       character.focuses[Ability.accuracy].map((focus) => focus.domain);
+
+  String renderDegree(Degree degree) {
+    switch(degree) {
+      case Degree.novice: return "Novice";
+      case Degree.journeyman: return "Journeyman";
+      case Degree.master: return "Master";
+    }
+  }
 }

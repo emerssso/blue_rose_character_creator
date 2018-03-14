@@ -6,6 +6,7 @@ import 'package:blue_rose_character_creator/src/character/focus.dart';
 import 'package:blue_rose_character_creator/src/character/race.dart';
 import 'package:blue_rose_character_creator/src/character/ability.dart';
 import 'package:blue_rose_character_creator/src/character/calling_destiny_fate.dart';
+import 'package:blue_rose_character_creator/src/character/talent.dart';
 
 /// Models a Blue Rose character
 class Character {
@@ -23,6 +24,7 @@ class Character {
   final Map<Ability, List<Focus>> focuses = new Map();
   final List<String> weaponsGroups = new List();
   final List<String> powers = new List();
+  final List<Talent> talents = new List();
 
   int get accuracy => _abilities[Ability.accuracy] ?? 0;
   int get communication => _abilities[Ability.communication] ?? 0;
@@ -34,6 +36,7 @@ class Character {
   int get strength => _abilities[Ability.strength] ?? 0;
   int get willpower => _abilities[Ability.willpower] ?? 0;
 
+  int get health => getHealthFor(characterClass, constitution);
   int get speed => 10 + dexterity; //TODO: Consider Rhydan complications
   int get defense => 10 + dexterity;
 
@@ -44,6 +47,7 @@ class Character {
         destinyAscendant = coinFlip() {
     _fillAbilities();
     applyRacialBenefits(this);
+    applyClassBenefits(this);
   }
 
   void _fillAbilities() {
@@ -71,6 +75,9 @@ class Character {
   void increase(Ability ability) => _abilities[ability]++;
 
   int getAbilityBonus(Ability ability) => _abilities[ability];
+
+  bool canTake(Talent talent) =>
+      _abilities[talent.requiredAbility] >= talent.requiredBonus;
 }
 
 Map<int, int> rollToAbilityBonus = new Map.unmodifiable(new Map.fromIterables(

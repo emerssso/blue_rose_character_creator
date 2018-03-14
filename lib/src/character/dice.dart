@@ -17,3 +17,4 @@ bool coinFlip() => _rng.nextInt(2) == 1;
 
 ///randomly select a T from passed list
 T drawFrom<T>(List<T> deck) => deck[_rng.nextInt(deck.length)];
+
