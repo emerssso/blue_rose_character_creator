@@ -16,15 +16,23 @@ int Xd6(int times) =>
 bool coinFlip() => _rng.nextInt(2) == 1;
 
 ///randomly select a T from passed list
-T drawFrom<T>(List<T> deck) => deck[_rng.nextInt(deck.length)];
+T drawFrom<T>(List<T> deck) {
+  if(deck == null) return null;
+  if(deck.length == 0) return null;
+  if(deck.length == 1) return deck.first;
+
+  return deck[_rng.nextInt(deck.length)];
+}
 
 /// Returns a random element of T that meets the passed predicate,
 /// or null if none can
-T drawWhere<T>(List<T> deck, bool predicate(T)) {
+T drawWhere<T>(Iterable<T> deck, bool predicate(T)) {
+  if(deck == null) return null;
   return drawFrom(deck.where(predicate).toList());
 }
 
-T drawWithoutRepeats<T>(List<T> deck, List<T> repeats) {
-  return drawWhere(deck, (t) => repeats.contains(t));
+T drawWithoutRepeats<T>(Iterable<T> deck, Iterable<T> repeats) {
+  if(deck == null) return null;
+  return drawWhere(deck, (t) => !repeats.contains(t));
 }
 

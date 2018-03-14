@@ -141,9 +141,9 @@ List<Talent> _adeptTalents = new List.unmodifiable([
 List<Talent> getTalentsFor(Character c) {
   switch (c.characterClass) {
     case CharacterClass.adept:
-      Talent first = drawWithoutRepeats(arcaneTalents, c.talents);
-      Talent second = drawWhere(
-          arcaneTalents.where(c.talents.contains).toList(), (t) => t != first);
+      Talent first = drawWhere(arcaneTalents, c.canTake);
+      Talent second = drawWhere(arcaneTalents.where(c.canTake),
+              (t) => t != first);
       Talent third = drawWhere(_adeptTalents, c.canTake);
 
       return listOfNonNull([first, second, third]);

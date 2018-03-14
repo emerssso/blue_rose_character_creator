@@ -10,7 +10,7 @@ class Talent {
   final Ability requiredAbility;
   final int requiredBonus;
 
-  Talent(this.name, this.degree, {this.requiredAbility, this.requiredBonus});
+  Talent(this.name, this.degree, {this.requiredAbility, this.requiredBonus=-1});
 }
 
 List<Talent> arcaneTalents = new List.unmodifiable([
