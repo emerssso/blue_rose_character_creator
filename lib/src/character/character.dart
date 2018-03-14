@@ -77,7 +77,8 @@ class Character {
   int getAbilityBonus(Ability ability) => _abilities[ability];
 
   bool canTake(Talent talent) =>
-      _abilities[talent.requiredAbility] >= talent.requiredBonus;
+      _abilities[talent.requiredAbility] >= talent.requiredBonus &&
+          talents.where((has) => has.name == talent.name).isEmpty;
 }
 
 Map<int, int> rollToAbilityBonus = new Map.unmodifiable(new Map.fromIterables(

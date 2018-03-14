@@ -123,17 +123,6 @@ List<String> getWeaponsGroupsFor(CharacterClass cc) {
   }
 }
 
-List<Talent> _arcaneTalents = new List.unmodifiable([
-  new Talent("Animism", Degree.novice),
-  new Talent("Arcane Training", Degree.novice),
-  new Talent("Healing", Degree.novice),
-  new Talent("Meditative", Degree.novice),
-  new Talent("Shaping", Degree.novice),
-  new Talent("Psychic", Degree.novice),
-  new Talent("Visionary", Degree.novice),
-  new Talent("Wild Arcane", Degree.novice),
-]);
-
 List<Talent> _adeptTalents = new List.unmodifiable([
   new Talent("Linguistics", Degree.novice,
       requiredAbility: Ability.intelligence, requiredBonus: 1),
@@ -148,19 +137,13 @@ List<Talent> _adeptTalents = new List.unmodifiable([
 List<Talent> getTalentsFor(Character c) {
   switch(c.characterClass) {
     case CharacterClass.adept:
-      Talent first = drawFrom(_arcaneTalents);
-      Talent second = drawFrom(_arcaneTalents);
+      Talent first = drawWithoutRepeats(arcaneTalents, c.talents);
+      Talent second = drawWhere(
+          arcaneTalents.where(c.talents.contains).toList(),
+          (t) => t != first);
+      Talent third = drawWhere(_adeptTalents, c.canTake);
 
-      while(first == second) {
-        second = drawFrom(_arcaneTalents);
-      }
-
-      Talent third;
-      do {
-        third = drawFrom(_adeptTalents);
-      } while(!c.canTake(third));
-
-      return new List.from([first, second, third]);
+      return listOfNonNull([first, second, third]);
     case CharacterClass.expert:
     case CharacterClass.warrior:
     default:
@@ -171,13 +154,22 @@ List<Talent> getTalentsFor(Character c) {
 List<String> getPowersFor(CharacterClass cc) {
   switch(cc) {
     case CharacterClass.adept:
-      return new List.from(["may use the Skillful Channeling arcane stunt for "
-          "1 SP instead of 2 & when using Powerful Channeling you get "
-          "+1 free SP (must spend at least 1 SP)"]);
+      return new List.unmodifiable(["may use the Skillful Channeling arcane "
+          "stunt for 1 SP instead of 2 & when using "
+          "Powerful Channeling you get +1 free SP (must spend at least 1 SP)"]);
     case CharacterClass.expert:
     case CharacterClass.warrior:
     default:
       return new List();
   }
+}
+
+List<T> listOfNonNull<T>(List<T> ts) {
+  List<T> result = new List();
+  for(var t in ts) {
+    if (t != null) result.add(t);
+  }
+
+  return result;
 }
 

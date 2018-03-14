@@ -3,6 +3,7 @@ import 'package:blue_rose_character_creator/src/character/benefit.dart';
 import 'package:blue_rose_character_creator/src/character/character.dart';
 import 'package:blue_rose_character_creator/src/character/dice.dart';
 import 'package:blue_rose_character_creator/src/character/focus.dart';
+import 'package:blue_rose_character_creator/src/character/talent.dart';
 
 enum Race {
   human, nightPerson, rhydan, seaFolk, vata, unknown
@@ -99,8 +100,8 @@ void _rhydanBenefits(Character character) {
   
   character.weaponsGroups.add("Natural weapons");
   character.weaponsGroups.add("Brawling weapons");
-  
-  //TODO Talent: Psychic(novice)
+
+  character.talents.add(new Talent("Psychic", Degree.novice));
 }
 
 void _seaFolkBenefits(Character character) {
@@ -111,8 +112,8 @@ void _seaFolkBenefits(Character character) {
 }
 
 void _vataBenefits(Character character) {
-  //TODO: Talent: one of Animism, Healing, Meditative,
-  // Psychic, Shaping, or Visionary at novice
+  character.talents.add(
+      drawWhere(arcaneTalents, (t) => t.name != "Wild Arcane"));
 
   //TODO: improve once backgrounds are added
   character.powers.add("Dark sight (20 yards for vata'an, 30 for vata'sha), "

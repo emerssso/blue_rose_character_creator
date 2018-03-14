@@ -12,3 +12,14 @@ class Talent {
 
   Talent(this.name, this.degree, {this.requiredAbility, this.requiredBonus});
 }
+
+List<Talent> arcaneTalents = new List.unmodifiable([
+  new Talent("Animism", Degree.novice),
+  new Talent("Arcane Training", Degree.novice),
+  new Talent("Healing", Degree.novice),
+  new Talent("Meditative", Degree.novice),
+  new Talent("Shaping", Degree.novice),
+  new Talent("Psychic", Degree.novice),
+  new Talent("Visionary", Degree.novice),
+  new Talent("Wild Arcane", Degree.novice),
+]);
