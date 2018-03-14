@@ -1,4 +1,5 @@
 import 'dart:math';
+
 /// Models the three Blue Rose Classes as an enum
 
 import 'package:blue_rose_character_creator/src/character/ability.dart';
@@ -71,9 +72,9 @@ List<Ability> statPriorityListForClass(CharacterClass cc) {
 
   switch (cc) {
     case CharacterClass.warrior:
-     primary = new List.from(warriorPrimary);
-     secondary = new List.from(warriorSecondary);
-     break;
+      primary = new List.from(warriorPrimary);
+      secondary = new List.from(warriorSecondary);
+      break;
     case CharacterClass.expert:
       primary = new List.from(expertPrimary);
       secondary = new List.from(expertSecondary);
@@ -96,10 +97,11 @@ List<Ability> statPriorityListForClass(CharacterClass cc) {
 }
 
 int getHealthFor(CharacterClass cc, int constitution) {
-  switch(cc) {
+  switch (cc) {
     case CharacterClass.adept:
       return constitution + 20 + d6();
     case CharacterClass.expert:
+      return constitution + 15 + d6();
     case CharacterClass.warrior:
     default:
       return 1;
@@ -113,10 +115,12 @@ applyClassBenefits(Character character) {
 }
 
 List<String> getWeaponsGroupsFor(CharacterClass cc) {
-  switch(cc) {
+  switch (cc) {
     case CharacterClass.adept:
       return new List.unmodifiable(["Staves", "Brawling weapons"]);
     case CharacterClass.expert:
+      return new List.unmodifiable(
+          ["Bows", "Brawling weapons", "Light blades", "Staves"]);
     case CharacterClass.warrior:
     default:
       return new List();
@@ -128,19 +132,18 @@ List<Talent> _adeptTalents = new List.unmodifiable([
       requiredAbility: Ability.intelligence, requiredBonus: 1),
   new Talent("Lore", Degree.novice,
       requiredAbility: Ability.intelligence, requiredBonus: 2),
-  new Talent("Medecine", Degree.novice,
+  new Talent("Medicine", Degree.novice,
       requiredAbility: Ability.intelligence, requiredBonus: 1),
   new Talent("Observation", Degree.novice,
       requiredAbility: Ability.perception, requiredBonus: 2)
 ]);
 
 List<Talent> getTalentsFor(Character c) {
-  switch(c.characterClass) {
+  switch (c.characterClass) {
     case CharacterClass.adept:
       Talent first = drawWithoutRepeats(arcaneTalents, c.talents);
       Talent second = drawWhere(
-          arcaneTalents.where(c.talents.contains).toList(),
-          (t) => t != first);
+          arcaneTalents.where(c.talents.contains).toList(), (t) => t != first);
       Talent third = drawWhere(_adeptTalents, c.canTake);
 
       return listOfNonNull([first, second, third]);
@@ -152,11 +155,13 @@ List<Talent> getTalentsFor(Character c) {
 }
 
 List<String> getPowersFor(CharacterClass cc) {
-  switch(cc) {
+  switch (cc) {
     case CharacterClass.adept:
-      return new List.unmodifiable(["may use the Skillful Channeling arcane "
-          "stunt for 1 SP instead of 2 & when using "
-          "Powerful Channeling you get +1 free SP (must spend at least 1 SP)"]);
+      return new List.unmodifiable([
+        "may use the Skillful Channeling arcane "
+            "stunt for 1 SP instead of 2 & when using "
+            "Powerful Channeling you get +1 free SP (must spend at least 1 SP)"
+      ]);
     case CharacterClass.expert:
     case CharacterClass.warrior:
     default:
@@ -166,10 +171,9 @@ List<String> getPowersFor(CharacterClass cc) {
 
 List<T> listOfNonNull<T>(List<T> ts) {
   List<T> result = new List();
-  for(var t in ts) {
+  for (var t in ts) {
     if (t != null) result.add(t);
   }
 
   return result;
 }
-
