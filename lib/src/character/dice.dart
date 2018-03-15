@@ -36,3 +36,18 @@ T drawWithoutRepeats<T>(Iterable<T> deck, Iterable<T> repeats) {
   return drawWhere(deck, (t) => !repeats.contains(t));
 }
 
+///returns N unique draws from the deck, or the whole deck if N >= deck.length
+List<T> drawN<T>(Iterable<T> deck, int n) {
+  if(n >= deck.length) {
+    return new List.from(deck);
+  }
+
+  List<T> returns = new List();
+
+  while(returns.length < n) {
+    returns.add(drawWithoutRepeats(deck, returns));
+  }
+
+  return returns;
+}
+

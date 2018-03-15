@@ -5,6 +5,7 @@ import 'dart:math';
 import 'package:blue_rose_character_creator/src/character/ability.dart';
 import 'package:blue_rose_character_creator/src/character/character.dart';
 import 'package:blue_rose_character_creator/src/character/dice.dart';
+import 'package:blue_rose_character_creator/src/character/race.dart';
 import 'package:blue_rose_character_creator/src/character/talent.dart';
 
 enum CharacterClass { warrior, expert, adept, unknown }
@@ -75,14 +76,17 @@ List<Ability> statPriorityListForClass(CharacterClass cc) {
       primary = new List.from(warriorPrimary);
       secondary = new List.from(warriorSecondary);
       break;
+
     case CharacterClass.expert:
       primary = new List.from(expertPrimary);
       secondary = new List.from(expertSecondary);
       break;
+
     case CharacterClass.adept:
       primary = new List.from(adeptPrimary);
       secondary = new List.from(adeptSecondary);
       break;
+
     case CharacterClass.unknown:
       primary = new List<Ability>();
       secondary = primary;
@@ -100,42 +104,59 @@ int getHealthFor(CharacterClass cc, int constitution) {
   switch (cc) {
     case CharacterClass.adept:
       return constitution + 20 + d6();
+
     case CharacterClass.expert:
       return constitution + 15 + d6();
+
     case CharacterClass.warrior:
+      return constitution + 30 + d6();
+
     default:
       return 1;
   }
 }
 
 applyClassBenefits(Character character) {
-  character.weaponsGroups.addAll(getWeaponsGroupsFor(character.characterClass));
+  character.weaponsGroups.addAll(getWeaponsGroupsFor(character));
   character.powers.addAll(getPowersFor(character.characterClass));
   character.talents.addAll(getTalentsFor(character));
 }
 
-List<String> getWeaponsGroupsFor(CharacterClass cc) {
-  switch (cc) {
+List<String> _warriorWeaponsGroups = new List.unmodifiable([
+  "Axes", "Bludgeons", "Bows", "Light blades", "Polearms", "Staves"
+]);
+
+List<String> getWeaponsGroupsFor(Character c) {
+  if(c.race == Race.rhydan) {
+    return new List.unmodifiable([]);
+  }
+
+  switch (c.characterClass) {
     case CharacterClass.adept:
       return new List.unmodifiable(["Staves", "Brawling weapons"]);
+
     case CharacterClass.expert:
       return new List.unmodifiable(
           ["Bows", "Brawling weapons", "Light blades", "Staves"]);
+
     case CharacterClass.warrior:
+      return new List.unmodifiable(
+          drawN(_warriorWeaponsGroups, 3)..add("Brawling weapons"));
+
     default:
-      return new List();
+      return new List.unmodifiable([]);
   }
 }
 
 List<Talent> _adeptTalents = new List.unmodifiable([
   new Talent("Linguistics", Degree.novice,
-      requirements: [new Requirement(Ability.intelligence, 1)]),
+      requirements: [new AbilityRequirement(Ability.intelligence, 1)]),
   new Talent("Lore", Degree.novice,
-      requirements: [new Requirement(Ability.intelligence, 2)]),
+      requirements: [new AbilityRequirement(Ability.intelligence, 2)]),
   new Talent("Medicine", Degree.novice,
-      requirements: [new Requirement(Ability.intelligence, 1)]),
+      requirements: [new AbilityRequirement(Ability.intelligence, 1)]),
   new Talent("Observation", Degree.novice,
-      requirements: [new Requirement(Ability.perception, 2)])
+      requirements: [new AbilityRequirement(Ability.perception, 2)])
 ]);
 
 List<Talent> _expertTalents = new List.unmodifiable([
@@ -143,23 +164,53 @@ List<Talent> _expertTalents = new List.unmodifiable([
   new Talent("Arcane potential", Degree.novice),
   new Talent("Carousing", Degree.novice,
       requirements: [
-        new Requirement(Ability.communication, 1),
-        new Requirement(Ability.constitution, 1)
+        new AbilityRequirement(Ability.communication, 1),
+        new AbilityRequirement(Ability.constitution, 1)
       ]),
   new Talent("Contacts", Degree.novice,
-      requirements: [new Requirement(Ability.communication, 2)]),
+      requirements: [new AbilityRequirement(Ability.communication, 2)]),
   new Talent("Intrigue", Degree.novice,
-      requirements: [new Requirement(Ability.communication, 2)]),
+      requirements: [new AbilityRequirement(Ability.communication, 2)]),
   new Talent("Linguistics", Degree.novice,
-      requirements: [new Requirement(Ability.intelligence, 1)]),
+      requirements: [new AbilityRequirement(Ability.intelligence, 1)]),
   new Talent("Medicine", Degree.novice,
-      requirements: [new Requirement(Ability.intelligence, 1)]),
+      requirements: [new AbilityRequirement(Ability.intelligence, 1)]),
   new Talent("Oratory", Degree.novice),
   new Talent("Performance", Degree.novice),
   new Talent("Scouting", Degree.novice,
-      requirements: [new Requirement(Ability.dexterity, 2)]),
+      requirements: [new AbilityRequirement(Ability.dexterity, 2)]),
   new Talent("Theivery", Degree.novice,
-      requirements: [new Requirement(Ability.dexterity, 2)]),
+      requirements: [new AbilityRequirement(Ability.dexterity, 2)]),
+]);
+
+List<Talent> _warriorTalents = new List.unmodifiable([
+  new Talent("Arcane potential", Degree.novice),
+  new Talent("Carousing", Degree.novice,
+      requirements: [
+        new AbilityRequirement(Ability.communication, 1),
+        new AbilityRequirement(Ability.constitution, 1)
+      ]),
+  new Talent("Quick reflexes", Degree.novice,
+      requirements: [new AbilityRequirement(Ability.dexterity, 2)])
+]);
+
+List<Talent> _styleTalents = new List.unmodifiable([
+  new Talent("Archery style", Degree.novice,
+      requirements: [new WeaponsGroupsRequirement(["Bows"])]),
+  new Talent("Dual weapon style", Degree.novice,
+      requirements: [new AbilityRequirement(Ability.dexterity, 1)]),
+  new Talent("Single weapon style", Degree.novice,
+      requirements: [new AbilityRequirement(Ability.perception, 1)]),
+  new Talent("Thrown weapon style", Degree.novice,
+      requirements: [new WeaponsGroupsRequirement(
+          ["Axes", "Light blades", "Polearms"])]),
+  new Talent("Two-handed weapon style", Degree.novice,
+      requirements: [new AbilityRequirement(Ability.strength, 2),
+      new WeaponsGroupsRequirement(
+          ["Axes", "Bludgeons", "Heavy blades", "Polearms"])]),
+  new Talent("Unarmed style", Degree.novice),
+  new Talent("Weapon and shield style", Degree.novice,
+      requirements: [new AbilityRequirement(Ability.strength, 1)])
 ]);
 
 List<Talent> getTalentsFor(Character c) {
@@ -176,8 +227,21 @@ List<Talent> getTalentsFor(Character c) {
       return _listOfNonNull([drawWhere(_expertTalents, c.canTake)]);
 
     case CharacterClass.warrior:
+      if(c.race == Race.rhydan) {
+        return [drawFrom(_warriorTalents),
+            new Talent("Armor training", Degree.novice),
+            new Talent("Tooth and claw", Degree.novice),
+        ];
+      }
+
+      return _listOfNonNull([
+        drawWhere(_warriorTalents, c.canTake),
+        drawWhere(_styleTalents, c.canTake),
+        new Talent("Armor training", Degree.novice)
+      ]);
+
     default:
-      return new List();
+      return new List.unmodifiable([]);
   }
 }
 
@@ -192,11 +256,14 @@ List<String> getPowersFor(CharacterClass cc) {
 
     case CharacterClass.expert:
       return new List.unmodifiable([
-        "Once per round, add 1d6 to the damage of a sucessful attack if your dex > your target's",
+        "Once per round, add 1d6 to the damage of a sucessful attack "
+            "if your dex > your target's",
         "You are trained in Light Armor w/out need of the Armor Training talent"
       ]);
 
     case CharacterClass.warrior:
+      return new List.unmodifiable([]);
+
     default:
       return new List();
   }
@@ -208,5 +275,5 @@ List<T> _listOfNonNull<T>(List<T> ts) {
     if (t != null) result.add(t);
   }
 
-  return result;
+  return new List.unmodifiable(result);
 }
