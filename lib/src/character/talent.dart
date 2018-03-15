@@ -27,12 +27,25 @@ List<Talent> arcaneTalents = new List.unmodifiable([
   new Talent("Wild Arcane", Degree.novice),
 ]);
 
+String degreeToString(Degree degree) {
+  switch(degree) {
+    case Degree.novice:
+      return "Novice";
+    case Degree.journeyman:
+      return "Journeyman";
+    case Degree.master:
+      return "Master";
+    default:
+      return "";
+  }
+}
+
 abstract class Requirement {
   bool isMetBy(Character character);
 }
 
 ///Requirement that the character have a minimum bonus for an ability.
-class AbilityRequirement extends Requirement{
+class AbilityRequirement extends Requirement {
   final Ability ability;
   final int bonus;
 

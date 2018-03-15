@@ -5,6 +5,7 @@ import 'package:blue_rose_character_creator/src/character/race.dart';
 import 'package:blue_rose_character_creator/src/character/ability.dart';
 import 'package:blue_rose_character_creator/src/character/calling_destiny_fate.dart';
 import 'package:blue_rose_character_creator/src/character/talent.dart';
+import 'package:blue_rose_character_creator/src/character/weapons_group.dart';
 
 /// Models a Blue Rose character
 class Character {
@@ -20,7 +21,7 @@ class Character {
 
   final Map<Ability, int> abilities;
   final Map<Ability, List<Focus>> focuses = new Map();
-  final List<String> weaponsGroups = new List();
+  final List<WeaponsGroup> weaponsGroups = new List();
   final List<String> powers = new List();
   final List<Talent> talents = new List();
 

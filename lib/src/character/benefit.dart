@@ -3,6 +3,7 @@ import 'package:blue_rose_character_creator/src/character/character.dart';
 import 'package:blue_rose_character_creator/src/character/dice.dart';
 import 'package:blue_rose_character_creator/src/character/focus.dart';
 import 'package:blue_rose_character_creator/src/character/race.dart';
+import 'package:blue_rose_character_creator/src/character/weapons_group.dart';
 
 ///Models a benefit from a race as an operation to apply it to a character.
 typedef void Benefit(Character);
@@ -72,9 +73,9 @@ void _historicalLore(Character c) =>
 void _culturalLore(Character c) =>
     c.addFocus(new Focus(Ability.intelligence, "Cultural lore"));
 
-void _bludgeons(Character c) => c.weaponsGroups.add("Bludgeons");
-void _polearms(Character c) => c.weaponsGroups.add("Polearms");
-void _lightBlades(Character c) => c.weaponsGroups.add("Light blades");
+void _bludgeons(Character c) => c.weaponsGroups.add(WeaponsGroup.brawling);
+void _polearms(Character c) => c.weaponsGroups.add(WeaponsGroup.polearms);
+void _lightBlades(Character c) => c.weaponsGroups.add(WeaponsGroup.lightBlades);
 
 Map<int, Benefit> _humanBenefits = new Map.unmodifiable(new Map.fromIterables(
     [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],

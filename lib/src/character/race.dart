@@ -4,6 +4,7 @@ import 'package:blue_rose_character_creator/src/character/character.dart';
 import 'package:blue_rose_character_creator/src/character/dice.dart';
 import 'package:blue_rose_character_creator/src/character/focus.dart';
 import 'package:blue_rose_character_creator/src/character/talent.dart';
+import 'package:blue_rose_character_creator/src/character/weapons_group.dart';
 
 enum Race {
   human, nightPerson, rhydan, seaFolk, vata, unknown
@@ -97,9 +98,10 @@ void _nightPeopleBenefits(Character character) {
 void _rhydanBenefits(Character character) {
   addRandomFocus(new Focus(Ability.intelligence, "Natural lore"), 
       new Focus(Ability.perception, "Player choice"), character);
+  //todo: make "Player Choice" a random selection from the options.
   
-  character.weaponsGroups.add("Natural weapons");
-  character.weaponsGroups.add("Brawling weapons");
+  character.weaponsGroups.add(WeaponsGroup.naturalWeapons);
+  character.weaponsGroups.add(WeaponsGroup.brawling);
 
   character.talents.add(new Talent("Psychic", Degree.novice));
 }
