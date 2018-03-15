@@ -7,10 +7,19 @@ enum Degree {
 class Talent {
   final String name;
   final Degree degree;
-  final Ability requiredAbility;
-  final int requiredBonus;
+  final List<Requirement> requirements;
 
-  Talent(this.name, this.degree, {this.requiredAbility, this.requiredBonus=-1});
+  Talent(this.name, this.degree, {List<Requirement> requirements}) :
+      requirements = requirements != null
+          ? new List.unmodifiable(requirements)
+          : new List.unmodifiable([]) {}
+}
+
+class Requirement {
+  final Ability ability;
+  final int bonus;
+
+  Requirement(this.ability, this.bonus);
 }
 
 List<Talent> arcaneTalents = new List.unmodifiable([

@@ -76,10 +76,21 @@ class Character {
 
   int getAbilityBonus(Ability ability) => _abilities[ability];
 
+  // talents can be taken only if a talent with the same name
+  // (but maybe different degree) ahs not already been taken and
+  // the character meets minimum ability if any
   bool canTake(Talent talent) {
-    return (talent.requiredAbility == null ||
-        (_abilities[talent.requiredAbility] >= talent.requiredBonus)) &&
-          talents.where((has) => has.name == talent.name).isEmpty;
+    if(talents.where((has) => has.name == talent.name).isNotEmpty) {
+      return false;
+    }
+
+    for(var requirement in talent.requirements) {
+      if(_abilities[requirement.ability] < requirement.bonus) {
+        return false;
+      }
+    }
+
+    return true;
   }
 }
 

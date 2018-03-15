@@ -129,13 +129,37 @@ List<String> getWeaponsGroupsFor(CharacterClass cc) {
 
 List<Talent> _adeptTalents = new List.unmodifiable([
   new Talent("Linguistics", Degree.novice,
-      requiredAbility: Ability.intelligence, requiredBonus: 1),
+      requirements: [new Requirement(Ability.intelligence, 1)]),
   new Talent("Lore", Degree.novice,
-      requiredAbility: Ability.intelligence, requiredBonus: 2),
+      requirements: [new Requirement(Ability.intelligence, 2)]),
   new Talent("Medicine", Degree.novice,
-      requiredAbility: Ability.intelligence, requiredBonus: 1),
+      requirements: [new Requirement(Ability.intelligence, 1)]),
   new Talent("Observation", Degree.novice,
-      requiredAbility: Ability.perception, requiredBonus: 2)
+      requirements: [new Requirement(Ability.perception, 2)])
+]);
+
+List<Talent> _expertTalents = new List.unmodifiable([
+  new Talent("Animal training", Degree.novice),
+  new Talent("Arcane potential", Degree.novice),
+  new Talent("Carousing", Degree.novice,
+      requirements: [
+        new Requirement(Ability.communication, 1),
+        new Requirement(Ability.constitution, 1)
+      ]),
+  new Talent("Contacts", Degree.novice,
+      requirements: [new Requirement(Ability.communication, 2)]),
+  new Talent("Intrigue", Degree.novice,
+      requirements: [new Requirement(Ability.communication, 2)]),
+  new Talent("Linguistics", Degree.novice,
+      requirements: [new Requirement(Ability.intelligence, 1)]),
+  new Talent("Medicine", Degree.novice,
+      requirements: [new Requirement(Ability.intelligence, 1)]),
+  new Talent("Oratory", Degree.novice),
+  new Talent("Performance", Degree.novice),
+  new Talent("Scouting", Degree.novice,
+      requirements: [new Requirement(Ability.dexterity, 2)]),
+  new Talent("Theivery", Degree.novice,
+      requirements: [new Requirement(Ability.dexterity, 2)]),
 ]);
 
 List<Talent> getTalentsFor(Character c) {
@@ -146,8 +170,11 @@ List<Talent> getTalentsFor(Character c) {
               (t) => t != first);
       Talent third = drawWhere(_adeptTalents, c.canTake);
 
-      return listOfNonNull([first, second, third]);
+      return _listOfNonNull([first, second, third]);
+
     case CharacterClass.expert:
+      return _listOfNonNull([drawWhere(_expertTalents, c.canTake)]);
+
     case CharacterClass.warrior:
     default:
       return new List();
@@ -158,18 +185,24 @@ List<String> getPowersFor(CharacterClass cc) {
   switch (cc) {
     case CharacterClass.adept:
       return new List.unmodifiable([
-        "may use the Skillful Channeling arcane "
+        "May use the Skillful Channeling arcane "
             "stunt for 1 SP instead of 2 & when using "
             "Powerful Channeling you get +1 free SP (must spend at least 1 SP)"
       ]);
+
     case CharacterClass.expert:
+      return new List.unmodifiable([
+        "Once per round, add 1d6 to the damage of a sucessful attack if your dex > your target's",
+        "You are trained in Light Armor w/out need of the Armor Training talent"
+      ]);
+
     case CharacterClass.warrior:
     default:
       return new List();
   }
 }
 
-List<T> listOfNonNull<T>(List<T> ts) {
+List<T> _listOfNonNull<T>(List<T> ts) {
   List<T> result = new List();
   for (var t in ts) {
     if (t != null) result.add(t);
