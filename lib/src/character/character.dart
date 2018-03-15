@@ -64,18 +64,14 @@ class Character {
   // (but maybe different degree) ahs not already been taken and
   // the character meets minimum ability if any
   bool canTake(Talent talent) {
-    if(talents.where((has) => has.name == talent.name).isNotEmpty) {
-      return false;
-    }
+    var doesntHave = !talents.any((has) => has.name == talent.name);
 
-    for(var requirement in talent.requirements) {
-      if(!requirement.isMetBy(this)) {
-        return false;
-      }
-    }
+    var meets = !talent.requirements.any(_doesntMeet);
 
-    return true;
+    return doesntHave && meets;
   }
+
+  bool _doesntMeet(Requirement req) => !req.isMetBy(this);
 }
 
 Map<int, int> rollToAbilityBonus = new Map.unmodifiable(new Map.fromIterables(
