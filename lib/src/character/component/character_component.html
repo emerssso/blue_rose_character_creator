@@ -42,7 +42,7 @@
   <div class="card wrap" *ngIf="character.weaponsGroups.isNotEmpty">
     <h3>Weapons Groups</h3>
     <li *ngFor="let group of character.weaponsGroups">
-      {{ group }}
+      {{ renderWeaponsGroup(group) }}
     </li>
   </div>
   <div class="card wrap" *ngIf="character.talents.isNotEmpty">
