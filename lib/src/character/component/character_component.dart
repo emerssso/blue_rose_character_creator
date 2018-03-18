@@ -100,6 +100,8 @@ class CharacterComponent implements OnInit {
 
   String renderWeaponsGroup(WeaponsGroup wg) => weaponsGroupToString(wg);
 
+  String renderLanguage(Language lang) => languageToString(lang);
+
   String renderWeapon(Weapon weapon) => weapon.toString();
 
   bool isRhydan(Race race) => race == Race.rhydan;

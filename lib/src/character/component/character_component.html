@@ -56,23 +56,34 @@
         <b>Fate: </b> {{character.fate}} <i>{{fateAscendant()}}</i><br/>
     </div>
 
+    <div class="card wrap adjacent" *ngIf="character.languages.isNotEmpty">
+        <h3>Languages</h3>
+        <li *ngFor="let lang of character.languages"
+            style="list-style: none;">
+            {{ renderLanguage(lang) }}
+        </li>
+    </div>
+
     <div class="card wrap adjacent" *ngIf="character.weaponsGroups.isNotEmpty">
         <h3>Weapons Groups</h3>
-        <li *ngFor="let group of character.weaponsGroups">
+        <li *ngFor="let group of character.weaponsGroups"
+            style="list-style: none;">
             {{ renderWeaponsGroup(group) }}
         </li>
     </div>
 
     <div class="card wrap adjacent" *ngIf="character.weapons.isNotEmpty">
         <h3>Weapons</h3>
-        <li *ngFor="let weapon of character.weapons">
+        <li *ngFor="let weapon of character.weapons"
+            style="list-style: none;">
             {{ renderWeapon(weapon) }}
         </li>
     </div>
 
     <div class="card wrap adjacent" *ngIf="character.talents.isNotEmpty">
         <h3>Talents</h3>
-        <li *ngFor="let talent of character.talents">
+        <li *ngFor="let talent of character.talents"
+            style="list-style: none;">
             {{talent.name}} ({{renderDegree(talent.degree)}})
         </li>
     </div>
@@ -80,7 +91,8 @@
 
     <div class="card wrap adjacent" *ngIf="character.powers.isNotEmpty">
         <h3>Powers</h3>
-        <li *ngFor="let power of character.powers">
+        <li *ngFor="let power of character.powers"
+            style="list-style: none;">
             {{ power }}
         </li>
     </div>

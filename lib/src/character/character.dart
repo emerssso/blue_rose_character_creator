@@ -28,6 +28,7 @@ class Character {
   final List<String> powers;
   final List<Talent> talents;
   final List<Weapon> weapons;
+  final List<Language> languages;
 
   int get accuracy => abilities[Ability.accuracy] ?? 0;
   int get communication => abilities[Ability.communication] ?? 0;
@@ -43,25 +44,26 @@ class Character {
   int get defense => 10 + dexterity;
 
   factory Character(race, characterClass, {background, level, rhydanType}) {
-    var m = new Character._mutable(race, characterClass,
+    var mutable = new Character._mutable(race, characterClass,
         background: background, level: level, rhydanType: rhydanType);
 
     return new Character._immutable(
-      m.race,
-      m.rhydanType,
-      m.characterClass,
-      m.background,
-      m.level,
-      m.calling,
-      m.destiny,
-      m.fate,
-      m.destinyAscendant,
-      new Map.unmodifiable(m.abilities),
-      new Map.unmodifiable(m.focuses),
-      new List.unmodifiable(m.weaponsGroups),
-      new List.unmodifiable(m.powers),
-      new List.unmodifiable(m.talents),
-      new List.unmodifiable(m.weapons)
+      mutable.race,
+      mutable.rhydanType,
+      mutable.characterClass,
+      mutable.background,
+      mutable.level,
+      mutable.calling,
+      mutable.destiny,
+      mutable.fate,
+      mutable.destinyAscendant,
+      new Map.unmodifiable(mutable.abilities),
+      new Map.unmodifiable(mutable.focuses),
+      new List.unmodifiable(mutable.weaponsGroups),
+      new List.unmodifiable(mutable.powers),
+      new List.unmodifiable(mutable.talents),
+      new List.unmodifiable(mutable.weapons),
+      new List.unmodifiable(mutable.languages)
     );
   }
 
@@ -79,7 +81,8 @@ class Character {
       this.weaponsGroups,
       this.powers,
       this.talents,
-      this.weapons);
+      this.weapons,
+      this.languages);
 
   Character._mutable(this.race, this.characterClass,
       {this.background, this.level=1, this.rhydanType})
@@ -92,7 +95,8 @@ class Character {
         weaponsGroups = new List(),
         powers = new List(),
         talents = new List(),
-        weapons = new List() {
+        weapons = new List(),
+        languages = new List() {
     if(race == Race.rhydan && rhydanType == null) {
       throw "Rhydan must have a type!";
     }
@@ -103,6 +107,7 @@ class Character {
 
     applyRacialBenefits(this);
     applyClassBenefits(this);
+    applyBackgroundToCharacter(this);
 
     if(rhydanType != null) {
       applyRhydanBonuses(this);
@@ -130,6 +135,10 @@ class Character {
 
     return doesntHave && meets;
   }
+
+  bool hasnt(Focus focus) =>
+      focuses[focus.ability] == null ||
+          focuses[focus.ability].any((f) => f.domain == focus.domain);
 
   bool _doesntMeet(Requirement req) => !req.isMetBy(this);
 }
