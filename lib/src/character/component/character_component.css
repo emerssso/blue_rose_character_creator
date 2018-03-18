@@ -1,9 +1,3 @@
-#generate-character {
-  background: #4a86ef;
-  color: white;
-  float: right;
-}
-
 .card {
   margin: 8px;
   padding: 8px;
@@ -18,4 +12,14 @@
 .adjacent {
   float: left;
   overflow: hidden;
+}
+
+.button {
+  background: #4a86ef;
+  color: white;
+}
+
+.icon-button {
+  float: right;
+  color: #4a86ef;
 }

@@ -1,9 +1,15 @@
+<h1>{{title}}</h1>
 <div class="card">
     <material-input
             id="name"
             label="Character Name"
             autoFocus floatingLabel style="width:80%">
     </material-input>
+
+    <material-button icon *ngIf="creatorView" (trigger)="print()"
+                     class="icon-button">
+        <material-icon icon="print"></material-icon>
+    </material-button>
     <br/>
     <material-dropdown-select
             *ngIf="!isRhydan(character.race)"
@@ -40,10 +46,9 @@
             [width]="2">
     </material-dropdown-select>
 
-    <material-button raised (trigger)="reRoll()">
+    <material-button raised class="button" (trigger)="reRoll()" *ngIf="creatorView">
         Re-roll
     </material-button>
-
 </div>
 
 <div *ngIf="character.isFilled">
@@ -53,8 +58,9 @@
     </div>
 
     <div class="card wrap adjacent">
+        <b>Health: </b> {{character.health}} <br/>
         <b>Speed: </b> {{character.speed}}<br/>
-        <b>Defense: </b> {{character.defense}} <br/>
+        <b>Defense: </b> {{character.defense}} <br/><br/>
         <b>Calling: </b> {{character.calling}}<br/>
         <b>Destiny: </b> {{character.destiny}} <i>{{destinyAscendant()}}</i><br/>
         <b>Fate: </b> {{character.fate}} <i>{{fateAscendant()}}</i><br/>

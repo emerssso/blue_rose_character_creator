@@ -1,3 +1,5 @@
+import 'dart:html';
+import 'dart:async';
 import 'package:angular/angular.dart';
 import 'package:angular_components/angular_components.dart';
 import 'package:angular_forms/angular_forms.dart';
@@ -76,6 +78,22 @@ class CharacterComponent implements OnInit {
   void reRoll() => _regenerateCharacter(character.race,
       character.characterClass, character.background, character.rhydanType);
 
+  print() async {
+    creatorView = false;
+    title = sheetTitle;
+
+    await window.animationFrame;
+    window.print();
+    await window.animationFrame;
+
+    title = creatorTitle;
+    creatorView = true;
+  }
+
+  bool creatorView = true;
+
+  String title = creatorTitle;
+
   String get raceName => raceToString(character?.race);
 
   String get backgroundName => backgroundToString(character?.background);
@@ -98,3 +116,6 @@ class CharacterComponent implements OnInit {
 
   bool isRhydan(Race race) => race == Race.rhydan;
 }
+
+const creatorTitle = "Blue Rose Character Creator";
+const sheetTitle = "Blue Rose Character Sheet";
