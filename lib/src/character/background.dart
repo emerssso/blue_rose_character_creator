@@ -103,55 +103,57 @@ List<Focus> _getFocusesFor(Background bg) {
   }
 }
 
-final _emptyList = new List.unmodifiable([]);
-final _aldinFocuses = new List<Focus>.unmodifiable([
-  new Focus(Ability.communication, "Persuasion"),
-  new Focus(Ability.dexterity, "Artisan"),
-  new Focus(Ability.intelligence, "Cultural lore"),
-  new Focus(Ability.intelligence, "Historical lore")
-]);
-final _forestFolkFocuses = new List<Focus>.unmodifiable([
-  new Focus(Ability.constitution, "Running"),
-  new Focus(Ability.dexterity, "Crafting"),
-  new Focus(Ability.intelligence, "Natural lore"),
-  new Focus(Ability.perception, "Tracking")
-]);
-final _jarzoniFocuses = new List<Focus>.unmodifiable([
-  new Focus(Ability.communication, "Etiquette"),
-  new Focus(Ability.intelligence, "Historical lore"),
-  new Focus(Ability.intelligence, "Religious lore"),
-  new Focus(Ability.willpower, "Faith")
-]);
-final _lartyanFocuses = new List<Focus>.unmodifiable([
-  new Focus(Ability.communication, "Etiquette"),
-  new Focus(Ability.dexterity, "Crafting"),
-  new Focus(Ability.intelligence, "Heraldry"),
-  new Focus(Ability.willpower, "Self-discipline")
-]);
-final _marinerFocuses = new List<Focus>.unmodifiable([
-  new Focus(Ability.communication, "Bargaining"),
-  new Focus(Ability.constitution, "Swimming"),
-  new Focus(Ability.dexterity, "Sailing"),
-  new Focus(Ability.intelligence, "Nautical lore")
-]);
-final _outcastFocuses = new List<Focus>.unmodifiable([
-  new Focus(Ability.communication, "Gambling"),
-  new Focus(Ability.dexterity, "Stealth"),
-  new Focus(Ability.intelligence, "Navigation"),
-  new Focus(Ability.willpower, "Courage")
-]);
-final _rezeanFocuses = new List<Focus>.unmodifiable([
-  new Focus(Ability.constitution, "Stamina"),
-  new Focus(Ability.dexterity, "Riding"),
-  new Focus(Ability.intelligence, "Navigation"),
-  new Focus(Ability.willpower, "Courage")
-]);
-final _roamerFocuses = new List<Focus>.unmodifiable([
-  new Focus(Ability.communication, "Bargaining"),
-  new Focus(Ability.communication, "Performance"),
-  new Focus(Ability.dexterity, "Crafting"),
-  new Focus(Ability.perception, "Empathy")
-]);
+const _emptyList = const [];
+
+const _aldinFocuses = const [
+  const Focus(Ability.communication, "Persuasion"),
+  const Focus(Ability.dexterity, "Artisan"),
+  const Focus(Ability.intelligence, "Cultural lore"),
+  const Focus(Ability.intelligence, "Historical lore")
+];
+
+const _forestFolkFocuses =  const [
+  const Focus(Ability.constitution, "Running"),
+  const Focus(Ability.dexterity, "Crafting"),
+  const Focus(Ability.intelligence, "Natural lore"),
+  const Focus(Ability.perception, "Tracking")
+];
+const _jarzoniFocuses = const [
+  const Focus(Ability.communication, "Etiquette"),
+  const Focus(Ability.intelligence, "Historical lore"),
+  const Focus(Ability.intelligence, "Religious lore"),
+  const Focus(Ability.willpower, "Faith")
+];
+const _lartyanFocuses = const [
+  const Focus(Ability.communication, "Etiquette"),
+  const Focus(Ability.dexterity, "Crafting"),
+  const Focus(Ability.intelligence, "Heraldry"),
+  const Focus(Ability.willpower, "Self-discipline")
+];
+const _marinerFocuses = const [
+  const Focus(Ability.communication, "Bargaining"),
+  const Focus(Ability.constitution, "Swimming"),
+  const Focus(Ability.dexterity, "Sailing"),
+  const Focus(Ability.intelligence, "Nautical lore")
+];
+const _outcastFocuses = const [
+  const Focus(Ability.communication, "Gambling"),
+  const Focus(Ability.dexterity, "Stealth"),
+  const Focus(Ability.intelligence, "Navigation"),
+  const Focus(Ability.willpower, "Courage")
+];
+const _rezeanFocuses = const [
+  const Focus(Ability.constitution, "Stamina"),
+  const Focus(Ability.dexterity, "Riding"),
+  const Focus(Ability.intelligence, "Navigation"),
+  const Focus(Ability.willpower, "Courage")
+];
+const _roamerFocuses = const [
+  const Focus(Ability.communication, "Bargaining"),
+  const Focus(Ability.communication, "Performance"),
+  const Focus(Ability.dexterity, "Crafting"),
+  const Focus(Ability.perception, "Empathy")
+];
 
 List<Language> _getLanguagesForBackground(Background bg) {
   switch (bg) {
