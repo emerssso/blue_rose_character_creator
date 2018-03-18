@@ -6,7 +6,7 @@ drawDestiny() => drawFrom(_destinies);
 
 drawFate() => drawFrom(_fates);
 
-List<String> _callings = new List.unmodifiable(const [
+const _callings = const [
   "Adventure and excitement",
   "Mastery of the arcane",
   "Oneness with spirit",
@@ -29,9 +29,9 @@ List<String> _callings = new List.unmodifiable(const [
   "Championing the everyday",
   "Atonement",
   "Exploration and discovery",
-]);
+];
 
-List<String> _destinies = new List.unmodifiable(const[
+const _destinies = const [
   "Courageous",
   "Compromising",
   "Stalwart",
@@ -88,9 +88,9 @@ List<String> _destinies = new List.unmodifiable(const[
   "Determined",
   "Nurturing",
   "Resourceful"
-]);
+];
 
-List<String> _fates = new List.unmodifiable(const [
+const _fates = const [
   "Cowardly",
   "Indecisive",
   "Treacherous",
@@ -147,4 +147,4 @@ List<String> _fates = new List.unmodifiable(const [
   "Hasty",
   "Suspicious",
   "Sneaky"
-]);
+];
