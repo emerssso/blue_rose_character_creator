@@ -24,13 +24,13 @@ String characterClassToString(CharacterClass cc) {
   }
 }
 
-List<Ability> warriorPrimary = [
+const List<Ability> _warriorPrimary = const [
   Ability.constitution,
   Ability.dexterity,
   Ability.fighting,
   Ability.strength
 ];
-List<Ability> warriorSecondary = [
+const List<Ability> _warriorSecondary = const [
   Ability.accuracy,
   Ability.communication,
   Ability.intelligence,
@@ -38,13 +38,13 @@ List<Ability> warriorSecondary = [
   Ability.willpower
 ];
 
-List<Ability> expertPrimary = [
+const List<Ability> _expertPrimary = const [
   Ability.accuracy,
   Ability.communication,
   Ability.dexterity,
   Ability.perception
 ];
-List<Ability> expertSecondary = [
+const List<Ability> _expertSecondary = const [
   Ability.constitution,
   Ability.fighting,
   Ability.intelligence,
@@ -52,13 +52,13 @@ List<Ability> expertSecondary = [
   Ability.willpower
 ];
 
-List<Ability> adeptPrimary = [
+const List<Ability> _adeptPrimary = const [
   Ability.accuracy,
   Ability.intelligence,
   Ability.perception,
   Ability.willpower
 ];
-List<Ability> adeptSecondary = [
+const List<Ability> _adeptSecondary = const [
   Ability.communication,
   Ability.constitution,
   Ability.dexterity,
@@ -66,7 +66,7 @@ List<Ability> adeptSecondary = [
   Ability.strength
 ];
 
-Random rng = new Random();
+final rng = new Random();
 
 List<Ability> statPriorityListForClass(CharacterClass cc) {
   List<Ability> primary;
@@ -74,18 +74,18 @@ List<Ability> statPriorityListForClass(CharacterClass cc) {
 
   switch (cc) {
     case CharacterClass.warrior:
-      primary = new List.from(warriorPrimary);
-      secondary = new List.from(warriorSecondary);
+      primary = new List.from(_warriorPrimary);
+      secondary = new List.from(_warriorSecondary);
       break;
 
     case CharacterClass.expert:
-      primary = new List.from(expertPrimary);
-      secondary = new List.from(expertSecondary);
+      primary = new List.from(_expertPrimary);
+      secondary = new List.from(_expertSecondary);
       break;
 
     case CharacterClass.adept:
-      primary = new List.from(adeptPrimary);
-      secondary = new List.from(adeptSecondary);
+      primary = new List.from(_adeptPrimary);
+      secondary = new List.from(_adeptSecondary);
       break;
 
     case CharacterClass.unknown:
@@ -123,14 +123,14 @@ applyClassBenefits(Character character) {
   character.talents.addAll(getTalentsFor(character));
 }
 
-List<WeaponsGroup> _warriorWeaponsGroups = new List.unmodifiable([
+const _warriorWeaponsGroups = const [
   WeaponsGroup.axes,
   WeaponsGroup.bludgeons,
   WeaponsGroup.bows,
   WeaponsGroup.lightBlades,
   WeaponsGroup.polearms,
   WeaponsGroup.staves
-]);
+];
 
 List<WeaponsGroup> getWeaponsGroupsFor(Character c) {
   if (c.race == Race.rhydan) {
@@ -159,7 +159,7 @@ List<WeaponsGroup> getWeaponsGroupsFor(Character c) {
   }
 }
 
-List<Talent> _adeptTalents = new List.unmodifiable([
+final _adeptTalents = new List<Talent>.unmodifiable([
   new Talent("Linguistics", Degree.novice,
       requirements: [new AbilityRequirement(Ability.intelligence, 1)]),
   new Talent("Lore", Degree.novice,
@@ -170,7 +170,7 @@ List<Talent> _adeptTalents = new List.unmodifiable([
       requirements: [new AbilityRequirement(Ability.perception, 2)])
 ]);
 
-List<Talent> _expertTalents = new List.unmodifiable([
+final _expertTalents = new List<Talent>.unmodifiable([
   new Talent("Animal training", Degree.novice),
   new Talent("Arcane potential", Degree.novice),
   new Talent("Carousing", Degree.novice, requirements: [
@@ -193,7 +193,7 @@ List<Talent> _expertTalents = new List.unmodifiable([
       requirements: [new AbilityRequirement(Ability.dexterity, 2)]),
 ]);
 
-List<Talent> _warriorTalents = new List.unmodifiable([
+final _warriorTalents = new List<Talent>.unmodifiable([
   new Talent("Arcane potential", Degree.novice),
   new Talent("Carousing", Degree.novice, requirements: [
     new AbilityRequirement(Ability.communication, 1),
@@ -203,7 +203,7 @@ List<Talent> _warriorTalents = new List.unmodifiable([
       requirements: [new AbilityRequirement(Ability.dexterity, 2)])
 ]);
 
-List<Talent> _styleTalents = new List.unmodifiable([
+final _styleTalents = new List<Talent>.unmodifiable([
   new Talent("Archery style", Degree.novice, requirements: [
     new WeaponsGroupsRequirement(["Bows"])
   ]),
@@ -253,9 +253,11 @@ List<Talent> getTalentsFor(Character c) {
       ]);
 
     default:
-      return new List.unmodifiable([]);
+      return _emptyList;
   }
 }
+
+const _emptyList = const [];
 
 List<String> getPowersFor(CharacterClass cc) {
   switch (cc) {
@@ -277,7 +279,7 @@ List<String> getPowersFor(CharacterClass cc) {
       return new List.unmodifiable([]);
 
     default:
-      return new List();
+      return _emptyList;
   }
 }
 
