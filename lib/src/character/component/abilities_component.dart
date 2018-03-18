@@ -14,7 +14,7 @@ class AbilitiesComponent {
 
   @Input() Character character;
 
-  String abilityName(Ability ability) => nameOf(ability);
+  String abilityName(Ability ability) => abilityToString(ability);
 
   int bonus(ability) => character.getAbilityBonus(ability);
 

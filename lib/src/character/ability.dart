@@ -10,7 +10,7 @@ enum Ability {
   willpower
 }
 
-String nameOf(Ability a) {
+String abilityToString(Ability a) {
   switch(a) {
     case Ability.accuracy: return "Accuracy";
     case Ability.communication: return "Communication";

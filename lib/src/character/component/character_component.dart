@@ -84,17 +84,13 @@ class CharacterComponent implements OnInit {
 
   String get backgroundName => backgroundToString(character?.background);
 
-  String get characterClassName =>
-      characterClassToString(character?.characterClass);
+  String get className => characterClassToString(character?.characterClass);
 
-  String get characterRhydanType => rhyToString(character?.rhydanType);
+  String get rhyName => rhyToString(character?.rhydanType);
 
   String destinyAscendant() => character.destinyAscendant ? "(ascendant)" : "";
 
   String fateAscendant() => character.destinyAscendant ? "" : "(ascendant)";
-
-  List<String> get accuracyFocuses =>
-      character.focuses[Ability.accuracy].map((focus) => focus.domain);
 
   String renderDegree(Degree degree) => degreeToString(degree);
 

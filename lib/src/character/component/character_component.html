@@ -25,7 +25,7 @@
 
     <material-dropdown-select
             *ngIf="isRhydan(character.race)"
-            [buttonText]="characterRhydanType"
+            [buttonText]="rhyName"
             [options]="rhydanType.options"
             [itemRenderer]="rhydanType.renderer"
             [selection]="rhydanType.selection"
@@ -33,7 +33,7 @@
     </material-dropdown-select>
 
     <material-dropdown-select
-            [buttonText]="characterClassName"
+            [buttonText]="className"
             [options]="characterClass.options"
             [itemRenderer]="characterClass.renderer"
             [selection]="characterClass.selection"
