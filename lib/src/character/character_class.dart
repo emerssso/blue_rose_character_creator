@@ -66,8 +66,6 @@ const List<Ability> _adeptSecondary = const [
   Ability.strength
 ];
 
-final rng = new Random();
-
 List<Ability> statPriorityListForClass(CharacterClass cc) {
   List<Ability> primary;
   List<Ability> secondary;
@@ -262,21 +260,21 @@ const _emptyList = const [];
 List<String> getPowersFor(CharacterClass cc) {
   switch (cc) {
     case CharacterClass.adept:
-      return new List.unmodifiable([
+      return const [
         "May use the Skillful Channeling arcane "
             "stunt for 1 SP instead of 2 & when using "
             "Powerful Channeling you get +1 free SP (must spend at least 1 SP)"
-      ]);
+      ];
 
     case CharacterClass.expert:
-      return new List.unmodifiable([
+      return const [
         "Once per round, add 1d6 to the damage of a sucessful attack "
             "if your dex > your target's",
         "You are trained in Light Armor w/out need of the Armor Training talent"
-      ]);
+      ];
 
     case CharacterClass.warrior:
-      return new List.unmodifiable([]);
+      return _emptyList;
 
     default:
       return _emptyList;
