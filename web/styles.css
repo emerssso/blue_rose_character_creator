@@ -10,3 +10,7 @@ body {
 * {
   font-family: Roboto, Helvetica, Arial, sans-serif;
 }
+
+h3{
+  margin: 8px
+}
