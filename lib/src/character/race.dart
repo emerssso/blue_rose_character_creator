@@ -81,23 +81,23 @@ Map<Race, Benefit> _fixedBenefits = new Map.unmodifiable(new Map.fromIterables([
 void _humanBenefits(Character character) {
   character.increase(_randomAbility());
 
-  addRandomFocus(new Focus(Ability.dexterity, "Riding"),
-      new Focus(Ability.constitution, "Swimming"), character);
+  addRandomFocus(const Focus(Ability.dexterity, "Riding"),
+      const Focus(Ability.constitution, "Swimming"), character);
 }
 
 void _nightPeopleBenefits(Character character) {
   character.increase(Ability.strength);
 
-  addRandomFocus(new Focus(Ability.constitution, "Stamina"),
-      new Focus(Ability.strength, "Might"), character);
+  addRandomFocus(const Focus(Ability.constitution, "Stamina"),
+      const Focus(Ability.strength, "Might"), character);
 
   character.powers.add("Dark sight (30 yards in darkness), "
       "but you are blinded for one round when exposed to daylight");
 }
 
 void _rhydanBenefits(Character character) {
-  addRandomFocus(new Focus(Ability.intelligence, "Natural lore"), 
-      new Focus(Ability.perception, "Player choice"), character);
+  addRandomFocus(const Focus(Ability.intelligence, "Natural lore"),
+      const Focus(Ability.perception, "Player choice"), character);
   //todo: make "Player Choice" a random selection from the options.
   
   character.weaponsGroups.add(WeaponsGroup.naturalWeapons);
