@@ -67,7 +67,7 @@ class RhydanBonuses {
   final List<Weapon> attacks;
   final List<String> powers;
 
-  RhydanBonuses._internal(
+  const RhydanBonuses._internal(
       this.abilityBonuses, this.attacks, this.powers);
 }
 
@@ -78,22 +78,22 @@ class Weapon {
   final int dieSize;
   final int modifier;
 
-  Weapon._internal(this.name, this.ability, this.dice, this.modifier,
+  const Weapon._internal(this.name, this.ability, this.dice, this.modifier,
       {this.dieSize = 6});
 
-  String toString() => "$name (${nameOf(ability)}) ${dice}d$dieSize" +
+  String toString() => "$name (${abilityToString(ability)}) ${dice}d$dieSize" +
       (modifier > 0 ? "+$modifier" : "");
 }
 
-final _bite0 = new Weapon._internal("Bite", Ability.accuracy, 1, 0);
-final _bite1 = new Weapon._internal("Bite", Ability.accuracy, 1, 1);
-final _bite2 = new Weapon._internal("Bite", Ability.accuracy, 2, 0);
-final _claw1 = new Weapon._internal("Claw", Ability.fighting, 1, 0);
-final _claw2 = new Weapon._internal("Claw", Ability.fighting, 2, 0);
-final _claw3 = new Weapon._internal("Claw", Ability.fighting, 1, 0, dieSize: 3);
-final _gore = new Weapon._internal("Gore", Ability.fighting, 2, 0);
-final _slam = new Weapon._internal("Slam", Ability.accuracy, 1, 0);
-final _kick = new Weapon._internal("Kick", Ability.accuracy, 1, 0);
+const _bite0 = const Weapon._internal("Bite", Ability.accuracy, 1, 0);
+const _bite1 = const Weapon._internal("Bite", Ability.accuracy, 1, 1);
+const _bite2 = const Weapon._internal("Bite", Ability.accuracy, 2, 0);
+const _claw1 = const Weapon._internal("Claw", Ability.fighting, 1, 0);
+const _claw2 = const Weapon._internal("Claw", Ability.fighting, 2, 0);
+const _claw3 = const Weapon._internal("Claw", Ability.fighting, 1, 0, dieSize: 3);
+const _gore = const Weapon._internal("Gore", Ability.fighting, 2, 0);
+const _slam = const Weapon._internal("Slam", Ability.accuracy, 1, 0);
+const _kick = const Weapon._internal("Kick", Ability.accuracy, 1, 0);
 
 void applyRhydanBonuses(Character character) {
   if(character.rhydanType == null) {
