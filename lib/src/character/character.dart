@@ -31,16 +31,27 @@ class Character {
   final List<Language> languages;
 
   int get accuracy => abilities[Ability.accuracy] ?? 0;
+
   int get communication => abilities[Ability.communication] ?? 0;
+
   int get constitution => abilities[Ability.constitution] ?? 0;
+
   int get dexterity => abilities[Ability.dexterity] ?? 0;
+
   int get fighting => abilities[Ability.fighting] ?? 0;
+
   int get intelligence => abilities[Ability.intelligence] ?? 0;
+
   int get perception => abilities[Ability.perception] ?? 0;
+
   int get strength => abilities[Ability.strength] ?? 0;
+
   int get willpower => abilities[Ability.willpower] ?? 0;
+
   int get health => getHealthFor(characterClass, constitution);
+
   int get speed => getBaseSpeed(rhydanType) + dexterity;
+
   int get defense => 10 + dexterity;
 
   factory Character(race, characterClass, {background, level, rhydanType}) {
@@ -48,26 +59,26 @@ class Character {
         background: background, level: level, rhydanType: rhydanType);
 
     return new Character._immutable(
-      mutable.race,
-      mutable.rhydanType,
-      mutable.characterClass,
-      mutable.background,
-      mutable.level,
-      mutable.calling,
-      mutable.destiny,
-      mutable.fate,
-      mutable.destinyAscendant,
-      new Map.unmodifiable(mutable.abilities),
-      new Map.unmodifiable(mutable.focuses),
-      new List.unmodifiable(mutable.weaponsGroups),
-      new List.unmodifiable(mutable.powers),
-      new List.unmodifiable(mutable.talents),
-      new List.unmodifiable(mutable.weapons),
-      new List.unmodifiable(mutable.languages)
-    );
+        mutable.race,
+        mutable.rhydanType,
+        mutable.characterClass,
+        mutable.background,
+        mutable.level,
+        mutable.calling,
+        mutable.destiny,
+        mutable.fate,
+        mutable.destinyAscendant,
+        new Map.unmodifiable(mutable.abilities),
+        new Map.unmodifiable(mutable.focuses),
+        new List.unmodifiable(mutable.weaponsGroups),
+        new List.unmodifiable(mutable.powers),
+        new List.unmodifiable(mutable.talents),
+        new List.unmodifiable(mutable.weapons),
+        new List.unmodifiable(mutable.languages));
   }
 
-  Character._immutable(this.race,
+  Character._immutable(
+      this.race,
       this.rhydanType,
       this.characterClass,
       this.background,
@@ -85,7 +96,7 @@ class Character {
       this.languages);
 
   Character._mutable(this.race, this.characterClass,
-      {this.background, this.level=1, this.rhydanType})
+      {this.background, this.level = 1, this.rhydanType})
       : calling = drawCalling(),
         destiny = drawDestiny(),
         fate = drawFate(),
@@ -97,11 +108,11 @@ class Character {
         talents = new List(),
         weapons = new List(),
         languages = new List() {
-    if(race == Race.rhydan && rhydanType == null) {
+    if (race == Race.rhydan && rhydanType == null) {
       throw "Rhydan must have a type!";
     }
 
-    if(race != Race.rhydan && rhydanType != null) {
+    if (race != Race.rhydan && rhydanType != null) {
       throw "Non-rhydan cannot have a Rhy-type!";
     }
 
@@ -109,7 +120,7 @@ class Character {
     applyClassBenefits(this);
     applyBackgroundToCharacter(this);
 
-    if(rhydanType != null) {
+    if (rhydanType != null) {
       applyRhydanBonuses(this);
     }
   }
@@ -138,12 +149,12 @@ class Character {
 
   bool hasnt(Focus focus) =>
       focuses[focus.ability] == null ||
-          focuses[focus.ability].any((f) => f.domain == focus.domain);
+      focuses[focus.ability].any((f) => f.domain == focus.domain);
 
   bool _doesntMeet(Requirement req) => !req.isMetBy(this);
 }
 
-Map<int, int> rollToAbilityBonus = new Map.unmodifiable(new Map.fromIterables(
+final rollToAbilityBonus = new Map<int, int>.unmodifiable(new Map.fromIterables(
     [3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18],
     [-2, -1, -1, 0, 0, 0, 1, 1, 1, 2, 2, 2, 3, 3, 3, 4]));
 
