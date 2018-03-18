@@ -20,10 +20,10 @@ class Character {
   final bool destinyAscendant;
 
   final Map<Ability, int> abilities;
-  final Map<Ability, List<Focus>> focuses = new Map();
-  final List<WeaponsGroup> weaponsGroups = new List();
-  final List<String> powers = new List();
-  final List<Talent> talents = new List();
+  final Map<Ability, List<Focus>> focuses;
+  final List<WeaponsGroup> weaponsGroups;
+  final List<String> powers;
+  final List<Talent> talents;
 
   int get accuracy => abilities[Ability.accuracy] ?? 0;
   int get communication => abilities[Ability.communication] ?? 0;
@@ -34,18 +34,56 @@ class Character {
   int get perception => abilities[Ability.perception] ?? 0;
   int get strength => abilities[Ability.strength] ?? 0;
   int get willpower => abilities[Ability.willpower] ?? 0;
-
   int get health => getHealthFor(characterClass, constitution);
   int get speed => 10 + dexterity; //TODO: Consider Rhydan complications
   int get defense => 10 + dexterity;
 
-  Character(this.race, this.characterClass, {this.background, this.level}) :
-        calling = drawCalling(),
+  factory Character(race, characterClass, {background, level}) {
+    var m = new Character._mutable(race, characterClass,
+        background: background, level: level);
+
+    return new Character._immutable(
+      m.race,
+      m.characterClass,
+      m.background,
+      m.level,
+      m.calling,
+      m.destiny,
+      m.fate,
+      m.destinyAscendant,
+      m.abilities,
+      new Map.unmodifiable(m.focuses),
+      new List.unmodifiable(m.weaponsGroups),
+      new List.unmodifiable(m.powers),
+      new List.unmodifiable(m.talents)
+    );
+  }
+
+  Character._immutable(this.race,
+      this.characterClass,
+      this.background,
+      this.level,
+      this.calling,
+      this.destiny,
+      this.fate,
+      this.destinyAscendant,
+      this.abilities,
+      this.focuses,
+      this.weaponsGroups,
+      this.powers,
+      this.talents);
+
+  Character._mutable(this.race, this.characterClass,
+      {this.background, this.level=1})
+      : calling = drawCalling(),
         destiny = drawDestiny(),
         fate = drawFate(),
         destinyAscendant = coinFlip(),
-        abilities = _fillAbilities(characterClass) {
-
+        abilities = _fillAbilities(characterClass),
+        focuses = new Map(),
+        weaponsGroups = new List(),
+        powers = new List(),
+        talents = new List() {
     applyRacialBenefits(this);
     applyClassBenefits(this);
   }
@@ -82,8 +120,7 @@ Map<int, int> rollToAbilityBonus = new Map.unmodifiable(new Map.fromIterables(
 Map<Ability, int> _fillAbilities(CharacterClass characterClass) {
   Map<Ability, int> temp = new Map();
 
-  List<int> bonuses =
-  new List.generate(9, (i) => Xd6(3))
+  List<int> bonuses = new List.generate(9, (i) => Xd6(3))
       .map((k) => rollToAbilityBonus[k])
       .toList();
 
