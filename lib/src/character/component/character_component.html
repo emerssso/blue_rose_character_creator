@@ -1,58 +1,75 @@
 <div class="card">
-  <material-input id="name"
-      label="Character Name"
-      autoFocus floatingLabel style="width:80%">
-  </material-input>
-<br/>
-  <material-dropdown-select
-      [buttonText]="raceName"
-      [options]="race.options"
-      [itemRenderer]="race.renderer"
-      [selection]="race.selection"
-      [width]="2">
-  </material-dropdown-select>
+    <material-input id="name"
+                    label="Character Name"
+                    autoFocus floatingLabel style="width:80%">
+    </material-input>
+    <br/>
+    <material-dropdown-select
+            [buttonText]="raceName"
+            [options]="race.options"
+            [itemRenderer]="race.renderer"
+            [selection]="race.selection"
+            [width]="2">
+    </material-dropdown-select>
 
-  <material-dropdown-select
-      [buttonText]="characterClassName"
-      [options]="characterClass.options"
-      [itemRenderer]="characterClass.renderer"
-      [selection]="characterClass.selection"
-      [width]="2">
-  </material-dropdown-select>
+    <material-dropdown-select
+            [buttonText]="characterClassName"
+            [options]="characterClass.options"
+            [itemRenderer]="characterClass.renderer"
+            [selection]="characterClass.selection"
+            [width]="2">
+    </material-dropdown-select>
+    <br/>
+    <material-dropdown-select
+            *ngIf="isRhydan(character.race)"
+            [buttonText]="characterRhydanType"
+            [options]="rhydanType.options"
+            [itemRenderer]="rhydanType.renderer"
+            [selection]="rhydanType.selection"
+            [width]="2">
+    </material-dropdown-select>
 </div>
 
-<div *ngIf="character.isFilled" >
-  <div class="card wrap adjacent">
-  <h3>Abilities</h3>
-    <abilities [character]="character"></abilities>
-  </div>
+<div *ngIf="character.isFilled">
+    <div class="card wrap adjacent">
+        <h3>Abilities</h3>
+        <abilities [character]="character"></abilities>
+    </div>
 
-  <div class="card wrap adjacent">
-    <b>Speed: </b> {{character.speed}}<br/>
-    <b>Defense: </b> {{character.defense}} <br/>
-    <b>Calling: </b> {{character.calling}}<br/>
-    <b>Destiny: </b> {{character.destiny}} <i>{{destinyAscendant()}}</i><br/>
-    <b>Fate: </b> {{character.fate}} <i>{{fateAscendant()}}</i><br/>
-  </div>
+    <div class="card wrap adjacent">
+        <b>Speed: </b> {{character.speed}}<br/>
+        <b>Defense: </b> {{character.defense}} <br/>
+        <b>Calling: </b> {{character.calling}}<br/>
+        <b>Destiny: </b> {{character.destiny}} <i>{{destinyAscendant()}}</i><br/>
+        <b>Fate: </b> {{character.fate}} <i>{{fateAscendant()}}</i><br/>
+    </div>
 
-  <div class="card wrap adjacent" *ngIf="character.weaponsGroups.isNotEmpty">
-    <h3>Weapons Groups</h3>
-    <li *ngFor="let group of character.weaponsGroups">
-      {{ renderWeaponsGroup(group) }}
-    </li>
-  </div>
+    <div class="card wrap adjacent" *ngIf="character.weaponsGroups.isNotEmpty">
+        <h3>Weapons Groups</h3>
+        <li *ngFor="let group of character.weaponsGroups">
+            {{ renderWeaponsGroup(group) }}
+        </li>
+    </div>
 
-  <div class="card wrap adjacent" *ngIf="character.talents.isNotEmpty">
-    <h3>Talents</h3>
-    <li *ngFor="let talent of character.talents">
-      {{talent.name}} ({{renderDegree(talent.degree)}})
-    </li>
-  </div>
+    <div class="card wrap adjacent" *ngIf="character.weapons.isNotEmpty">
+        <h3>Weapons</h3>
+        <li *ngFor="let weapon of character.weapons">
+            {{ renderWeapon(weapon) }}
+        </li>
+    </div>
 
-  <div class="card wrap adjacent" *ngIf="character.powers.isNotEmpty">
-    <h3>Powers</h3>
-    <li *ngFor="let power of character.powers">
-      {{ power }}
-    </li>
-  </div>
+    <div class="card wrap adjacent" *ngIf="character.talents.isNotEmpty">
+        <h3>Talents</h3>
+        <li *ngFor="let talent of character.talents">
+            {{talent.name}} ({{renderDegree(talent.degree)}})
+        </li>
+    </div>
+
+
+    <div class="card wrap adjacent" *ngIf="character.powers.isNotEmpty">
+        <h3>Powers</h3>
+        <li *ngFor="let power of character.powers">
+            {{ power }}
+        </li>
+    </div>
 </div>

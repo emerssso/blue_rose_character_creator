@@ -6,6 +6,7 @@ import 'package:blue_rose_character_creator/src/character/character.dart';
 import 'package:blue_rose_character_creator/src/character/character_class.dart';
 import 'package:blue_rose_character_creator/src/character/component/abilities_component.dart';
 import 'package:blue_rose_character_creator/src/character/race.dart';
+import 'package:blue_rose_character_creator/src/character/rhydan.dart';
 import 'package:blue_rose_character_creator/src/character/talent.dart';
 import 'package:blue_rose_character_creator/src/character/weapons_group.dart';
 import 'package:blue_rose_character_creator/src/drop_down_delegate.dart';
@@ -35,23 +36,39 @@ class CharacterComponent implements OnInit {
       characterClassToString,
       CharacterClass.unknown);
 
+  var rhydanType = new DropDownDelegate<Rhy>(
+      new List.from(Rhy.values)..add(null), rhyToString, Rhy.ape);
+
   @override
   ngOnInit() {
     race.listen((selected) =>
-        _regenerateCharacter(selected, character.characterClass));
+        _regenerateCharacter(
+            selected, character.characterClass, character.rhydanType));
 
     characterClass.listen((selected) =>
-        _regenerateCharacter(character.race, selected));
+        _regenerateCharacter(character.race, selected, character.rhydanType));
+
+    rhydanType.listen((selected) =>
+        _regenerateCharacter(
+            character.race, character.characterClass, selected));
   }
 
-  _regenerateCharacter(Race race, CharacterClass characterClass) =>
-      character = new Character(race, characterClass);
+  _regenerateCharacter(Race race, CharacterClass characterClass, Rhy rhy) {
+    if(race != Race.rhydan) {
+      rhy = null;
+    } else if (rhy == null) {
+      rhy = Rhy.ape;
+    }
+
+    character = new Character(race, characterClass, rhydanType: rhy);
+  }
 
   String get raceName => raceToString(character?.race);
 
   String get characterClassName =>
       characterClassToString(character?.characterClass);
 
+  String get characterRhydanType => rhyToString(character?.rhydanType);
 
   String destinyAscendant() => character.destinyAscendant ? "(ascendant)" : "";
 
@@ -63,4 +80,8 @@ class CharacterComponent implements OnInit {
   String renderDegree(Degree degree) => degreeToString(degree);
 
   String renderWeaponsGroup(WeaponsGroup wg) => weaponsGroupToString(wg);
+
+  String renderWeapon(Weapon weapon) => weapon.toString();
+
+  bool isRhydan(Race race) => race == Race.rhydan;
 }

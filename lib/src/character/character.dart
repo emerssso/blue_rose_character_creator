@@ -4,6 +4,7 @@ import 'package:blue_rose_character_creator/src/character/focus.dart';
 import 'package:blue_rose_character_creator/src/character/race.dart';
 import 'package:blue_rose_character_creator/src/character/ability.dart';
 import 'package:blue_rose_character_creator/src/character/calling_destiny_fate.dart';
+import 'package:blue_rose_character_creator/src/character/rhydan.dart';
 import 'package:blue_rose_character_creator/src/character/talent.dart';
 import 'package:blue_rose_character_creator/src/character/weapons_group.dart';
 
@@ -11,6 +12,7 @@ import 'package:blue_rose_character_creator/src/character/weapons_group.dart';
 class Character {
   final Race race;
   final String background;
+  final Rhy rhydanType;
   final CharacterClass characterClass;
   final int level;
 
@@ -24,6 +26,7 @@ class Character {
   final List<WeaponsGroup> weaponsGroups;
   final List<String> powers;
   final List<Talent> talents;
+  final List<Weapon> weapons;
 
   int get accuracy => abilities[Ability.accuracy] ?? 0;
   int get communication => abilities[Ability.communication] ?? 0;
@@ -35,15 +38,16 @@ class Character {
   int get strength => abilities[Ability.strength] ?? 0;
   int get willpower => abilities[Ability.willpower] ?? 0;
   int get health => getHealthFor(characterClass, constitution);
-  int get speed => 10 + dexterity; //TODO: Consider Rhydan complications
+  int get speed => getBaseSpeed(rhydanType) + dexterity;
   int get defense => 10 + dexterity;
 
-  factory Character(race, characterClass, {background, level}) {
+  factory Character(race, characterClass, {background, level, rhydanType}) {
     var m = new Character._mutable(race, characterClass,
-        background: background, level: level);
+        background: background, level: level, rhydanType: rhydanType);
 
     return new Character._immutable(
       m.race,
+      m.rhydanType,
       m.characterClass,
       m.background,
       m.level,
@@ -51,15 +55,17 @@ class Character {
       m.destiny,
       m.fate,
       m.destinyAscendant,
-      m.abilities,
+      new Map.unmodifiable(m.abilities),
       new Map.unmodifiable(m.focuses),
       new List.unmodifiable(m.weaponsGroups),
       new List.unmodifiable(m.powers),
-      new List.unmodifiable(m.talents)
+      new List.unmodifiable(m.talents),
+      new List.unmodifiable(m.weapons)
     );
   }
 
   Character._immutable(this.race,
+      this.rhydanType,
       this.characterClass,
       this.background,
       this.level,
@@ -71,10 +77,11 @@ class Character {
       this.focuses,
       this.weaponsGroups,
       this.powers,
-      this.talents);
+      this.talents,
+      this.weapons);
 
   Character._mutable(this.race, this.characterClass,
-      {this.background, this.level=1})
+      {this.background, this.level=1, this.rhydanType})
       : calling = drawCalling(),
         destiny = drawDestiny(),
         fate = drawFate(),
@@ -83,9 +90,22 @@ class Character {
         focuses = new Map(),
         weaponsGroups = new List(),
         powers = new List(),
-        talents = new List() {
+        talents = new List(),
+        weapons = new List() {
+    if(race == Race.rhydan && rhydanType == null) {
+      throw "Rhydan must have a type!";
+    }
+
+    if(race != Race.rhydan && rhydanType != null) {
+      throw "Non-rhydan cannot have a Rhy-type!";
+    }
+
     applyRacialBenefits(this);
     applyClassBenefits(this);
+
+    if(rhydanType != null) {
+      applyRhydanBonuses(this);
+    }
   }
 
   bool get isFilled => abilities.isNotEmpty;
