@@ -1,14 +1,34 @@
 <div class="card">
-    <material-input id="name"
-                    label="Character Name"
-                    autoFocus floatingLabel style="width:80%">
+    <material-input
+            id="name"
+            label="Character Name"
+            autoFocus floatingLabel style="width:80%">
     </material-input>
     <br/>
+    <material-dropdown-select
+            *ngIf="!isRhydan(character.race)"
+            [buttonText]="backgroundName"
+            [options]="background.options"
+            [itemRenderer]="background.renderer"
+            [selection]="background.selection"
+            [width]="2"
+    >
+    </material-dropdown-select>
+
     <material-dropdown-select
             [buttonText]="raceName"
             [options]="race.options"
             [itemRenderer]="race.renderer"
             [selection]="race.selection"
+            [width]="2">
+    </material-dropdown-select>
+
+    <material-dropdown-select
+            *ngIf="isRhydan(character.race)"
+            [buttonText]="characterRhydanType"
+            [options]="rhydanType.options"
+            [itemRenderer]="rhydanType.renderer"
+            [selection]="rhydanType.selection"
             [width]="2">
     </material-dropdown-select>
 
@@ -19,15 +39,7 @@
             [selection]="characterClass.selection"
             [width]="2">
     </material-dropdown-select>
-    <br/><br/>
-    <material-dropdown-select
-            *ngIf="isRhydan(character.race)"
-            [buttonText]="characterRhydanType"
-            [options]="rhydanType.options"
-            [itemRenderer]="rhydanType.renderer"
-            [selection]="rhydanType.selection"
-            [width]="2">
-    </material-dropdown-select>
+
 </div>
 
 <div *ngIf="character.isFilled">

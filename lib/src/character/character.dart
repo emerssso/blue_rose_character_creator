@@ -1,3 +1,4 @@
+import 'package:blue_rose_character_creator/src/character/background.dart';
 import 'package:blue_rose_character_creator/src/character/character_class.dart';
 import 'package:blue_rose_character_creator/src/character/dice.dart';
 import 'package:blue_rose_character_creator/src/character/focus.dart';
@@ -11,7 +12,7 @@ import 'package:blue_rose_character_creator/src/character/weapons_group.dart';
 /// Models a Blue Rose character
 class Character {
   final Race race;
-  final String background;
+  final Background background;
   final Rhy rhydanType;
   final CharacterClass characterClass;
   final int level;
