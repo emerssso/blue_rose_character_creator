@@ -110,8 +110,9 @@ void applyRhydanBonuses(Character character) {
   character.powers.addAll(bonuses.powers);
 }
 
+const _emptyList = const [];
+
 RhydanBonuses _getBonusesForRhydan(Rhy type) {
-  var _emptyList = new List.unmodifiable([]);
 
   switch (type) {
     case Rhy.ape:
@@ -120,7 +121,7 @@ RhydanBonuses _getBonusesForRhydan(Rhy type) {
               [Ability.constitution, Ability.dexterity, Ability.strength],
               [1, 1, 2])),
           _emptyList,
-          new List.unmodifiable(["Hands"]));
+          const ["Hands"]);
 
     case Rhy.badger:
       return new RhydanBonuses._internal(
@@ -128,41 +129,41 @@ RhydanBonuses _getBonusesForRhydan(Rhy type) {
               [Ability.constitution, Ability.perception, Ability.strength],
               [2, 1, 1])),
           new List.from([_bite1, _claw1]),
-          new List.unmodifiable(["Tough (AR 1)"]));
+          const ["Tough (AR 1)"]);
 
     case Rhy.bear:
       return new RhydanBonuses._internal(
           new Map.unmodifiable(new Map.fromIterables(
               [Ability.constitution, Ability.strength], [3, 3])),
-          new List.unmodifiable([_bite1, _claw2]),
+          const [_bite1, _claw2],
           _emptyList);
 
     case Rhy.boar:
       return new RhydanBonuses._internal(
           new Map.unmodifiable(new Map.fromIterables(
               [Ability.constitution, Ability.strength], [2, 2])),
-          new List.unmodifiable([_gore]),
+          const [_gore],
           _emptyList);
 
     case Rhy.cat:
       return new RhydanBonuses._internal(
           new Map.unmodifiable(new Map.fromIterables(
               [Ability.dexterity, Ability.perception], [2, 1])),
-          new List.unmodifiable([_bite1, _claw1]),
-          new List.unmodifiable(["Nightvision"]));
+          const [_bite1, _claw1],
+          const ["Nightvision"]);
 
     case Rhy.crocodile:
       return new RhydanBonuses._internal(
           new Map.unmodifiable(new Map.fromIterables(
               [Ability.constitution, Ability.strength], [2, 2])),
-          new List.unmodifiable([_bite2]),
-          new List.unmodifiable(["Tough hide (AR 2)", "Swimming speed 10"]));
+          const [_bite2],
+          const["Tough hide (AR 2)", "Swimming speed 10"]);
 
     case Rhy.dog:
       return new RhydanBonuses._internal(
           new Map.unmodifiable(new Map.fromIterables(
               [Ability.constitution, Ability.dexterity], [2, 1])),
-          new List.unmodifiable([_bite1, _claw1]),
+          const [_bite1, _claw1],
           _emptyList);
 
     case Rhy.dolphin:
@@ -170,71 +171,70 @@ RhydanBonuses _getBonusesForRhydan(Rhy type) {
           new Map.unmodifiable(new Map.fromIterables(
               [Ability.constitution, Ability.dexterity, Ability.strength],
               [1, 1, 1])),
-          new List.unmodifiable([_slam]),
-          new List.unmodifiable(
-              ["Echolocation", "Hold breath for Con x 10 minutes"]));
+          const [_slam],
+          const ["Echolocation", "Hold breath for Con x 10 minutes"]);
 
     case Rhy.hawk:
       return new RhydanBonuses._internal(
           new Map.unmodifiable(new Map.fromIterables(
               [Ability.dexterity, Ability.perception, Ability.strength],
               [2, 1, -1])),
-          new List.unmodifiable([_bite0, _claw1]),
-          new List.unmodifiable(["Nightvision"]));
+          const [_bite0, _claw1],
+          const ["Nightvision"]);
 
     case Rhy.owl:
       return new RhydanBonuses._internal(
           new Map.unmodifiable(new Map.fromIterables(
               [Ability.dexterity, Ability.perception, Ability.strength],
               [2, 1, -1])),
-          new List.unmodifiable([_bite0, _claw1]),
-          new List.unmodifiable(["Nightvision"]));
+          const [_bite0, _claw1],
+          const ["Nightvision"]);
 
     case Rhy.horse:
       return new RhydanBonuses._internal(
           new Map.unmodifiable(new Map.fromIterables(
               [Ability.constitution, Ability.strength], [2, 2])),
-          new List.unmodifiable([_kick]),
+          const [_kick],
           _emptyList);
 
     case Rhy.lizard:
       return new RhydanBonuses._internal(
           new Map.unmodifiable(new Map.fromIterables(
               [Ability.constitution, Ability.strength], [2, 1])),
-          new List.unmodifiable([_bite2]),
-          new List.unmodifiable(["Nightvision"]));
+          const [_bite2],
+          const ["Nightvision"]);
 
     case Rhy.raccoon:
       return new RhydanBonuses._internal(
           new Map.unmodifiable(new Map.fromIterables(
               [Ability.dexterity, Ability.perception, Ability.strength],
               [2, 1, -2])),
-          new List.unmodifiable([_bite0, _claw3]),
-          new List.unmodifiable(["Nightvision"]));
+          const [_bite0, _claw3],
+          const ["Nightvision"]);
 
     case Rhy.raven:
       return new RhydanBonuses._internal(
           new Map.unmodifiable(new Map.fromIterables(
               [Ability.dexterity, Ability.perception, Ability.strength],
               [3, 1, -2])),
-          new List.unmodifiable([_bite0, _claw1]),
-          new List.unmodifiable(["Nightvision", "can speak"]));
+          const [_bite0, _claw1],
+          const ["Nightvision", "can speak"]);
 
     case Rhy.snake:
       return new RhydanBonuses._internal(
           new Map.unmodifiable(new Map.fromIterables(
               [Ability.dexterity, Ability.perception, Ability.strength],
               [2, 1, 1])),
-          new List.unmodifiable([_bite1]),
-          new List.unmodifiable(["Nightvision"]));
+          const [_bite1],
+          const ["Nightvision"]);
 
     case Rhy.weasel:
       return new RhydanBonuses._internal(
           new Map.unmodifiable(new Map.fromIterables(
               [Ability.dexterity, Ability.perception, Ability.strength],
               [3, 1, -1])),
-          new List.unmodifiable([_bite0]),
-          new List.unmodifiable(["Nightvision"]));
+          const [_bite0],
+          const ["Nightvision"]);
 
     case Rhy.wolf:
       return new RhydanBonuses._internal(
@@ -249,8 +249,8 @@ RhydanBonuses _getBonusesForRhydan(Rhy type) {
             1,
             1
           ])),
-          new List.unmodifiable([_bite1]),
-          new List.unmodifiable(["Nightvision"]));
+          const [_bite1],
+          const ["Nightvision"]);
     default:
       throw "Unrecognized rhy-type: $type";
   }
