@@ -16,7 +16,7 @@ class Talent {
           : new List.unmodifiable([]) {}
 }
 
-List<Talent> arcaneTalents = new List.unmodifiable([
+final arcaneTalents = new List<Talent>.unmodifiable([
   new Talent("Animism", Degree.novice),
   new Talent("Arcane Training", Degree.novice),
   new Talent("Healing", Degree.novice),
@@ -42,6 +42,8 @@ String degreeToString(Degree degree) {
 
 abstract class Requirement {
   bool isMetBy(Character character);
+
+  const Requirement();
 }
 
 ///Requirement that the character have a minimum bonus for an ability.
@@ -49,7 +51,7 @@ class AbilityRequirement extends Requirement {
   final Ability ability;
   final int bonus;
 
-  AbilityRequirement(this.ability, this.bonus);
+  const AbilityRequirement(this.ability, this.bonus);
 
   @override
   bool isMetBy(Character character) => character.abilities[ability] >= bonus;
@@ -59,7 +61,7 @@ class AbilityRequirement extends Requirement {
 class WeaponsGroupsRequirement extends Requirement {
   final List<String> weaponsGroups;
 
-  WeaponsGroupsRequirement(this.weaponsGroups);
+  const WeaponsGroupsRequirement(this.weaponsGroups);
 
   @override
   bool isMetBy(Character character) {
