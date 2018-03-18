@@ -1,7 +1,3 @@
-import 'dart:math';
-
-/// Models the three Blue Rose Classes as an enum
-
 import 'package:blue_rose_character_creator/src/character/ability.dart';
 import 'package:blue_rose_character_creator/src/character/character.dart';
 import 'package:blue_rose_character_creator/src/character/dice.dart';
@@ -9,6 +5,7 @@ import 'package:blue_rose_character_creator/src/character/race.dart';
 import 'package:blue_rose_character_creator/src/character/talent.dart';
 import 'package:blue_rose_character_creator/src/character/weapons_group.dart';
 
+/// Models the three Blue Rose Classes as an enum
 enum CharacterClass { warrior, expert, adept, unknown }
 
 String characterClassToString(CharacterClass cc) {
