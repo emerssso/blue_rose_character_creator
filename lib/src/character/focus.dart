@@ -12,10 +12,10 @@ class Focus {
   final String domain;
 
   ///If the focus has been improved (+2 -> +3)
-  bool improved = false;
+  final bool improved;
 
   ///Bonus applied by the focus
   int get bonus => improved ? 3 : 2;
 
-  Focus(this.ability, this.domain, {this.improved});
+  const Focus(this.ability, this.domain, {this.improved=false});
 }
