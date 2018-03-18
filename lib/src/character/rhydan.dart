@@ -81,7 +81,8 @@ class Weapon {
   Weapon._internal(this.name, this.ability, this.dice, this.modifier,
       {this.dieSize = 6});
 
-  String toString() => "$name (${nameOf(ability)}) ${dice}d$dieSize+$modifier";
+  String toString() => "$name (${nameOf(ability)}) ${dice}d$dieSize" +
+      (modifier > 0 ? "+$modifier" : "");
 }
 
 final _bite0 = new Weapon._internal("Bite", Ability.accuracy, 1, 0);
@@ -127,7 +128,7 @@ RhydanBonuses _getBonusesForRhydan(Rhy type) {
               [Ability.constitution, Ability.perception, Ability.strength],
               [2, 1, 1])),
           new List.from([_bite1, _claw1]),
-          new List.unmodifiable(["Tough (AR 1"]));
+          new List.unmodifiable(["Tough (AR 1)"]));
 
     case Rhy.bear:
       return new RhydanBonuses._internal(
