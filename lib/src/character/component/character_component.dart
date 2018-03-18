@@ -20,6 +20,7 @@ import 'package:blue_rose_character_creator/src/drop_down_delegate.dart';
     CORE_DIRECTIVES,
     materialDirectives,
     MaterialDropdownSelectComponent,
+    MaterialButtonComponent,
     NgModel,
     AbilitiesComponent,
   ],
@@ -45,24 +46,17 @@ class CharacterComponent implements OnInit {
 
   @override
   ngOnInit() {
-    race.listen((selected) =>
-        _regenerateCharacter(
-            selected, character.characterClass, character.background,
-            character.rhydanType));
+    race.listen((selected) => _regenerateCharacter(selected,
+        character.characterClass, character.background, character.rhydanType));
 
-    characterClass.listen((selected) =>
-        _regenerateCharacter(character.race, selected, character.background,
-            character.rhydanType));
+    characterClass.listen((selected) => _regenerateCharacter(
+        character.race, selected, character.background, character.rhydanType));
 
-    background.listen((selected) =>
-        _regenerateCharacter(
-            character.race, character.characterClass, selected,
-            character.rhydanType));
+    background.listen((selected) => _regenerateCharacter(character.race,
+        character.characterClass, selected, character.rhydanType));
 
-    rhydanType.listen((selected) =>
-        _regenerateCharacter(
-            character.race, character.characterClass, character.background,
-            selected));
+    rhydanType.listen((selected) => _regenerateCharacter(character.race,
+        character.characterClass, character.background, selected));
   }
 
   _regenerateCharacter(Race race, CharacterClass characterClass,
@@ -78,6 +72,9 @@ class CharacterComponent implements OnInit {
     character = new Character(race, characterClass,
         background: background, rhydanType: rhy);
   }
+
+  void reRoll() => _regenerateCharacter(character.race,
+      character.characterClass, character.background, character.rhydanType);
 
   String get raceName => raceToString(character?.race);
 
