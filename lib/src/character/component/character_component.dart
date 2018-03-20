@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:angular/angular.dart';
 import 'package:angular_components/angular_components.dart';
 import 'package:angular_forms/angular_forms.dart';
+import 'package:blue_rose_character_creator/src/character/arcana.dart';
 import 'package:blue_rose_character_creator/src/character/background.dart';
 import 'package:blue_rose_character_creator/src/character/character.dart';
 import 'package:blue_rose_character_creator/src/character/character_class.dart';
@@ -113,6 +114,8 @@ class CharacterComponent implements OnInit {
   String renderLanguage(Language lang) => languageToString(lang);
 
   String renderWeapon(Weapon weapon) => weapon.toString();
+
+  String renderArcana(Arcana arcana) => arcanaToString(arcana);
 
   bool isRhydan(Race race) => race == Race.rhydan;
 }

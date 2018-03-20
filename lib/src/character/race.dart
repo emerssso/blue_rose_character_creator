@@ -103,7 +103,7 @@ void _rhydanBenefits(Character character) {
   character.weaponsGroups.add(WeaponsGroup.naturalWeapons);
   character.weaponsGroups.add(WeaponsGroup.brawling);
 
-  character.talents.add(new Talent("Psychic", Degree.novice));
+  character.talents.add(psychic);
 }
 
 void _seaFolkBenefits(Character character) {

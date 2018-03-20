@@ -10,21 +10,29 @@ class Talent {
   final Degree degree;
   final List<Requirement> requirements;
 
-  Talent(this.name, this.degree, {List<Requirement> requirements}) :
-      requirements = requirements != null
-          ? new List.unmodifiable(requirements)
-          : new List.unmodifiable([]) {}
+  const Talent(this.name, this.degree, {List<Requirement> requirements}) :
+        requirements = requirements ?? const [];
 }
 
+const animism = const Talent("Animism", Degree.novice);
+const arcaneTraining = const Talent("Arcane training", Degree.novice);
+const healing = const Talent("Healing", Degree.novice);
+const meditative = const Talent("Meditative", Degree.novice);
+const shaping = const Talent("Shaping", Degree.novice);
+const psychic = const Talent("Psychic", Degree.novice);
+const visionary = const Talent("Visionary", Degree.novice);
+const wildArcane = const Talent("Wild arcane", Degree.novice);
+const arcanePotential = const Talent("Arcane potential", Degree.novice);
+
 final arcaneTalents = new List<Talent>.unmodifiable([
-  new Talent("Animism", Degree.novice),
-  new Talent("Arcane Training", Degree.novice),
-  new Talent("Healing", Degree.novice),
-  new Talent("Meditative", Degree.novice),
-  new Talent("Shaping", Degree.novice),
-  new Talent("Psychic", Degree.novice),
-  new Talent("Visionary", Degree.novice),
-  new Talent("Wild Arcane", Degree.novice),
+  animism,
+  arcaneTraining,
+  healing,
+  meditative,
+  shaping,
+  psychic,
+  visionary,
+  wildArcane,
 ]);
 
 String degreeToString(Degree degree) {
@@ -64,13 +72,9 @@ class WeaponsGroupsRequirement extends Requirement {
   const WeaponsGroupsRequirement(this.weaponsGroups);
 
   @override
-  bool isMetBy(Character character) {
-    for(var group in weaponsGroups) {
-      if(character.weaponsGroups.contains(group)) {
-        return true;
-      }
-    }
-
-    return false;
-  }
+  bool isMetBy(Character character) => 
+      _anyIntersection(weaponsGroups, character.weaponsGroups);
 }
+
+bool _anyIntersection<T>(List<T> first, List<T> second) => 
+    first.map(second.contains).fold(false, (a, b) => a || b);

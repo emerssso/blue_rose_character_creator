@@ -98,6 +98,14 @@
         </li>
     </div>
 
+    <div class="card wrap adjacent" *ngIf="character.arcana.isNotEmpty">
+        <h3>Arcana</h3>
+        <li *ngFor="let arcanum of character.arcana"
+            style="list-style: none;">
+           {{renderArcana(arcanum)}}
+        </li>
+    </div>
+
 
     <div class="card wrap adjacent" *ngIf="character.powers.isNotEmpty">
         <h3>Powers</h3>

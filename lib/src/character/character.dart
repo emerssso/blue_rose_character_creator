@@ -1,3 +1,4 @@
+import 'package:blue_rose_character_creator/src/character/arcana.dart';
 import 'package:blue_rose_character_creator/src/character/background.dart';
 import 'package:blue_rose_character_creator/src/character/character_class.dart';
 import 'package:blue_rose_character_creator/src/character/dice.dart';
@@ -29,6 +30,7 @@ class Character {
   final List<Talent> talents;
   final List<Weapon> weapons;
   final List<Language> languages;
+  final List<Arcana> arcana;
 
   int get accuracy => abilities[Ability.accuracy] ?? 0;
 
@@ -75,7 +77,8 @@ class Character {
         new List.unmodifiable(mutable.powers),
         new List.unmodifiable(mutable.talents),
         new List.unmodifiable(mutable.weapons),
-        new List.unmodifiable(mutable.languages));
+        new List.unmodifiable(mutable.languages),
+        new List.unmodifiable(mutable.arcana));
   }
 
   Character._immutable(
@@ -94,7 +97,8 @@ class Character {
       this.powers,
       this.talents,
       this.weapons,
-      this.languages);
+      this.languages,
+      this.arcana);
 
   Character._mutable(this.race, this.characterClass,
       {this.background, this.level = 1, this.rhydanType})
@@ -108,7 +112,8 @@ class Character {
         powers = new List(),
         talents = new List(),
         weapons = new List(),
-        languages = new List() {
+        languages = new List(),
+        arcana = new List() {
     if (race == Race.rhydan && rhydanType == null) {
       throw "Rhydan must have a type!";
     }
@@ -124,6 +129,8 @@ class Character {
     if (rhydanType != null) {
       applyRhydanBonuses(this);
     }
+
+    arcana.addAll(getArcanaFor(talents));
   }
 
   bool get isFilled => abilities.isNotEmpty;
@@ -141,9 +148,9 @@ class Character {
   // (but maybe different degree) ahs not already been taken and
   // the character meets minimum ability if any
   bool canTake(Talent talent) {
-    var doesntHave = !talents.any((has) => has.name == talent.name);
+    var doesntHave = talents.every((has) => has.name != talent.name);
 
-    var meets = !talent.requirements.any(_doesntMeet);
+    var meets = talent.requirements.every(_meets);
 
     return doesntHave && meets;
   }
@@ -152,7 +159,7 @@ class Character {
       focuses[focus.ability] == null ||
       focuses[focus.ability].any((f) => f.domain == focus.domain);
 
-  bool _doesntMeet(Requirement req) => !req.isMetBy(this);
+  bool _meets(Requirement req) => req.isMetBy(this);
 }
 
 final rollToAbilityBonus = new Map<int, int>.unmodifiable(new Map.fromIterables(

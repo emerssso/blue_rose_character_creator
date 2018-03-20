@@ -147,7 +147,7 @@ List<WeaponsGroup> getWeaponsGroupsFor(Character c) {
 
     case CharacterClass.warrior:
       return new List.unmodifiable(
-          drawN(_warriorWeaponsGroups, 3)..add(WeaponsGroup.brawling));
+          drawN(3, _warriorWeaponsGroups)..add(WeaponsGroup.brawling));
 
     default:
       return new List.unmodifiable([]);
@@ -166,8 +166,8 @@ final _adeptTalents = new List<Talent>.unmodifiable([
 ]);
 
 final _expertTalents = new List<Talent>.unmodifiable([
+  arcanePotential,
   new Talent("Animal training", Degree.novice),
-  new Talent("Arcane potential", Degree.novice),
   new Talent("Carousing", Degree.novice, requirements: [
     new AbilityRequirement(Ability.communication, 1),
     new AbilityRequirement(Ability.constitution, 1)
@@ -189,7 +189,7 @@ final _expertTalents = new List<Talent>.unmodifiable([
 ]);
 
 final _warriorTalents = new List<Talent>.unmodifiable([
-  new Talent("Arcane potential", Degree.novice),
+  arcanePotential,
   new Talent("Carousing", Degree.novice, requirements: [
     new AbilityRequirement(Ability.communication, 1),
     new AbilityRequirement(Ability.constitution, 1)
@@ -223,8 +223,13 @@ List<Talent> getTalentsFor(Character c) {
   switch (c.characterClass) {
     case CharacterClass.adept:
       Talent first = drawWhere(arcaneTalents, c.canTake);
-      Talent second =
-          drawWhere(arcaneTalents.where(c.canTake), (t) => t != first);
+
+      final safeSecond = (Talent talent) =>
+          c.canTake(talent) &&
+          talent != first &&
+          _notBothWeirdArcaneTalents(first, talent);
+
+      Talent second = drawWhere(arcaneTalents, safeSecond);
       Talent third = drawWhere(_adeptTalents, c.canTake);
 
       return _listOfNonNull([first, second, third]);
@@ -251,6 +256,14 @@ List<Talent> getTalentsFor(Character c) {
       return _emptyList;
   }
 }
+
+// These two talents work badly together, so we just make sure characters can't
+// have both
+const _weirdArcaneTalents = const [arcaneTraining, wildArcane];
+
+bool _notBothWeirdArcaneTalents(Talent one, Talent two) =>
+    !_weirdArcaneTalents.contains(one) ||
+        !_weirdArcaneTalents.contains(two);
 
 const _emptyList = const [];
 
