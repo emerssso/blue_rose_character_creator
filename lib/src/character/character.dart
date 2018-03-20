@@ -48,11 +48,12 @@ class Character {
 
   int get willpower => abilities[Ability.willpower] ?? 0;
 
-  int get health => getHealthFor(characterClass, constitution);
-
   int get speed => getBaseSpeed(rhydanType) + dexterity;
 
   int get defense => 10 + dexterity;
+
+  int _health;
+  int get health => _health ??= getHealthFor(characterClass, constitution);
 
   factory Character(race, characterClass, {background, level, rhydanType}) {
     var mutable = new Character._mutable(race, characterClass,
