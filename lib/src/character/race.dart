@@ -108,9 +108,12 @@ void _rhydanBenefits(Character character) {
 
 void _seaFolkBenefits(Character character) {
   character.increase(Ability.constitution);
+  character.addFocus(const Focus(Ability.constitution, "Swimming"));
   character.powers.add("Dark sight (20 yards in darkness)");
   character.powers.add("Can hold breath "
       "${60 + 6 * character.constitution} rounds");
+  character.powers.add(" swim at your Speed as a minor action (twice"
+      "your Speed as a major action)");
 }
 
 void _vataBenefits(Character character) {
