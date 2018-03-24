@@ -118,7 +118,7 @@ void _seaFolkBenefits(Character character) {
 
 void _vataBenefits(Character character) {
   character.talents.add(
-      drawWhere(arcaneTalents, (t) => t.name != "Wild Arcane"));
+      drawWhere(arcaneTalents, (t) => t != wildArcane));
 
   //TODO: improve once backgrounds are added
   character.powers.add("Dark sight (20 yards for vata'an, 30 for vata'sha), "
