@@ -129,35 +129,33 @@ const _warriorWeaponsGroups = const [
 
 List<WeaponsGroup> getWeaponsGroupsFor(Character c) {
   if (c.race == Race.rhydan) {
-    return new List.unmodifiable([]);
+    return _emptyList;
   }
 
   switch (c.characterClass) {
     case CharacterClass.adept:
-      return new List.unmodifiable(
-          [WeaponsGroup.staves, WeaponsGroup.brawling]);
+      return const [WeaponsGroup.staves, WeaponsGroup.brawling];
 
     case CharacterClass.expert:
-      return new List.unmodifiable([
+      return const [
         WeaponsGroup.bows,
         WeaponsGroup.brawling,
         WeaponsGroup.lightBlades,
         WeaponsGroup.staves
-      ]);
+      ];
 
     case CharacterClass.warrior:
       return new List.unmodifiable(
           drawN(3, _warriorWeaponsGroups)..add(WeaponsGroup.brawling));
 
     default:
-      return new List.unmodifiable([]);
+      return _emptyList;
   }
 }
 
-final _adeptTalents =
-    new List<Talent>.unmodifiable([linguistics, lore, medicine, observation]);
+const _adeptTalents = const [linguistics, lore, medicine, observation];
 
-final _expertTalents = new List<Talent>.unmodifiable([
+const _expertTalents = const [
   arcanePotential,
   animalTraining,
   carousing,
@@ -169,12 +167,11 @@ final _expertTalents = new List<Talent>.unmodifiable([
   performance,
   scouting,
   thievery
-]);
+];
 
-final _warriorTalents =
-    new List<Talent>.unmodifiable([arcanePotential, carousing, quickReflexes]);
+const _warriorTalents = const [arcanePotential, carousing, quickReflexes];
 
-final _styleTalents = new List<Talent>.unmodifiable([
+const _styleTalents = const [
   archeryStyle,
   dualWeaponStyle,
   singleWeaponStyle,
@@ -182,7 +179,7 @@ final _styleTalents = new List<Talent>.unmodifiable([
   twoHandedStyle,
   unarmedStyle,
   weaponAndShieldStyle
-]);
+];
 
 List<Talent> getTalentsFor(Character c) {
   switch (c.characterClass) {
