@@ -12,6 +12,8 @@ dependencies:
   angular_components: ^0.8.0
   angular_forms: ^1.0.0
   sass_builder: ^1.1.2
+  googleapis: ^0.50.0
+  googleapis_auth: ^0.2.3
 
 dev_dependencies:
   angular_test: ^1.0.0
