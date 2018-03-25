@@ -70,6 +70,11 @@ applyBackgroundToCharacter(Character character) {
   }
 
   character.languages.addAll(_getLanguagesForBackground(character.background));
+
+  if(character.talents.any((talent) => talent.name == "Linguistics")) {
+    character.languages.add(
+        drawWithoutRepeats(Language.values, character.languages));
+  }
 }
 
 List<Focus> _getFocusesFor(Background bg) {
