@@ -12,6 +12,7 @@ import 'package:blue_rose_character_creator/src/character/race.dart';
 import 'package:blue_rose_character_creator/src/character/rhydan.dart';
 import 'package:blue_rose_character_creator/src/character/talent.dart';
 import 'package:blue_rose_character_creator/src/character/weapons_group.dart';
+import 'package:blue_rose_character_creator/src/drive/drive_component.dart';
 import 'package:blue_rose_character_creator/src/drop_down_delegate.dart';
 
 /// UI form for a character
@@ -26,6 +27,7 @@ import 'package:blue_rose_character_creator/src/drop_down_delegate.dart';
     MaterialButtonComponent,
     NgModel,
     AbilitiesComponent,
+    DriveComponent,
   ],
   providers: const [materialProviders],
 )
