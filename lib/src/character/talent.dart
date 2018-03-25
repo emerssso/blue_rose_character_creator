@@ -11,12 +11,12 @@ class Talent {
   final Degree degree;
   final List<Requirement> requirements;
 
-  const Talent._init(this.name, {this.degree=Degree.novice,
-    this.requirements = const []});
+  const Talent._init(this.name,
+      {this.degree = Degree.novice, this.requirements = const []});
 
   Talent improve() {
-    return new Talent._init(name, degree: improveDegree(degree),
-        requirements: requirements);
+    return new Talent._init(name,
+        degree: improveDegree(degree), requirements: requirements);
   }
 }
 
@@ -25,11 +25,11 @@ const animism = const Talent._init("Animism", requirements: const [
   const ClassRequirement(const [CharacterClass.adept])
 ]);
 const arcanePotential =
-const Talent._init("Arcane potential", requirements: const [
+    const Talent._init("Arcane potential", requirements: const [
   const ClassRequirement(const [CharacterClass.expert, CharacterClass.warrior])
 ]);
 const arcaneTraining =
-const Talent._init("Arcane training", requirements: const [
+    const Talent._init("Arcane training", requirements: const [
   const ClassRequirement(const [CharacterClass.adept])
 ]);
 const armorTraining = const Talent._init("Armor training", requirements: const [
@@ -75,7 +75,7 @@ const meditative = const Talent._init("Meditative", requirements: const [
   const ClassRequirement(const [CharacterClass.adept])
 ]);
 const mountedCombatStyle =
-const Talent._init("Mounted combat style", requirements: const [
+    const Talent._init("Mounted combat style", requirements: const [
   const ClassRequirement(const [CharacterClass.warrior])
 ]);
 const observation = const Talent._init("Observation",
@@ -87,14 +87,14 @@ const performance = const Talent._init("Performance", requirements: const [
   const FocusRequirement(const [focus.performance, focus.musicalLore])
 ]);
 const poleWeaponStyle =
-const Talent._init("Pole weapon style", requirements: const [
+    const Talent._init("Pole weapon style", requirements: const [
   const WeaponsGroupsRequirement(const [WeaponsGroup.polearms])
 ]);
 const psychic = const Talent._init("Psychic", requirements: const [
   const ClassRequirement(const [CharacterClass.adept])
 ]);
 const purifyingLight =
-const Talent._init("Purifying light", requirements: const [
+    const Talent._init("Purifying light", requirements: const [
   const AbilityRequirement(Ability.willpower, 2),
   const FocusRequirement(const [focus.faith])
 ]);
@@ -108,7 +108,7 @@ const shaping = const Talent._init("Shaping", requirements: const [
   const ClassRequirement(const [CharacterClass.adept])
 ]);
 const singleWeaponStyle =
-const Talent._init("Single weapon style", requirements: const [
+    const Talent._init("Single weapon style", requirements: const [
   const ClassRequirement(const [CharacterClass.expert, CharacterClass.warrior])
 ]);
 const thievery = const Talent._init("Thievery", requirements: const [
@@ -116,7 +116,7 @@ const thievery = const Talent._init("Thievery", requirements: const [
   const AbilityRequirement(Ability.dexterity, 2)
 ]);
 const thrownWeaponStyle =
-const Talent._init("Thrown weapon style", requirements: const [
+    const Talent._init("Thrown weapon style", requirements: const [
   const ClassRequirement(const [CharacterClass.expert, CharacterClass.warrior]),
   const WeaponsGroupsRequirement(const [
     WeaponsGroup.axes,
@@ -127,8 +127,8 @@ const Talent._init("Thrown weapon style", requirements: const [
 const toothAndClaw = const Talent._init("Tooth and claw", requirements: const [
   const WeaponsGroupsRequirement(const [WeaponsGroup.naturalWeapons])
 ]);
-const twoHandedStyle = const Talent._init(
-    "Two-handed style", requirements: const [
+const twoHandedStyle =
+    const Talent._init("Two-handed style", requirements: const [
   const ClassRequirement(const [CharacterClass.warrior]),
   const AbilityRequirement(Ability.strength, 3),
   const WeaponsGroupsRequirement(const [
@@ -144,7 +144,8 @@ const unarmedStyle = const Talent._init("Unarmed style", requirements: const [
 const visionary = const Talent._init("Visionary", requirements: const [
   const ClassRequirement(const [CharacterClass.adept])
 ]);
-const weaponAndShieldStyle = const Talent._init("Weapon and shield style", requirements: const [
+const weaponAndShieldStyle =
+    const Talent._init("Weapon and shield style", requirements: const [
   const ClassRequirement(const [CharacterClass.warrior]),
   const AbilityRequirement(Ability.strength, 2)
 ]);
@@ -175,7 +176,7 @@ String degreeToString(Degree degree) {
 }
 
 Degree improveDegree(Degree old) {
-  switch(old) {
+  switch (old) {
     case Degree.novice:
       return Degree.journeyman;
     case Degree.journeyman:
