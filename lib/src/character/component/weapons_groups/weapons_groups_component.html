@@ -1,0 +1,7 @@
+<div class="card wrap adjacent" *ngIf="character.weaponsGroups.isNotEmpty">
+    <h3>Weapons</h3>
+    <li *ngFor="let weaponsGroup of character.weaponsGroups"
+        style="list-style: none;">
+        {{ renderWeaponsGroup(weaponsGroup) }}
+    </li>
+</div>

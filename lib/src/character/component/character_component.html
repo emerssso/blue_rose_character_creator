@@ -58,13 +58,7 @@
 
     <languages [character]="character"></languages>
 
-    <div class="card wrap adjacent" *ngIf="character.weaponsGroups.isNotEmpty">
-        <h3>Weapons Groups</h3>
-        <li *ngFor="let group of character.weaponsGroups"
-            style="list-style: none;">
-            {{ renderWeaponsGroup(group) }}
-        </li>
-    </div>
+    <weapons-groups [character]="character"></weapons-groups>
 
     <div class="card wrap adjacent" *ngIf="character.weapons.isNotEmpty">
         <h3>Weapons</h3>

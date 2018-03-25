@@ -8,10 +8,10 @@ import 'package:blue_rose_character_creator/src/character/character_class.dart';
 import 'package:blue_rose_character_creator/src/character/component/abilities/abilities_component.dart';
 import 'package:blue_rose_character_creator/src/character/component/languages/languages_component.dart';
 import 'package:blue_rose_character_creator/src/character/component/various_stats/various_stats_component.dart';
+import 'package:blue_rose_character_creator/src/character/component/weapons_groups/weapons_groups_component.dart';
 import 'package:blue_rose_character_creator/src/character/race.dart';
 import 'package:blue_rose_character_creator/src/character/rhydan.dart';
 import 'package:blue_rose_character_creator/src/character/talent.dart';
-import 'package:blue_rose_character_creator/src/character/weapons_group.dart';
 import 'package:blue_rose_character_creator/src/drop_down_delegate.dart';
 
 /// UI form for a character
@@ -25,6 +25,7 @@ import 'package:blue_rose_character_creator/src/drop_down_delegate.dart';
     AbilitiesComponent,
     VariousStatsComponent,
     LanguagesComponent,
+    WeaponsGroupsComponent
   ],
   providers: const [materialProviders],
 )
@@ -103,8 +104,6 @@ class CharacterComponent implements OnInit {
   String get rhyName => rhyToString(character?.rhydanType);
 
   String renderDegree(Degree degree) => degreeToString(degree);
-
-  String renderWeaponsGroup(WeaponsGroup wg) => weaponsGroupToString(wg);
 
   String renderWeapon(Weapon weapon) => weapon.toString();
 
