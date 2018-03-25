@@ -81,24 +81,22 @@ Map<Race, Benefit> _fixedBenefits = new Map.unmodifiable(new Map.fromIterables([
 void _humanBenefits(Character character) {
   character.increase(_randomAbility());
 
-  addRandomFocus(const Focus(Ability.dexterity, "Riding"),
-      const Focus(Ability.constitution, "Swimming"), character);
+  addRandomFocus(riding, swimming, character);
 }
 
 void _nightPeopleBenefits(Character character) {
   character.increase(Ability.strength);
 
-  addRandomFocus(const Focus(Ability.constitution, "Stamina"),
-      const Focus(Ability.strength, "Might"), character);
+  addRandomFocus(stamina, might, character);
 
   character.powers.add("Dark sight (30 yards in darkness), "
       "but you are blinded for one round when exposed to daylight");
 }
 
 void _rhydanBenefits(Character character) {
-  addRandomFocus(const Focus(Ability.intelligence, "Natural lore"),
-      const Focus(Ability.perception, "Player choice"), character);
-  //todo: make "Player Choice" a random selection from the options.
+  addRandomFocus(naturalLore,
+      drawWithoutRepeats(perceptionFocuses,
+          character.focuses[Ability.perception] ?? const []), character);
   
   character.weaponsGroups.add(WeaponsGroup.naturalWeapons);
   character.weaponsGroups.add(WeaponsGroup.brawling);
@@ -108,7 +106,7 @@ void _rhydanBenefits(Character character) {
 
 void _seaFolkBenefits(Character character) {
   character.increase(Ability.constitution);
-  character.addFocus(const Focus(Ability.constitution, "Swimming"));
+  character.addFocus(swimming);
   character.powers.add("Dark sight (20 yards in darkness)");
   character.powers.add("Can hold breath "
       "${60 + 6 * character.constitution} rounds");

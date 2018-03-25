@@ -1,5 +1,4 @@
 import 'dart:html';
-import 'dart:async';
 import 'package:angular/angular.dart';
 import 'package:angular_components/angular_components.dart';
 import 'package:angular_forms/angular_forms.dart';

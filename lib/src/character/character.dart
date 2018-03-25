@@ -155,9 +155,10 @@ class Character {
     return doesntHave && meets;
   }
 
-  bool hasnt(Focus focus) =>
-      focuses[focus.ability] == null ||
+  bool hasFocus(Focus focus) => focuses[focus.ability] != null &&
       focuses[focus.ability].any((f) => f.domain == focus.domain);
+
+  bool hasnt(Focus focus) => !hasFocus(focus);
 
   bool _meets(Requirement req) => req.isMetBy(this);
 }

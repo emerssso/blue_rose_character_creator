@@ -154,69 +154,34 @@ List<WeaponsGroup> getWeaponsGroupsFor(Character c) {
   }
 }
 
-final _adeptTalents = new List<Talent>.unmodifiable([
-  new Talent("Linguistics", Degree.novice,
-      requirements: [new AbilityRequirement(Ability.intelligence, 1)]),
-  new Talent("Lore", Degree.novice,
-      requirements: [new AbilityRequirement(Ability.intelligence, 2)]),
-  new Talent("Medicine", Degree.novice,
-      requirements: [new AbilityRequirement(Ability.intelligence, 1)]),
-  new Talent("Observation", Degree.novice,
-      requirements: [new AbilityRequirement(Ability.perception, 2)])
-]);
+final _adeptTalents =
+    new List<Talent>.unmodifiable([linguistics, lore, medicine, observation]);
 
 final _expertTalents = new List<Talent>.unmodifiable([
   arcanePotential,
-  new Talent("Animal training", Degree.novice),
-  new Talent("Carousing", Degree.novice, requirements: [
-    new AbilityRequirement(Ability.communication, 1),
-    new AbilityRequirement(Ability.constitution, 1)
-  ]),
-  new Talent("Contacts", Degree.novice,
-      requirements: [new AbilityRequirement(Ability.communication, 2)]),
-  new Talent("Intrigue", Degree.novice,
-      requirements: [new AbilityRequirement(Ability.communication, 2)]),
-  new Talent("Linguistics", Degree.novice,
-      requirements: [new AbilityRequirement(Ability.intelligence, 1)]),
-  new Talent("Medicine", Degree.novice,
-      requirements: [new AbilityRequirement(Ability.intelligence, 1)]),
-  new Talent("Oratory", Degree.novice),
-  new Talent("Performance", Degree.novice),
-  new Talent("Scouting", Degree.novice,
-      requirements: [new AbilityRequirement(Ability.dexterity, 2)]),
-  new Talent("Theivery", Degree.novice,
-      requirements: [new AbilityRequirement(Ability.dexterity, 2)]),
+  animalTraining,
+  carousing,
+  contacts,
+  intrigue,
+  linguistics,
+  medicine,
+  oratory,
+  performance,
+  scouting,
+  thievery
 ]);
 
-final _warriorTalents = new List<Talent>.unmodifiable([
-  arcanePotential,
-  new Talent("Carousing", Degree.novice, requirements: [
-    new AbilityRequirement(Ability.communication, 1),
-    new AbilityRequirement(Ability.constitution, 1)
-  ]),
-  new Talent("Quick reflexes", Degree.novice,
-      requirements: [new AbilityRequirement(Ability.dexterity, 2)])
-]);
+final _warriorTalents =
+    new List<Talent>.unmodifiable([arcanePotential, carousing, quickReflexes]);
 
 final _styleTalents = new List<Talent>.unmodifiable([
-  new Talent("Archery style", Degree.novice, requirements: [
-    new WeaponsGroupsRequirement(["Bows"])
-  ]),
-  new Talent("Dual weapon style", Degree.novice,
-      requirements: [new AbilityRequirement(Ability.dexterity, 1)]),
-  new Talent("Single weapon style", Degree.novice,
-      requirements: [new AbilityRequirement(Ability.perception, 1)]),
-  new Talent("Thrown weapon style", Degree.novice, requirements: [
-    new WeaponsGroupsRequirement(["Axes", "Light blades", "Polearms"])
-  ]),
-  new Talent("Two-handed weapon style", Degree.novice, requirements: [
-    new AbilityRequirement(Ability.strength, 2),
-    new WeaponsGroupsRequirement(
-        ["Axes", "Bludgeons", "Heavy blades", "Polearms"])
-  ]),
-  new Talent("Unarmed style", Degree.novice),
-  new Talent("Weapon and shield style", Degree.novice,
-      requirements: [new AbilityRequirement(Ability.strength, 1)])
+  archeryStyle,
+  dualWeaponStyle,
+  singleWeaponStyle,
+  thrownWeaponStyle,
+  twoHandedStyle,
+  unarmedStyle,
+  weaponAndShieldStyle
 ]);
 
 List<Talent> getTalentsFor(Character c) {
@@ -241,15 +206,15 @@ List<Talent> getTalentsFor(Character c) {
       if (c.race == Race.rhydan) {
         return [
           drawFrom(_warriorTalents),
-          new Talent("Armor training", Degree.novice),
-          new Talent("Tooth and claw", Degree.novice),
+          armorTraining,
+          toothAndClaw,
         ];
       }
 
       return _listOfNonNull([
         drawWhere(_warriorTalents, c.canTake),
         drawWhere(_styleTalents, c.canTake),
-        new Talent("Armor training", Degree.novice)
+        armorTraining
       ]);
 
     default:
@@ -262,8 +227,7 @@ List<Talent> getTalentsFor(Character c) {
 const _weirdArcaneTalents = const [arcaneTraining, wildArcane];
 
 bool _notBothWeirdArcaneTalents(Talent one, Talent two) =>
-    !_weirdArcaneTalents.contains(one) ||
-        !_weirdArcaneTalents.contains(two);
+    !_weirdArcaneTalents.contains(one) || !_weirdArcaneTalents.contains(two);
 
 const _emptyList = const [];
 

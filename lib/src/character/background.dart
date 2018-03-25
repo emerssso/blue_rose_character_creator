@@ -1,4 +1,3 @@
-import 'package:blue_rose_character_creator/src/character/ability.dart';
 import 'package:blue_rose_character_creator/src/character/character.dart';
 import 'package:blue_rose_character_creator/src/character/dice.dart';
 import 'package:blue_rose_character_creator/src/character/focus.dart';
@@ -111,53 +110,29 @@ List<Focus> _getFocusesFor(Background bg) {
 const _emptyList = const [];
 
 const _aldinFocuses = const [
-  const Focus(Ability.communication, "Persuasion"),
-  const Focus(Ability.dexterity, "Artisan"),
-  const Focus(Ability.intelligence, "Cultural lore"),
-  const Focus(Ability.intelligence, "Historical lore")
+  persuasion, artisan, culturalLore, historicalLore
 ];
 
-const _forestFolkFocuses =  const [
-  const Focus(Ability.constitution, "Running"),
-  const Focus(Ability.dexterity, "Crafting"),
-  const Focus(Ability.intelligence, "Natural lore"),
-  const Focus(Ability.perception, "Tracking")
+const _forestFolkFocuses = const [
+  running, crafting, naturalLore, tracking
 ];
 const _jarzoniFocuses = const [
-  const Focus(Ability.communication, "Etiquette"),
-  const Focus(Ability.intelligence, "Historical lore"),
-  const Focus(Ability.intelligence, "Religious lore"),
-  const Focus(Ability.willpower, "Faith")
+  etiquette, historicalLore, religiousLore, faith
 ];
 const _lartyanFocuses = const [
-  const Focus(Ability.communication, "Etiquette"),
-  const Focus(Ability.dexterity, "Crafting"),
-  const Focus(Ability.intelligence, "Heraldry"),
-  const Focus(Ability.willpower, "Self-discipline")
+  etiquette, crafting, heraldry, selfDiscipline
 ];
 const _marinerFocuses = const [
-  const Focus(Ability.communication, "Bargaining"),
-  const Focus(Ability.constitution, "Swimming"),
-  const Focus(Ability.dexterity, "Sailing"),
-  const Focus(Ability.intelligence, "Nautical lore")
+  bargaining, swimming, sailing, nauticalLore
 ];
 const _outcastFocuses = const [
-  const Focus(Ability.communication, "Gambling"),
-  const Focus(Ability.dexterity, "Stealth"),
-  const Focus(Ability.intelligence, "Navigation"),
-  const Focus(Ability.willpower, "Courage")
+  gambling, stealth, navigation, courage
 ];
 const _rezeanFocuses = const [
-  const Focus(Ability.constitution, "Stamina"),
-  const Focus(Ability.dexterity, "Riding"),
-  const Focus(Ability.intelligence, "Navigation"),
-  const Focus(Ability.willpower, "Courage")
+  stamina, riding, navigation, courage
 ];
 const _roamerFocuses = const [
-  const Focus(Ability.communication, "Bargaining"),
-  const Focus(Ability.communication, "Performance"),
-  const Focus(Ability.dexterity, "Crafting"),
-  const Focus(Ability.perception, "Empathy")
+  bargaining, performance, crafting, empathy
 ];
 
 List<Language> _getLanguagesForBackground(Background bg) {

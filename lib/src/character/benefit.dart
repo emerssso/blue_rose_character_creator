@@ -54,53 +54,37 @@ void _strength(Character c) => c.increase(Ability.strength);
 
 void _willpower(Character c) => c.increase(Ability.willpower);
 
-void _brawling(Character c) =>
-    c.addFocus(new Focus(Ability.accuracy, "Brawling"));
+void _brawling(Character c) => c.addFocus(brawling);
 
-void _naturalWeapon(Character c) =>
-    c.addFocus(new Focus(Ability.accuracy, "Natural weapon (pick one)"));
+void _naturalWeapon(Character c) => c.addFocus(naturalWeapon);
 
-void _deception(Character c) =>
-    c.addFocus(new Focus(Ability.communication, "Deception"));
+void _deception(Character c) => c.addFocus(deception);
 
-void _persuasion(Character c) =>
-    c.addFocus(new Focus(Ability.communication, "Persuasion"));
+void _persuasion(Character c) => c.addFocus(persuasion);
 
-void _stamina(Character c) =>
-    c.addFocus(new Focus(Ability.constitution, "Stamina"));
+void _stamina(Character c) => c.addFocus(stamina);
 
-void _searching(Character c) =>
-    c.addFocus(new Focus(Ability.perception, "Searching"));
+void _searching(Character c) => c.addFocus(searching);
 
-void _smelling(Character c) =>
-    c.addFocus(new Focus(Ability.perception, "Smelling"));
+void _smelling(Character c) => c.addFocus(smelling);
 
-void _psychic(Character c) =>
-    c.addFocus(new Focus(Ability.perception, "Psychic"));
+void _psychic(Character c) => c.addFocus(psychicPerception);
 
-void _hearing(Character c) =>
-    c.addFocus(new Focus(Ability.perception, "Hearing"));
+void _hearing(Character c) => c.addFocus(hearing);
 
-void _seeing(Character c) =>
-    c.addFocus(new Focus(Ability.perception, "Seeing"));
+void _seeing(Character c) => c.addFocus(seeing);
 
-void _stealth(Character c) =>
-    c.addFocus(new Focus(Ability.dexterity, "Stealth"));
+void _stealth(Character c) => c.addFocus(stealth);
 
-void _acrobatics(Character c) =>
-    c.addFocus(new Focus(Ability.dexterity, "Acrobatics"));
+void _acrobatics(Character c) => c.addFocus(acrobatics);
 
-void _intimidation(Character c) =>
-    c.addFocus(new Focus(Ability.strength, "Intimidation"));
+void _intimidation(Character c) => c.addFocus(intimidation);
 
-void _naturalLore(Character c) =>
-    c.addFocus(new Focus(Ability.intelligence, "Natural lore"));
+void _naturalLore(Character c) => c.addFocus(naturalLore);
 
-void _historicalLore(Character c) =>
-    c.addFocus(new Focus(Ability.intelligence, "Historical lore"));
+void _historicalLore(Character c) => c.addFocus(historicalLore);
 
-void _culturalLore(Character c) =>
-    c.addFocus(new Focus(Ability.intelligence, "Cultural lore"));
+void _culturalLore(Character c) => c.addFocus(culturalLore);
 
 void _bludgeons(Character c) => c.weaponsGroups.add(WeaponsGroup.brawling);
 
