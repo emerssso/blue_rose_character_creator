@@ -47,22 +47,6 @@ void _applyFixedBenefits(Character character) {
   _fixedBenefits[character.race](character);
 }
 
-Ability _randomAbility() {
-  var die = d(9);
-  switch(die) {
-    case 1: return Ability.accuracy;
-    case 2: return Ability.communication;
-    case 3: return Ability.constitution;
-    case 4: return Ability.dexterity;
-    case 5: return Ability.fighting;
-    case 6: return Ability.intelligence;
-    case 7: return Ability.perception;
-    case 8: return Ability.strength;
-    case 9: return Ability.willpower;
-    default: throw "RNG generated number outside 1-9: $die";
-  }
-}
-
 //contains benefits that always apply to a character of a specific race.
 Map<Race, Benefit> _fixedBenefits = new Map.unmodifiable(new Map.fromIterables([
   Race.human,
@@ -79,7 +63,7 @@ Map<Race, Benefit> _fixedBenefits = new Map.unmodifiable(new Map.fromIterables([
 ]));
 
 void _humanBenefits(Character character) {
-  character.increase(_randomAbility());
+  character.increase(drawFrom(Ability.values));
 
   addRandomFocus(riding, swimming, character);
 }
