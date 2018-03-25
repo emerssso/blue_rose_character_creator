@@ -1,12 +1,13 @@
 import 'dart:html';
 import 'package:angular/angular.dart';
 import 'package:angular_components/angular_components.dart';
-import 'package:angular_forms/angular_forms.dart';
 import 'package:blue_rose_character_creator/src/character/arcana.dart';
 import 'package:blue_rose_character_creator/src/character/background.dart';
 import 'package:blue_rose_character_creator/src/character/character.dart';
 import 'package:blue_rose_character_creator/src/character/character_class.dart';
-import 'package:blue_rose_character_creator/src/character/component/abilities_component.dart';
+import 'package:blue_rose_character_creator/src/character/component/abilities/abilities_component.dart';
+import 'package:blue_rose_character_creator/src/character/component/languages/languages_component.dart';
+import 'package:blue_rose_character_creator/src/character/component/various_stats/various_stats_component.dart';
 import 'package:blue_rose_character_creator/src/character/race.dart';
 import 'package:blue_rose_character_creator/src/character/rhydan.dart';
 import 'package:blue_rose_character_creator/src/character/talent.dart';
@@ -21,10 +22,9 @@ import 'package:blue_rose_character_creator/src/drop_down_delegate.dart';
   directives: const [
     CORE_DIRECTIVES,
     materialDirectives,
-    MaterialDropdownSelectComponent,
-    MaterialButtonComponent,
-    NgModel,
     AbilitiesComponent,
+    VariousStatsComponent,
+    LanguagesComponent,
   ],
   providers: const [materialProviders],
 )
@@ -102,15 +102,9 @@ class CharacterComponent implements OnInit {
 
   String get rhyName => rhyToString(character?.rhydanType);
 
-  String destinyAscendant() => character.destinyAscendant ? "(ascendant)" : "";
-
-  String fateAscendant() => character.destinyAscendant ? "" : "(ascendant)";
-
   String renderDegree(Degree degree) => degreeToString(degree);
 
   String renderWeaponsGroup(WeaponsGroup wg) => weaponsGroupToString(wg);
-
-  String renderLanguage(Language lang) => languageToString(lang);
 
   String renderWeapon(Weapon weapon) => weapon.toString();
 

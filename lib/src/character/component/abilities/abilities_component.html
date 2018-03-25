@@ -1,0 +1,15 @@
+<div class="card wrap adjacent">
+  <h3>Abilities</h3>
+  <table>
+    <tr *ngFor="let ability of abilities">
+      <td>{{abilityName(ability)}}:</td>
+      <td>{{bonus(ability)}}</td>
+      <td>
+        <li *ngFor="let focus of character.focuses[ability]"
+            style="list-style: none;">
+          <i>{{ focus.domain }}</i>
+        </li>
+      </td>
+    </tr>
+  </table>
+</div>

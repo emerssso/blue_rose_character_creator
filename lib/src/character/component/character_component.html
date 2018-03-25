@@ -52,27 +52,11 @@
 </div>
 
 <div *ngIf="character.isFilled">
-    <div class="card wrap adjacent">
-        <h3>Abilities</h3>
-        <abilities [character]="character"></abilities>
-    </div>
+    <abilities [character]="character"></abilities>
 
-    <div class="card wrap adjacent">
-        <b>Health: </b> {{character.health}} <br/>
-        <b>Speed: </b> {{character.speed}}<br/>
-        <b>Defense: </b> {{character.defense}} <br/><br/>
-        <b>Calling: </b> {{character.calling}}<br/>
-        <b>Destiny: </b> {{character.destiny}} <i>{{destinyAscendant()}}</i><br/>
-        <b>Fate: </b> {{character.fate}} <i>{{fateAscendant()}}</i><br/>
-    </div>
+    <various-stats [character]="character"></various-stats>
 
-    <div class="card wrap adjacent" *ngIf="character.languages.isNotEmpty">
-        <h3>Languages</h3>
-        <li *ngFor="let lang of character.languages"
-            style="list-style: none;">
-            {{ renderLanguage(lang) }}
-        </li>
-    </div>
+    <languages [character]="character"></languages>
 
     <div class="card wrap adjacent" *ngIf="character.weaponsGroups.isNotEmpty">
         <h3>Weapons Groups</h3>
