@@ -18,22 +18,22 @@ const scopes = const [DriveApi.DriveScope];
   directives: const [CORE_DIRECTIVES, materialDirectives],
   providers: const [materialProviders],
 )
-class DriveComponent {
+class DriveComponent implements OnInit {
   @Input() Character character;
 
+  BrowserOAuth2Flow _flow = null;
+
+  bool get cantSave => _flow == null;
+
   void save(UIEvent event) {
+    _flow.clientViaUserConsent(immediate: false);
+  }
+
+  @override
+  ngOnInit() {
     createImplicitBrowserFlow(identifier, scopes)
         .then((BrowserOAuth2Flow flow) {
-      // Try getting credentials without user consent.
-      // This will succeed if the user already gave consent for this application.
-      return flow.clientViaUserConsent(immediate: true).catchError((_) {
-
-        //I've removed the loginButton from the flow, since AngularDart
-        //doesn't pass this around.
-//        loginButton.text = 'Authorize';
-//        return loginButton.onClick.first.then((_) {
-        return flow.clientViaUserConsent(immediate: false);
-      }, test: (error) => error is UserConsentException);
+      _flow = flow;
     });
   }
 }
