@@ -25,9 +25,6 @@ import 'package:blue_rose_character_creator/src/drop_down_delegate.dart';
     CORE_DIRECTIVES,
     materialDirectives,
     AbilitiesComponent,
-    VariousStatsComponent,
-    LanguagesComponent,
-    WeaponsGroupsComponent
     DriveComponent,
   ],
   providers: const [materialProviders],

@@ -7,3 +7,7 @@ pubspec.lock
 
 # Directory created by dartdoc
 doc/api/
+
+.idea/libraries/Dart_SDK.xml
+.idea/workspace.xml
+nohup.out
