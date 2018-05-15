@@ -41,7 +41,7 @@ const gambling = const Focus._init(Ability.communication, "Gambling");
 const investigation = const Focus._init(Ability.communication, "Investigation");
 const leadership = const Focus._init(Ability.communication, "Leadership");
 const performance = const Focus._init(Ability.communication, "Performance");
-const persuasion = const Focus._init(Ability.communication, "Persuation");
+const persuasion = const Focus._init(Ability.communication, "Persuasion");
 const psychicCommunication =
     const Focus._init(Ability.communication, "Psychic");
 const romance = const Focus._init(Ability.communication, "Romance");
