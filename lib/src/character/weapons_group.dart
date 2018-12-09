@@ -13,7 +13,7 @@ enum WeaponsGroup {
 }
 
 String weaponsGroupToString(WeaponsGroup wg) {
-  switch(wg) {
+  switch (wg) {
     case WeaponsGroup.axes:
       return "Axes";
     case WeaponsGroup.bludgeons:

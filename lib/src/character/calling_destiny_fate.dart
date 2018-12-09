@@ -6,7 +6,7 @@ drawDestiny() => drawFrom(_destinies);
 
 drawFate() => drawFrom(_fates);
 
-const _callings = const [
+const _callings = [
   "Adventure and excitement",
   "Mastery of the arcane",
   "Oneness with spirit",
@@ -31,7 +31,7 @@ const _callings = const [
   "Exploration and discovery",
 ];
 
-const _destinies = const [
+const _destinies = [
   "Courageous",
   "Compromising",
   "Stalwart",
@@ -90,7 +90,7 @@ const _destinies = const [
   "Resourceful"
 ];
 
-const _fates = const [
+const _fates = [
   "Cowardly",
   "Indecisive",
   "Treacherous",

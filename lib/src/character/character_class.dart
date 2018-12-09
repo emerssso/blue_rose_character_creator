@@ -21,13 +21,13 @@ String characterClassToString(CharacterClass cc) {
   }
 }
 
-const List<Ability> _warriorPrimary = const [
+const List<Ability> _warriorPrimary = [
   Ability.constitution,
   Ability.dexterity,
   Ability.fighting,
   Ability.strength
 ];
-const List<Ability> _warriorSecondary = const [
+const List<Ability> _warriorSecondary = [
   Ability.accuracy,
   Ability.communication,
   Ability.intelligence,
@@ -35,13 +35,13 @@ const List<Ability> _warriorSecondary = const [
   Ability.willpower
 ];
 
-const List<Ability> _expertPrimary = const [
+const List<Ability> _expertPrimary = [
   Ability.accuracy,
   Ability.communication,
   Ability.dexterity,
   Ability.perception
 ];
-const List<Ability> _expertSecondary = const [
+const List<Ability> _expertSecondary = [
   Ability.constitution,
   Ability.fighting,
   Ability.intelligence,
@@ -49,13 +49,13 @@ const List<Ability> _expertSecondary = const [
   Ability.willpower
 ];
 
-const List<Ability> _adeptPrimary = const [
+const List<Ability> _adeptPrimary = [
   Ability.accuracy,
   Ability.intelligence,
   Ability.perception,
   Ability.willpower
 ];
-const List<Ability> _adeptSecondary = const [
+const List<Ability> _adeptSecondary = [
   Ability.communication,
   Ability.constitution,
   Ability.dexterity,
@@ -69,22 +69,22 @@ List<Ability> statPriorityListForClass(CharacterClass cc) {
 
   switch (cc) {
     case CharacterClass.warrior:
-      primary = new List.from(_warriorPrimary);
-      secondary = new List.from(_warriorSecondary);
+      primary = List.from(_warriorPrimary);
+      secondary = List.from(_warriorSecondary);
       break;
 
     case CharacterClass.expert:
-      primary = new List.from(_expertPrimary);
-      secondary = new List.from(_expertSecondary);
+      primary = List.from(_expertPrimary);
+      secondary = List.from(_expertSecondary);
       break;
 
     case CharacterClass.adept:
-      primary = new List.from(_adeptPrimary);
-      secondary = new List.from(_adeptSecondary);
+      primary = List.from(_adeptPrimary);
+      secondary = List.from(_adeptSecondary);
       break;
 
     case CharacterClass.unknown:
-      primary = new List<Ability>();
+      primary = List<Ability>();
       secondary = primary;
   }
 
@@ -118,7 +118,7 @@ applyClassBenefits(Character character) {
   character.talents.addAll(getTalentsFor(character));
 }
 
-const _warriorWeaponsGroups = const [
+const _warriorWeaponsGroups = [
   WeaponsGroup.axes,
   WeaponsGroup.bludgeons,
   WeaponsGroup.bows,
@@ -129,7 +129,7 @@ const _warriorWeaponsGroups = const [
 
 List<WeaponsGroup> getWeaponsGroupsFor(Character c) {
   if (c.race == Race.rhydan) {
-    return _emptyList;
+    return const [];
   }
 
   switch (c.characterClass) {
@@ -145,17 +145,17 @@ List<WeaponsGroup> getWeaponsGroupsFor(Character c) {
       ];
 
     case CharacterClass.warrior:
-      return new List.unmodifiable(
+      return List.unmodifiable(
           drawN(3, _warriorWeaponsGroups)..add(WeaponsGroup.brawling));
 
     default:
-      return _emptyList;
+      return const [];
   }
 }
 
-const _adeptTalents = const [linguistics, lore, medicine, observation];
+const _adeptTalents = [linguistics, lore, medicine, observation];
 
-const _expertTalents = const [
+const _expertTalents = [
   arcanePotential,
   animalTraining,
   carousing,
@@ -169,9 +169,9 @@ const _expertTalents = const [
   thievery
 ];
 
-const _warriorTalents = const [arcanePotential, carousing, quickReflexes];
+const _warriorTalents = [arcanePotential, carousing, quickReflexes];
 
-const _styleTalents = const [
+const _styleTalents = [
   archeryStyle,
   dualWeaponStyle,
   singleWeaponStyle,
@@ -215,18 +215,16 @@ List<Talent> getTalentsFor(Character c) {
       ]);
 
     default:
-      return _emptyList;
+      return const [];
   }
 }
 
 // These two talents work badly together, so we just make sure characters can't
 // have both
-const _weirdArcaneTalents = const [arcaneTraining, wildArcane];
+const _weirdArcaneTalents = [arcaneTraining, wildArcane];
 
 bool _notBothWeirdArcaneTalents(Talent one, Talent two) =>
     !_weirdArcaneTalents.contains(one) || !_weirdArcaneTalents.contains(two);
-
-const _emptyList = const [];
 
 List<String> getPowersFor(CharacterClass cc) {
   switch (cc) {
@@ -245,18 +243,18 @@ List<String> getPowersFor(CharacterClass cc) {
       ];
 
     case CharacterClass.warrior:
-      return _emptyList;
+      return const [];
 
     default:
-      return _emptyList;
+      return const [];
   }
 }
 
 List<T> _listOfNonNull<T>(List<T> ts) {
-  List<T> result = new List();
+  List<T> result = List();
   for (var t in ts) {
     if (t != null) result.add(t);
   }
 
-  return new List.unmodifiable(result);
+  return List.unmodifiable(result);
 }

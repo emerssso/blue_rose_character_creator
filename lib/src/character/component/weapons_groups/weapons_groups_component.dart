@@ -6,12 +6,13 @@ import 'package:blue_rose_character_creator/src/character/weapons_group.dart';
 @Component(
   selector: 'weapons-groups',
   templateUrl: 'weapons_groups_component.html',
-  styleUrls: const ['../../../base_styles.css'],
-  directives: const [CORE_DIRECTIVES],
-  providers: const [materialProviders],
+  styleUrls: ['../../../base_styles.css'],
+  directives: [coreDirectives],
+  providers: [materialProviders],
 )
 class WeaponsGroupsComponent {
-  @Input() Character character;
+  @Input()
+  Character character;
 
   String renderWeaponsGroup(WeaponsGroup wg) => weaponsGroupToString(wg);
 }
