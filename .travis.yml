@@ -1,5 +1,5 @@
 language: dart
-script: webdev build -r --output=build
+script: pub global activate webdev; webdev build -r --output=build
 deploy:
   provider: pages
   skip-cleanup: true
