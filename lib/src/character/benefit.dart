@@ -6,7 +6,7 @@ import 'package:blue_rose_character_creator/src/character/race.dart';
 import 'package:blue_rose_character_creator/src/character/weapons_group.dart';
 
 ///Models a benefit from a race as an operation to apply it to a character.
-typedef void Benefit(Character);
+typedef Benefit = void Function(Character);
 
 ///Returns a random benefit for the passed race
 Benefit randomBenefitFor(Race race) => _randomBenefitFrom(_benefitsFor(race));
@@ -92,8 +92,7 @@ void _polearms(Character c) => c.weaponsGroups.add(WeaponsGroup.polearms);
 
 void _lightBlades(Character c) => c.weaponsGroups.add(WeaponsGroup.lightBlades);
 
-final _humanBenefits =
-    new Map<int, Benefit>.unmodifiable(new Map.fromIterables([
+final _humanBenefits = Map<int, Benefit>.unmodifiable(Map.fromIterables([
   2,
   3,
   4,
@@ -119,8 +118,7 @@ final _humanBenefits =
   _strength,
 ]));
 
-final _nightPeopleBenefits =
-    new Map<int, Benefit>.unmodifiable(new Map.fromIterables([
+final _nightPeopleBenefits = Map<int, Benefit>.unmodifiable(Map.fromIterables([
   2,
   3,
   4,
@@ -146,8 +144,7 @@ final _nightPeopleBenefits =
   _willpower,
 ]));
 
-final _rhydanBenefits =
-    new Map<int, Benefit>.unmodifiable(new Map.fromIterables([
+final _rhydanBenefits = Map<int, Benefit>.unmodifiable(Map.fromIterables([
   2,
   3,
   4,
@@ -173,8 +170,7 @@ final _rhydanBenefits =
   _willpower
 ]));
 
-final _seaFolkBenefits =
-    new Map<int, Benefit>.unmodifiable(new Map.fromIterables([
+final _seaFolkBenefits = Map<int, Benefit>.unmodifiable(Map.fromIterables([
   2,
   3,
   4,
@@ -200,8 +196,7 @@ final _seaFolkBenefits =
   _perception
 ]));
 
-final _vataBenefits =
-    new Map<int, Benefit>.unmodifiable(new Map.fromIterables([
+final _vataBenefits = Map<int, Benefit>.unmodifiable(Map.fromIterables([
   2,
   3,
   4,

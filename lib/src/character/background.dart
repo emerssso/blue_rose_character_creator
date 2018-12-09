@@ -70,9 +70,9 @@ applyBackgroundToCharacter(Character character) {
 
   character.languages.addAll(_getLanguagesForBackground(character.background));
 
-  if(character.talents.any((talent) => talent.name == "Linguistics")) {
-    character.languages.add(
-        drawWithoutRepeats(Language.values, character.languages));
+  if (character.talents.any((talent) => talent.name == "Linguistics")) {
+    character.languages
+        .add(drawWithoutRepeats(Language.values, character.languages));
   }
 }
 
@@ -107,33 +107,17 @@ List<Focus> _getFocusesFor(Background bg) {
   }
 }
 
-const _emptyList = const [];
+const _emptyList = [];
 
-const _aldinFocuses = const [
-  persuasion, artisan, culturalLore, historicalLore
-];
+const _aldinFocuses = [persuasion, artisan, culturalLore, historicalLore];
 
-const _forestFolkFocuses = const [
-  running, crafting, naturalLore, tracking
-];
-const _jarzoniFocuses = const [
-  etiquette, historicalLore, religiousLore, faith
-];
-const _lartyanFocuses = const [
-  etiquette, crafting, heraldry, selfDiscipline
-];
-const _marinerFocuses = const [
-  bargaining, swimming, sailing, nauticalLore
-];
-const _outcastFocuses = const [
-  gambling, stealth, navigation, courage
-];
-const _rezeanFocuses = const [
-  stamina, riding, navigation, courage
-];
-const _roamerFocuses = const [
-  bargaining, performance, crafting, empathy
-];
+const _forestFolkFocuses = [running, crafting, naturalLore, tracking];
+const _jarzoniFocuses = [etiquette, historicalLore, religiousLore, faith];
+const _lartyanFocuses = [etiquette, crafting, heraldry, selfDiscipline];
+const _marinerFocuses = [bargaining, swimming, sailing, nauticalLore];
+const _outcastFocuses = [gambling, stealth, navigation, courage];
+const _rezeanFocuses = [stamina, riding, navigation, courage];
+const _roamerFocuses = [bargaining, performance, crafting, empathy];
 
 List<Language> _getLanguagesForBackground(Background bg) {
   switch (bg) {

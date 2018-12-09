@@ -22,7 +22,7 @@ enum Rhy {
 }
 
 String rhyToString(Rhy rhy) {
-  switch(rhy) {
+  switch (rhy) {
     case Rhy.ape:
       return "Ape";
     case Rhy.badger:
@@ -67,8 +67,7 @@ class RhydanBonuses {
   final List<Weapon> attacks;
   final List<String> powers;
 
-  const RhydanBonuses._internal(
-      this.abilityBonuses, this.attacks, this.powers);
+  const RhydanBonuses._internal(this.abilityBonuses, this.attacks, this.powers);
 }
 
 class Weapon {
@@ -81,28 +80,29 @@ class Weapon {
   const Weapon._internal(this.name, this.ability, this.dice, this.modifier,
       {this.dieSize = 6});
 
-  String toString() => "$name (${abilityToString(ability)}) ${dice}d$dieSize" +
+  String toString() =>
+      "$name (${abilityToString(ability)}) ${dice}d$dieSize" +
       (modifier > 0 ? "+$modifier" : "");
 }
 
-const _bite0 = const Weapon._internal("Bite", Ability.accuracy, 1, 0);
-const _bite1 = const Weapon._internal("Bite", Ability.accuracy, 1, 1);
-const _bite2 = const Weapon._internal("Bite", Ability.accuracy, 2, 0);
-const _claw1 = const Weapon._internal("Claw", Ability.fighting, 1, 0);
-const _claw2 = const Weapon._internal("Claw", Ability.fighting, 2, 0);
-const _claw3 = const Weapon._internal("Claw", Ability.fighting, 1, 0, dieSize: 3);
-const _gore = const Weapon._internal("Gore", Ability.fighting, 2, 0);
-const _slam = const Weapon._internal("Slam", Ability.accuracy, 1, 0);
-const _kick = const Weapon._internal("Kick", Ability.accuracy, 1, 0);
+const _bite0 = Weapon._internal("Bite", Ability.accuracy, 1, 0);
+const _bite1 = Weapon._internal("Bite", Ability.accuracy, 1, 1);
+const _bite2 = Weapon._internal("Bite", Ability.accuracy, 2, 0);
+const _claw1 = Weapon._internal("Claw", Ability.fighting, 1, 0);
+const _claw2 = Weapon._internal("Claw", Ability.fighting, 2, 0);
+const _claw3 = Weapon._internal("Claw", Ability.fighting, 1, 0, dieSize: 3);
+const _gore = Weapon._internal("Gore", Ability.fighting, 2, 0);
+const _slam = Weapon._internal("Slam", Ability.accuracy, 1, 0);
+const _kick = Weapon._internal("Kick", Ability.accuracy, 1, 0);
 
 void applyRhydanBonuses(Character character) {
-  if(character.rhydanType == null) {
+  if (character.rhydanType == null) {
     return;
   }
 
   var bonuses = _getBonusesForRhydan(character.rhydanType);
 
-  for(var ability in bonuses.abilityBonuses.keys) {
+  for (var ability in bonuses.abilityBonuses.keys) {
     character.abilities[ability] += bonuses.abilityBonuses[ability];
   }
 
@@ -110,135 +110,134 @@ void applyRhydanBonuses(Character character) {
   character.powers.addAll(bonuses.powers);
 }
 
-const _emptyList = const [];
+const _emptyList = [];
 
 RhydanBonuses _getBonusesForRhydan(Rhy type) {
-
   switch (type) {
     case Rhy.ape:
-      return new RhydanBonuses._internal(
-          new Map.unmodifiable(new Map.fromIterables(
+      return RhydanBonuses._internal(
+          Map.unmodifiable(Map.fromIterables(
               [Ability.constitution, Ability.dexterity, Ability.strength],
               [1, 1, 2])),
           _emptyList,
           const ["Hands"]);
 
     case Rhy.badger:
-      return new RhydanBonuses._internal(
-          new Map.unmodifiable(new Map.fromIterables(
+      return RhydanBonuses._internal(
+          Map.unmodifiable(Map.fromIterables(
               [Ability.constitution, Ability.perception, Ability.strength],
               [2, 1, 1])),
-          new List.from([_bite1, _claw1]),
+          List.from([_bite1, _claw1]),
           const ["Tough (AR 1)"]);
 
     case Rhy.bear:
-      return new RhydanBonuses._internal(
-          new Map.unmodifiable(new Map.fromIterables(
+      return RhydanBonuses._internal(
+          Map.unmodifiable(Map.fromIterables(
               [Ability.constitution, Ability.strength], [3, 3])),
           const [_bite1, _claw2],
           _emptyList);
 
     case Rhy.boar:
-      return new RhydanBonuses._internal(
-          new Map.unmodifiable(new Map.fromIterables(
+      return RhydanBonuses._internal(
+          Map.unmodifiable(Map.fromIterables(
               [Ability.constitution, Ability.strength], [2, 2])),
           const [_gore],
           _emptyList);
 
     case Rhy.cat:
-      return new RhydanBonuses._internal(
-          new Map.unmodifiable(new Map.fromIterables(
+      return RhydanBonuses._internal(
+          Map.unmodifiable(Map.fromIterables(
               [Ability.dexterity, Ability.perception], [2, 1])),
           const [_bite1, _claw1],
           const ["Nightvision"]);
 
     case Rhy.crocodile:
-      return new RhydanBonuses._internal(
-          new Map.unmodifiable(new Map.fromIterables(
+      return RhydanBonuses._internal(
+          Map.unmodifiable(Map.fromIterables(
               [Ability.constitution, Ability.strength], [2, 2])),
           const [_bite2],
-          const["Tough hide (AR 2)", "Swimming speed 10"]);
+          const ["Tough hide (AR 2)", "Swimming speed 10"]);
 
     case Rhy.dog:
-      return new RhydanBonuses._internal(
-          new Map.unmodifiable(new Map.fromIterables(
+      return RhydanBonuses._internal(
+          Map.unmodifiable(Map.fromIterables(
               [Ability.constitution, Ability.dexterity], [2, 1])),
           const [_bite1, _claw1],
           _emptyList);
 
     case Rhy.dolphin:
-      return new RhydanBonuses._internal(
-          new Map.unmodifiable(new Map.fromIterables(
+      return RhydanBonuses._internal(
+          Map.unmodifiable(Map.fromIterables(
               [Ability.constitution, Ability.dexterity, Ability.strength],
               [1, 1, 1])),
           const [_slam],
           const ["Echolocation", "Hold breath for Con x 10 minutes"]);
 
     case Rhy.hawk:
-      return new RhydanBonuses._internal(
-          new Map.unmodifiable(new Map.fromIterables(
+      return RhydanBonuses._internal(
+          Map.unmodifiable(Map.fromIterables(
               [Ability.dexterity, Ability.perception, Ability.strength],
               [2, 1, -1])),
           const [_bite0, _claw1],
           const ["Nightvision"]);
 
     case Rhy.owl:
-      return new RhydanBonuses._internal(
-          new Map.unmodifiable(new Map.fromIterables(
+      return RhydanBonuses._internal(
+          Map.unmodifiable(Map.fromIterables(
               [Ability.dexterity, Ability.perception, Ability.strength],
               [2, 1, -1])),
           const [_bite0, _claw1],
           const ["Nightvision"]);
 
     case Rhy.horse:
-      return new RhydanBonuses._internal(
-          new Map.unmodifiable(new Map.fromIterables(
+      return RhydanBonuses._internal(
+          Map.unmodifiable(Map.fromIterables(
               [Ability.constitution, Ability.strength], [2, 2])),
           const [_kick],
           _emptyList);
 
     case Rhy.lizard:
-      return new RhydanBonuses._internal(
-          new Map.unmodifiable(new Map.fromIterables(
+      return RhydanBonuses._internal(
+          Map.unmodifiable(Map.fromIterables(
               [Ability.constitution, Ability.strength], [2, 1])),
           const [_bite2],
           const ["Nightvision"]);
 
     case Rhy.raccoon:
-      return new RhydanBonuses._internal(
-          new Map.unmodifiable(new Map.fromIterables(
+      return RhydanBonuses._internal(
+          Map.unmodifiable(Map.fromIterables(
               [Ability.dexterity, Ability.perception, Ability.strength],
               [2, 1, -2])),
           const [_bite0, _claw3],
           const ["Nightvision"]);
 
     case Rhy.raven:
-      return new RhydanBonuses._internal(
-          new Map.unmodifiable(new Map.fromIterables(
+      return RhydanBonuses._internal(
+          Map.unmodifiable(Map.fromIterables(
               [Ability.dexterity, Ability.perception, Ability.strength],
               [3, 1, -2])),
           const [_bite0, _claw1],
           const ["Nightvision", "can speak"]);
 
     case Rhy.snake:
-      return new RhydanBonuses._internal(
-          new Map.unmodifiable(new Map.fromIterables(
+      return RhydanBonuses._internal(
+          Map.unmodifiable(Map.fromIterables(
               [Ability.dexterity, Ability.perception, Ability.strength],
               [2, 1, 1])),
           const [_bite1],
           const ["Nightvision"]);
 
     case Rhy.weasel:
-      return new RhydanBonuses._internal(
-          new Map.unmodifiable(new Map.fromIterables(
+      return RhydanBonuses._internal(
+          Map.unmodifiable(Map.fromIterables(
               [Ability.dexterity, Ability.perception, Ability.strength],
               [3, 1, -1])),
           const [_bite0],
           const ["Nightvision"]);
 
     case Rhy.wolf:
-      return new RhydanBonuses._internal(
-          new Map.unmodifiable(new Map.fromIterables([
+      return RhydanBonuses._internal(
+          Map.unmodifiable(Map.fromIterables([
             Ability.constitution,
             Ability.dexterity,
             Ability.perception,

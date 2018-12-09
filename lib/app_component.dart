@@ -7,11 +7,9 @@ import 'package:blue_rose_character_creator/src/character/component/character_co
 
 @Component(
   selector: 'my-app',
-  styleUrls: const ['app_component.css'],
+  styleUrls: ['app_component.css'],
   templateUrl: 'app_component.html',
-  directives: const [materialDirectives, CharacterComponent],
-  providers: const [materialProviders],
+  directives: [CharacterComponent],
+  providers: [materialProviders],
 )
-class AppComponent {
-  // Nothing here yet. All logic is in TodoListComponent.
-}
+class AppComponent {}

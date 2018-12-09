@@ -6,9 +6,7 @@ import 'package:blue_rose_character_creator/src/character/focus.dart';
 import 'package:blue_rose_character_creator/src/character/talent.dart';
 import 'package:blue_rose_character_creator/src/character/weapons_group.dart';
 
-enum Race {
-  human, nightPerson, rhydan, seaFolk, vata, unknown
-}
+enum Race { human, nightPerson, rhydan, seaFolk, vata, unknown }
 
 String raceToString(Race race) {
   switch (race) {
@@ -33,7 +31,7 @@ void applyRacialBenefits(Character character) {
   Benefit firstBenefit = randomBenefitFor(character.race);
   Benefit secondBenefit = randomBenefitFor(character.race);
 
-  while(firstBenefit == secondBenefit) {
+  while (firstBenefit == secondBenefit) {
     secondBenefit = randomBenefitFor(character.race);
   }
 
@@ -48,7 +46,7 @@ void _applyFixedBenefits(Character character) {
 }
 
 //contains benefits that always apply to a character of a specific race.
-Map<Race, Benefit> _fixedBenefits = new Map.unmodifiable(new Map.fromIterables([
+Map<Race, Benefit> _fixedBenefits = Map.unmodifiable(Map.fromIterables([
   Race.human,
   Race.nightPerson,
   Race.rhydan,
@@ -78,10 +76,12 @@ void _nightPeopleBenefits(Character character) {
 }
 
 void _rhydanBenefits(Character character) {
-  addRandomFocus(naturalLore,
-      drawWithoutRepeats(perceptionFocuses,
-          character.focuses[Ability.perception] ?? const []), character);
-  
+  addRandomFocus(
+      naturalLore,
+      drawWithoutRepeats(
+          perceptionFocuses, character.focuses[Ability.perception] ?? const []),
+      character);
+
   character.weaponsGroups.add(WeaponsGroup.naturalWeapons);
   character.weaponsGroups.add(WeaponsGroup.brawling);
 
@@ -99,8 +99,7 @@ void _seaFolkBenefits(Character character) {
 }
 
 void _vataBenefits(Character character) {
-  character.talents.add(
-      drawWhere(arcaneTalents, (t) => t != wildArcane));
+  character.talents.add(drawWhere(arcaneTalents, (t) => t != wildArcane));
 
   //TODO: improve once backgrounds are added
   character.powers.add("Dark sight (20 yards for vata'an, 30 for vata'sha), "

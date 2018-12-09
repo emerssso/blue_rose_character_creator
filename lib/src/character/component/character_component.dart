@@ -1,4 +1,5 @@
 import 'dart:html';
+
 import 'package:angular/angular.dart';
 import 'package:angular_components/angular_components.dart';
 import 'package:blue_rose_character_creator/src/character/arcana.dart';
@@ -18,34 +19,33 @@ import 'package:blue_rose_character_creator/src/drop_down_delegate.dart';
 @Component(
   selector: 'character',
   templateUrl: 'character_component.html',
-  styleUrls: const ['character_component.css'],
-  directives: const [
-    CORE_DIRECTIVES,
-    materialDirectives,
+  styleUrls: ['character_component.css'],
+  directives: [
+    coreDirectives,
     AbilitiesComponent,
     VariousStatsComponent,
     LanguagesComponent,
     WeaponsGroupsComponent
   ],
-  providers: const [materialProviders],
+  providers: [materialProviders],
 )
 class CharacterComponent implements OnInit {
-  var character = new Character(Race.human, CharacterClass.warrior,
+  var character = Character(Race.human, CharacterClass.warrior,
       background: Background.aldin);
 
-  var race = new DropDownDelegate<Race>(
+  var race = DropDownDelegate<Race>(
       Race.values.sublist(0, 5), raceToString, Race.unknown);
 
-  var characterClass = new DropDownDelegate<CharacterClass>(
+  var characterClass = DropDownDelegate<CharacterClass>(
       CharacterClass.values.sublist(0, 3),
       characterClassToString,
       CharacterClass.unknown);
 
-  var background = new DropDownDelegate<Background>(
+  var background = DropDownDelegate<Background>(
       Background.values, backgroundToString, Background.aldin);
 
-  var rhydanType = new DropDownDelegate<Rhy>(
-      new List.from(Rhy.values), rhyToString, Rhy.ape);
+  var rhydanType =
+  DropDownDelegate<Rhy>(List.from(Rhy.values), rhyToString, Rhy.ape);
 
   @override
   ngOnInit() {
@@ -72,7 +72,7 @@ class CharacterComponent implements OnInit {
       background = null;
     }
 
-    character = new Character(race, characterClass,
+    character = Character(race, characterClass,
         background: background, rhydanType: rhy);
   }
 

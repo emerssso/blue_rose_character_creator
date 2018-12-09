@@ -1,11 +1,11 @@
+import 'package:blue_rose_character_creator/src/character/ability.dart';
 import 'package:blue_rose_character_creator/src/character/arcana.dart';
 import 'package:blue_rose_character_creator/src/character/background.dart';
+import 'package:blue_rose_character_creator/src/character/calling_destiny_fate.dart';
 import 'package:blue_rose_character_creator/src/character/character_class.dart';
 import 'package:blue_rose_character_creator/src/character/dice.dart';
 import 'package:blue_rose_character_creator/src/character/focus.dart';
 import 'package:blue_rose_character_creator/src/character/race.dart';
-import 'package:blue_rose_character_creator/src/character/ability.dart';
-import 'package:blue_rose_character_creator/src/character/calling_destiny_fate.dart';
 import 'package:blue_rose_character_creator/src/character/rhydan.dart';
 import 'package:blue_rose_character_creator/src/character/talent.dart';
 import 'package:blue_rose_character_creator/src/character/weapons_group.dart';
@@ -55,13 +55,14 @@ class Character {
   int get defense => 10 + dexterity;
 
   int _health;
+
   int get health => _health ??= getHealthFor(characterClass, constitution);
 
   factory Character(race, characterClass, {background, level, rhydanType}) {
-    var mutable = new Character._mutable(race, characterClass,
+    var mutable = Character._mutable(race, characterClass,
         background: background, level: level, rhydanType: rhydanType);
 
-    return new Character._immutable(
+    return Character._immutable(
         mutable.race,
         mutable.rhydanType,
         mutable.characterClass,
@@ -71,18 +72,17 @@ class Character {
         mutable.destiny,
         mutable.fate,
         mutable.destinyAscendant,
-        new Map.unmodifiable(mutable.abilities),
-        new Map.unmodifiable(mutable.focuses),
-        new List.unmodifiable(mutable.weaponsGroups),
-        new List.unmodifiable(mutable.powers),
-        new List.unmodifiable(mutable.talents),
-        new List.unmodifiable(mutable.weapons),
-        new List.unmodifiable(mutable.languages),
-        new List.unmodifiable(mutable.arcana));
+        Map.unmodifiable(mutable.abilities),
+        Map.unmodifiable(mutable.focuses),
+        List.unmodifiable(mutable.weaponsGroups),
+        List.unmodifiable(mutable.powers),
+        List.unmodifiable(mutable.talents),
+        List.unmodifiable(mutable.weapons),
+        List.unmodifiable(mutable.languages),
+        List.unmodifiable(mutable.arcana));
   }
 
-  Character._immutable(
-      this.race,
+  Character._immutable(this.race,
       this.rhydanType,
       this.characterClass,
       this.background,
@@ -107,13 +107,13 @@ class Character {
         fate = drawFate(),
         destinyAscendant = coinFlip(),
         abilities = _fillAbilities(characterClass),
-        focuses = new Map(),
-        weaponsGroups = new List(),
-        powers = new List(),
-        talents = new List(),
-        weapons = new List(),
-        languages = new List(),
-        arcana = new List() {
+        focuses = Map(),
+        weaponsGroups = List(),
+        powers = List(),
+        talents = List(),
+        weapons = List(),
+        languages = List(),
+        arcana = List() {
     if (race == Race.rhydan && rhydanType == null) {
       throw "Rhydan must have a type!";
     }
@@ -136,7 +136,7 @@ class Character {
   bool get isFilled => abilities.isNotEmpty;
 
   void addFocus(Focus focus) {
-    focuses[focus.ability] ??= new List();
+    focuses[focus.ability] ??= List();
     focuses[focus.ability].add(focus);
   }
 
@@ -148,29 +148,30 @@ class Character {
   // (but maybe different degree) ahs not already been taken and
   // the character meets minimum ability if any
   bool canTake(Talent talent) {
-    var doesntHave = talents.every((has) => has.name != talent.name);
+    final doesntHave = talents.every((has) => has.name != talent.name);
 
-    var meets = talent.requirements.every(_meets);
+    final meets = talent.requirements.every(_meets);
 
     return doesntHave && meets;
   }
 
-  bool hasFocus(Focus focus) => focuses[focus.ability] != null &&
-      focuses[focus.ability].any((f) => f.domain == focus.domain);
+  bool hasFocus(Focus focus) =>
+      focuses[focus.ability] != null &&
+          focuses[focus.ability].any((f) => f.domain == focus.domain);
 
   bool hasnt(Focus focus) => !hasFocus(focus);
 
   bool _meets(Requirement req) => req.isMetBy(this);
 }
 
-final rollToAbilityBonus = new Map<int, int>.unmodifiable(new Map.fromIterables(
+final rollToAbilityBonus = Map<int, int>.unmodifiable(Map.fromIterables(
     [3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18],
     [-2, -1, -1, 0, 0, 0, 1, 1, 1, 2, 2, 2, 3, 3, 3, 4]));
 
 Map<Ability, int> _fillAbilities(CharacterClass characterClass) {
-  Map<Ability, int> temp = new Map();
+  Map<Ability, int> temp = Map();
 
-  List<int> bonuses = new List.generate(9, (i) => Xd6(3))
+  List<int> bonuses = List.generate(9, (i) => Xd6(3))
       .map((k) => rollToAbilityBonus[k])
       .toList();
 

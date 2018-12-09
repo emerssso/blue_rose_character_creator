@@ -162,7 +162,7 @@ String arcanaToString(Arcana arcana) {
   }
 }
 
-const animismArcana = const [
+const animismArcana = [
   Arcana.animalMessenger,
   Arcana.animalSummoning,
   Arcana.bodyControl,
@@ -179,7 +179,7 @@ const animismArcana = const [
   Arcana.ward
 ];
 
-const healingArcana = const [
+const healingArcana = [
   Arcana.bodyControl,
   Arcana.cure,
   Arcana.drawVitality,
@@ -191,7 +191,7 @@ const healingArcana = const [
   Arcana.ward
 ];
 
-const meditativeArcana = const [
+const meditativeArcana = [
   Arcana.arcaneStrike,
   Arcana.arcaneWeapon,
   Arcana.bodyControl,
@@ -202,7 +202,7 @@ const meditativeArcana = const [
   Arcana.ward
 ];
 
-const psychicArcana = const [
+const psychicArcana = [
   Arcana.calm,
   Arcana.heartReading,
   Arcana.illusion,
@@ -218,7 +218,7 @@ const psychicArcana = const [
   Arcana.ward
 ];
 
-const shapingArcana = const [
+const shapingArcana = [
   Arcana.arcaneStrike,
   Arcana.arcaneWeapon,
   Arcana.coldShaping,
@@ -238,7 +238,7 @@ const shapingArcana = const [
   Arcana.windWalking
 ];
 
-const visionaryArcana = const [
+const visionaryArcana = [
   Arcana.natureReading,
   Arcana.objectReading,
   Arcana.psychicShield,
@@ -250,7 +250,7 @@ const visionaryArcana = const [
 ];
 
 List<Arcana> getArcanaFor(List<Talent> talents) {
-  final result = new Set<Arcana>();
+  final result = Set<Arcana>();
 
   final importantTalents =
       talents.where((talent) => arcaneTalents.contains(talent));
@@ -263,30 +263,28 @@ List<Arcana> getArcanaFor(List<Talent> talents) {
   // add base arcanum for each talent
   result.addAll(importantTalents.map(startingArcanum));
 
-  if(importantTalents.length > 1) {
+  if (importantTalents.length > 1) {
     // add any additional arcana as a result of 2+ arcane talents
     // we remove 1 since it's covered by psychic shield and second sight
     final newArcana = (deck) => drawWithoutRepeats(deck, result);
 
     result.addAll(
-        _removeRandom(
-            importantTalents.map(arcanaForTalent).map(newArcana)));
+        _removeRandom(importantTalents.map(arcanaForTalent).map(newArcana)));
   }
- 
+
   // next add 2 arcana for Arcane Training
-  if(talents.contains(arcaneTraining)) {
-    result.addAll(
-        drawNWithoutRepeats(2,
-            importantTalents.map(arcanaForTalent).expand((t) => t), result));
+  if (talents.contains(arcaneTraining)) {
+    result.addAll(drawNWithoutRepeats(
+        2, importantTalents.map(arcanaForTalent).expand((t) => t), result));
   }
 
   // add 3 completely random talents for Wild Arcane
   //Todo: mark these arcana as wild and subject to additional tests.
-  if(talents.contains(wildArcane)) {
+  if (talents.contains(wildArcane)) {
     result.addAll(drawNWithoutRepeats(3, Arcana.values, result));
   }
 
-  if(talents.contains(arcanePotential)){
+  if (talents.contains(arcanePotential)) {
     result.add(drawWithoutRepeats(Arcana.values, result));
   }
 
@@ -294,7 +292,7 @@ List<Arcana> getArcanaFor(List<Talent> talents) {
   // drawWithoutRepeats failing to find a non-repeat
   result.remove(null);
 
-  return new List.unmodifiable(result);
+  return List.unmodifiable(result);
 }
 
 List<T> _removeRandom<T>(Iterable<T> iterable) {
