@@ -1,6 +1,6 @@
-import 'package:blue_rose_character_creator/src/character/character.dart';
-import 'package:blue_rose_character_creator/src/character/dice.dart';
-import 'package:blue_rose_character_creator/src/character/focus.dart';
+import 'character.dart';
+import 'dice.dart';
+import 'focus.dart';
 
 enum Background {
   aldin,

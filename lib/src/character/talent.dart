@@ -1,8 +1,8 @@
-import 'package:blue_rose_character_creator/src/character/ability.dart';
-import 'package:blue_rose_character_creator/src/character/character.dart';
-import 'package:blue_rose_character_creator/src/character/character_class.dart';
-import 'package:blue_rose_character_creator/src/character/focus.dart' as focus;
-import 'package:blue_rose_character_creator/src/character/weapons_group.dart';
+import 'ability.dart';
+import 'character.dart';
+import 'character_class.dart';
+import 'focus.dart' as focus;
+import 'weapons_group.dart';
 
 enum Degree { novice, journeyman, master }
 

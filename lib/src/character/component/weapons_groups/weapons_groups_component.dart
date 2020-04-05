@@ -1,7 +1,7 @@
 import 'package:angular/angular.dart';
 import 'package:angular_components/angular_components.dart';
-import 'package:blue_rose_character_creator/src/character/character.dart';
-import 'package:blue_rose_character_creator/src/character/weapons_group.dart';
+import 'character.dart';
+import 'weapons_group.dart';
 
 @Component(
   selector: 'weapons-groups',

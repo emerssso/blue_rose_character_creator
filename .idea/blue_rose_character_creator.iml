@@ -5,7 +5,16 @@
       <excludeFolder url="file://$MODULE_DIR$/.dart_tool" />
       <excludeFolder url="file://$MODULE_DIR$/.pub" />
       <excludeFolder url="file://$MODULE_DIR$/.tmp" />
+      <excludeFolder url="file://$MODULE_DIR$/brccf/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/brccf/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/brccf/build" />
       <excludeFolder url="file://$MODULE_DIR$/build" />
+      <excludeFolder url="file://$MODULE_DIR$/flt/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/flt/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/flt/build" />
+      <excludeFolder url="file://$MODULE_DIR$/flutter/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/flutter/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/flutter/build" />
       <excludeFolder url="file://$MODULE_DIR$/temp" />
       <excludeFolder url="file://$MODULE_DIR$/tmp" />
     </content>

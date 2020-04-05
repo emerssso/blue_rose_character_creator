@@ -1,5 +1,5 @@
-import 'package:blue_rose_character_creator/src/character/ability.dart';
-import 'package:blue_rose_character_creator/src/character/character.dart';
+import 'ability.dart';
+import 'character.dart';
 
 enum Rhy {
   ape,

@@ -1,4 +1,4 @@
-import 'package:blue_rose_character_creator/src/character/ability.dart';
+import 'ability.dart';
 
 ///Models a single character focus: i.e. Dexterity(Horseback riding)
 class Focus {

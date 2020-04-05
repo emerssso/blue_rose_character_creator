@@ -1,14 +1,14 @@
-import 'package:blue_rose_character_creator/src/character/ability.dart';
-import 'package:blue_rose_character_creator/src/character/arcana.dart';
-import 'package:blue_rose_character_creator/src/character/background.dart';
-import 'package:blue_rose_character_creator/src/character/calling_destiny_fate.dart';
-import 'package:blue_rose_character_creator/src/character/character_class.dart';
-import 'package:blue_rose_character_creator/src/character/dice.dart';
-import 'package:blue_rose_character_creator/src/character/focus.dart';
-import 'package:blue_rose_character_creator/src/character/race.dart';
-import 'package:blue_rose_character_creator/src/character/rhydan.dart';
-import 'package:blue_rose_character_creator/src/character/talent.dart';
-import 'package:blue_rose_character_creator/src/character/weapons_group.dart';
+import 'ability.dart';
+import 'arcana.dart';
+import 'background.dart';
+import 'calling_destiny_fate.dart';
+import 'character_class.dart';
+import 'dice.dart';
+import 'focus.dart';
+import 'race.dart';
+import 'rhydan.dart';
+import 'talent.dart';
+import 'weapons_group.dart';
 
 /// Models a Blue Rose character
 class Character {
