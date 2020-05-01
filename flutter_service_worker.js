@@ -9,10 +9,10 @@ const RESOURCES = {
 "favicon.png": "5dcef449791fa27946b3d35ad8803796",
 "icons/Icon-192.png": "ac9a721a12bbc803b44f645561ecb1e1",
 "icons/Icon-512.png": "96e752610906ba2a93c65f8abe1645f1",
-"index.html": "1c0568b1d29930792cd54523ef421d0a",
-"/": "1c0568b1d29930792cd54523ef421d0a",
-"main.dart.js": "8fff9b70c52f1bfc2a36f6a4729d56a7",
-"manifest.json": "5bc9c86c83548c3ba4136b06085c3008"
+"index.html": "1e23c5636995fb16969233244a78621a",
+"/": "1e23c5636995fb16969233244a78621a",
+"main.dart.js": "c906f07f456738987418adf7e0885398",
+"manifest.json": "827b0868d3bfba22b289c95920154156"
 };
 
 self.addEventListener('activate', function (event) {
