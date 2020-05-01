@@ -1,10 +1,11 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' hide Focus;
 
 import 'character/ability.dart';
 import 'character/arcana.dart';
 import 'character/background.dart';
 import 'character/character.dart';
 import 'character/character_class.dart';
+import 'character/focus.dart';
 import 'character/race.dart';
 import 'character/rhydan.dart';
 import 'character/weapons_group.dart';
@@ -103,7 +104,7 @@ class CharacterRenderer extends StatelessWidget {
       child: Wrap(
         children: [
           StatCard(character: character),
-          AbilitiesCard(abilities: character.abilities),
+          AbilitiesCard(character: character),
           if (character.languages.isNotEmpty)
             ListCard(
               title: 'Languages',
@@ -177,8 +178,11 @@ class StatCard extends StatelessWidget {
 
 class AbilitiesCard extends StatelessWidget {
   final Map<Ability, int> abilities;
+  final Map<Ability, List<Focus>> focuses;
 
-  const AbilitiesCard({this.abilities});
+  AbilitiesCard({Character character})
+      : abilities = character?.abilities,
+        focuses = character?.focuses;
 
   @override
   Widget build(BuildContext context) {
@@ -198,23 +202,42 @@ class AbilitiesCard extends StatelessWidget {
               ),
               SizedBox(),
             ]),
-            ...Ability.values.map(
-              (ability) => TableRow(
-                children: [
-                  Padding(
-                    padding: const EdgeInsetsDirectional.only(top: 4, start: 8),
-                    child: Text(
-                      abilityToString(ability),
-                      style: Theme.of(context).textTheme.subtitle2,
+            ...Ability.values.expand(
+              (ability) => [
+                TableRow(
+                  children: [
+                    Padding(
+                      padding:
+                          const EdgeInsetsDirectional.only(top: 4, start: 8),
+                      child: Text(
+                        abilityToString(ability),
+                        style: Theme.of(context).textTheme.subtitle2,
+                      ),
                     ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsetsDirectional.only(
-                        top: 4, start: 8, end: 8),
-                    child: Text('${abilities[ability]}'),
-                  ),
+                    Padding(
+                      padding: const EdgeInsetsDirectional.only(
+                          top: 8, start: 8, end: 8),
+                      child: Text('${abilities[ability]}'),
+                    ),
+                  ],
+                ),
+                if (focuses[ability]?.isNotEmpty ?? false) ...[
+                  for (var focus in focuses[ability])
+                    TableRow(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsetsDirectional.only(start: 12),
+                          child: Text(
+                            '${focus.domain}(+${focus.bonus})',
+                            style: Theme.of(context).textTheme.bodyText2,
+                          ),
+                        ),
+                        const SizedBox(),
+                      ],
+                    ),
+                  const TableRow(children: [SizedBox(), SizedBox(height: 4)]),
                 ],
-              ),
+              ],
             ),
           ],
         ),
