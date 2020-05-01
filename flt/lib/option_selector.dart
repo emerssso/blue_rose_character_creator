@@ -26,56 +26,60 @@ class _CharacterOptionSelectorState extends State<CharacterOptionSelector> {
   Widget build(BuildContext context) {
     return ListView(
       children: [
-        Wrap(
-          alignment: WrapAlignment.center,
-          spacing: 8,
-          runSpacing: 8,
-          children: [
-            if (race != Race.rhydan)
-              DropdownButton<Background>(
-                value: background,
-                onChanged: (b) => setState(() => background = b),
-                items: Background.values
-                    .map((b) => DropdownMenuItem(
-                          value: b,
-                          child: Text(backgroundToString(b)),
+        Container(
+          alignment: AlignmentDirectional.topStart,
+          margin: const EdgeInsetsDirectional.only(top: 8, start: 40),
+          child: Wrap(
+            alignment: WrapAlignment.center,
+            spacing: 8,
+            runSpacing: 8,
+            children: [
+              if (race != Race.rhydan)
+                DropdownButton<Background>(
+                  value: background,
+                  onChanged: (b) => setState(() => background = b),
+                  items: Background.values
+                      .map((b) => DropdownMenuItem(
+                            value: b,
+                            child: Text(backgroundToString(b)),
+                          ))
+                      .toList(),
+                ),
+              DropdownButton<Race>(
+                value: race,
+                onChanged: (r) => setState(() => race = r),
+                items: Race.values
+                    .where((r) => r != Race.unknown)
+                    .map((race) => DropdownMenuItem(
+                          value: race,
+                          child: Text(raceToString(race)),
                         ))
                     .toList(),
               ),
-            DropdownButton<Race>(
-              value: race,
-              onChanged: (r) => setState(() => race = r),
-              items: Race.values
-                  .where((r) => r != Race.unknown)
-                  .map((race) => DropdownMenuItem(
-                        value: race,
-                        child: Text(raceToString(race)),
-                      ))
-                  .toList(),
-            ),
-            if (race == Race.rhydan)
-              DropdownButton<Rhy>(
-                value: rhydanType,
-                onChanged: (r) => setState(() => rhydanType = r),
-                items: Rhy.values
-                    .map((rhy) => DropdownMenuItem(
-                          value: rhy,
-                          child: Text(rhyToString(rhy)),
+              if (race == Race.rhydan)
+                DropdownButton<Rhy>(
+                  value: rhydanType,
+                  onChanged: (r) => setState(() => rhydanType = r),
+                  items: Rhy.values
+                      .map((rhy) => DropdownMenuItem(
+                            value: rhy,
+                            child: Text(rhyToString(rhy)),
+                          ))
+                      .toList(),
+                ),
+              DropdownButton<CharacterClass>(
+                value: characterClass,
+                onChanged: (c) => setState(() => characterClass = c),
+                items: CharacterClass.values
+                    .where((cc) => cc != CharacterClass.unknown)
+                    .map((cc) => DropdownMenuItem(
+                          value: cc,
+                          child: Text(characterClassToString(cc)),
                         ))
                     .toList(),
               ),
-            DropdownButton<CharacterClass>(
-              value: characterClass,
-              onChanged: (c) => setState(() => characterClass = c),
-              items: CharacterClass.values
-                  .where((cc) => cc != CharacterClass.unknown)
-                  .map((cc) => DropdownMenuItem(
-                        value: cc,
-                        child: Text(characterClassToString(cc)),
-                      ))
-                  .toList(),
-            ),
-          ],
+            ],
+          ),
         ),
         if (race != null &&
             race != Race.unknown &&
@@ -99,38 +103,42 @@ class CharacterRenderer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.all(4),
-      child: Wrap(
-        children: [
-          StatCard(character: character),
-          AbilitiesCard(character: character),
-          if (character.languages.isNotEmpty)
-            ListCard(
-              title: 'Languages',
-              items: character.languages.map(languageToString).toList(),
-            ),
-          if (character.weapons.isNotEmpty)
-            ListCard(
-              title: 'Weapons',
-              items: character.weapons.map((w) => w.toString()).toList(),
-            ),
-          if (character.weaponsGroups.isNotEmpty)
-            ListCard(
-              title: 'Weapon Groups',
-              items: character.weaponsGroups.map(weaponsGroupToString).toList(),
-            ),
-          if (character.talents.isNotEmpty)
-            ListCard(
-              title: 'Talents',
-              items: character.talents.map((t) => t.toString()).toList(),
-            ),
-          if (character.arcana.isNotEmpty)
-            ListCard(
-              title: 'Arcana',
-              items: character.arcana.map(arcanaToString).toList(),
-            ),
-        ],
+    return Align(
+      alignment: AlignmentDirectional.topStart,
+      child: Container(
+        constraints: const BoxConstraints(maxWidth: 680),
+        padding: const EdgeInsets.symmetric(horizontal: 8),
+        child: Wrap(
+          children: [
+            StatCard(character: character),
+            AbilitiesCard(character: character),
+            if (character.languages.isNotEmpty)
+              ListCard(
+                title: 'Languages',
+                items: character.languages.map(languageToString).toList(),
+              ),
+            if (character.weapons.isNotEmpty)
+              ListCard(
+                title: 'Weapons',
+                items: character.weapons.map((w) => w.toString()).toList(),
+              ),
+            if (character.weaponsGroups.isNotEmpty)
+              ListCard(
+                title: 'Weapon Groups',
+                items: character.weaponsGroups.map(weaponsGroupToString).toList(),
+              ),
+            if (character.talents.isNotEmpty)
+              ListCard(
+                title: 'Talents',
+                items: character.talents.map((t) => t.toString()).toList(),
+              ),
+            if (character.arcana.isNotEmpty)
+              ListCard(
+                title: 'Arcana',
+                items: character.arcana.map(arcanaToString).toList(),
+              ),
+          ],
+        ),
       ),
     );
   }
