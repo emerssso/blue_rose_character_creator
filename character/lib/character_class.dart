@@ -23,6 +23,32 @@ String characterClassToString(CharacterClass cc) {
   }
 }
 
+List<Ability> primaryFor(CharacterClass cc) {
+  switch (cc) {
+    case CharacterClass.warrior:
+      return _warriorPrimary;
+    case CharacterClass.expert:
+      return _expertPrimary;
+    case CharacterClass.adept:
+      return _adeptPrimary;
+    default:
+      return const [];
+  }
+}
+
+List<Ability> secondaryFor(CharacterClass cc) {
+  switch (cc) {
+    case CharacterClass.warrior:
+      return _warriorSecondary;
+    case CharacterClass.expert:
+      return _expertSecondary;
+    case CharacterClass.adept:
+      return _adeptSecondary;
+    default:
+      return const [];
+  }
+}
+
 const List<Ability> _warriorPrimary = [
   Ability.constitution,
   Ability.dexterity,
@@ -66,36 +92,12 @@ const List<Ability> _adeptSecondary = [
 ];
 
 List<Ability> statPriorityListForClass(CharacterClass cc) {
-  List<Ability> primary;
-  List<Ability> secondary;
-
-  switch (cc) {
-    case CharacterClass.warrior:
-      primary = List.from(_warriorPrimary);
-      secondary = List.from(_warriorSecondary);
-      break;
-
-    case CharacterClass.expert:
-      primary = List.from(_expertPrimary);
-      secondary = List.from(_expertSecondary);
-      break;
-
-    case CharacterClass.adept:
-      primary = List.from(_adeptPrimary);
-      secondary = List.from(_adeptSecondary);
-      break;
-
-    case CharacterClass.unknown:
-      primary = [];
-      secondary = primary;
-  }
-
+  var primary = List.of(primaryFor(cc));
+  var secondary = List.of(secondaryFor(cc));
   primary.shuffle(rng);
   secondary.shuffle(rng);
 
-  primary.addAll(secondary);
-
-  return primary;
+  return primary..addAll(secondary);
 }
 
 int getHealthFor(CharacterClass cc, {int constitution = 0, int level = 1}) =>

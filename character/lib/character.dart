@@ -62,7 +62,7 @@ class Character {
         level: level,
       );
 
-  factory Character(race, characterClass, {background, level, rhydanType}) {
+  factory Character(race, characterClass, {background, level = 1, rhydanType}) {
     var mutable = Character._mutable(race, characterClass,
         background: background, level: level, rhydanType: rhydanType);
 
@@ -111,7 +111,7 @@ class Character {
         destiny = drawDestiny(),
         fate = drawFate(),
         destinyAscendant = flipCoin,
-        abilities = _fillAbilities(characterClass),
+        abilities = fillAbilities(characterClass, level),
         focuses = {},
         weaponsGroups = [],
         powers = [],
@@ -172,8 +172,9 @@ final rollToAbilityBonus = Map<int, int>.unmodifiable(Map.fromIterables(
     [3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18],
     [-2, -1, -1, 0, 0, 0, 1, 1, 1, 2, 2, 2, 3, 3, 3, 4]));
 
-Map<Ability, int> _fillAbilities(CharacterClass characterClass) {
-  var temp = <Ability, int>{};
+/// Generates ability levels for a [characterClass] at [level].
+Map<Ability, int> fillAbilities(CharacterClass characterClass, int level) {
+  var abilities = <Ability, int>{};
   var statOrder = statPriorityListForClass(characterClass);
   var bonuses = List.generate(9, (i) => 3.d6)
       .map((k) => rollToAbilityBonus[k])
@@ -181,8 +182,36 @@ Map<Ability, int> _fillAbilities(CharacterClass characterClass) {
         ..sort((i, j) => j - i);
 
   for (int i = 0; i < statOrder.length; i++) {
-    temp[statOrder[i]] = bonuses[i];
+    abilities[statOrder[i]] = bonuses[i];
   }
 
-  return temp;
+  if (level > 1) {
+    // 1 primary point received on even levels, 1 secondary on odd.
+    var primaryPoints = ((level - 1) / 2.0).ceil();
+    var secondaryPoints = ((level - 1) / 2.0).floor();
+
+    var primaries = primaryFor(characterClass);
+    while(primaryPoints > 0) {
+      var primary = drawFrom(primaries);
+      var current = abilities[primary] ?? 0;
+      var cost = _pointsPerAbility(current);
+
+      if(current == -1 || cost > primaryPoints) {
+        primaries.remove(primary);
+        continue;
+      }
+
+      primaryPoints -= cost;
+      abilities[primary] = current + 1;
+    }
+  }
+
+  return abilities;
+}
+
+int _pointsPerAbility(int ability) {
+  if(ability <= 5) return 1;
+  if(ability <= 8) return 2;
+  if(ability <= 12) return 3;
+  else return -1;
 }
