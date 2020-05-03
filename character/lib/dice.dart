@@ -4,7 +4,8 @@ final rng = Random();
 
 extension Dice on int {
   /// Allows fancy `2.d(6)` notation.
-  int d(int sides) => List.generate(this, (i) => d(sides)).fold(0, (i, j) => i + j);
+  int d(int sides) => List.generate(this, (i) => rng.nextInt(sides) + 1)
+      .fold(0, (i, j) => i + j);
 
   /// Fancy `2.d6` notation.
   int get d6 => this.d(6);
