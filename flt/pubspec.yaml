@@ -17,6 +17,8 @@ environment:
   sdk: ">=2.6.0 <3.0.0"
 
 dependencies:
+  blue_rose_character:
+    path: ../character
   flutter:
     sdk: flutter
 

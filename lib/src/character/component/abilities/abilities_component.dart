@@ -1,7 +1,7 @@
 import 'package:angular/angular.dart';
 import 'package:angular_components/angular_components.dart';
-import 'ability.dart';
-import 'character.dart';
+import 'package:blue_rose_character/ability.dart';
+import 'package:blue_rose_character/character.dart';
 
 ///Renders a characters abilities and focuses in a table
 @Component(

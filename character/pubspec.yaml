@@ -1,0 +1,8 @@
+name: blue_rose_character
+description: A shared library for generating Blue Rose characters
+version: 0.0.1
+homepage: https://github.com/emerssso/blue_rose_character_creator
+author: Conner Kasten <conner.kasten@emerssso.com>
+
+environment:
+  sdk: '>=2.1.0'

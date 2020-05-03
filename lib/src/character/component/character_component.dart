@@ -2,17 +2,17 @@ import 'dart:html';
 
 import 'package:angular/angular.dart';
 import 'package:angular_components/angular_components.dart';
-import 'package:blue_rose_character_creator/src/character/arcana.dart';
-import 'package:blue_rose_character_creator/src/character/background.dart';
-import 'package:blue_rose_character_creator/src/character/character.dart';
-import 'package:blue_rose_character_creator/src/character/character_class.dart';
+import 'package:blue_rose_character/arcana.dart';
+import 'package:blue_rose_character/background.dart';
+import 'package:blue_rose_character/character.dart';
+import 'package:blue_rose_character/character_class.dart';
 import 'package:blue_rose_character_creator/src/character/component/abilities/abilities_component.dart';
 import 'package:blue_rose_character_creator/src/character/component/languages/languages_component.dart';
 import 'package:blue_rose_character_creator/src/character/component/various_stats/various_stats_component.dart';
 import 'package:blue_rose_character_creator/src/character/component/weapons_groups/weapons_groups_component.dart';
-import 'package:blue_rose_character_creator/src/character/race.dart';
-import 'package:blue_rose_character_creator/src/character/rhydan.dart';
-import 'package:blue_rose_character_creator/src/character/talent.dart';
+import 'package:blue_rose_character/race.dart';
+import 'package:blue_rose_characte/rhydan.dart';
+import 'package:blue_rose_character/talent.dart';
 import 'package:blue_rose_character_creator/src/drop_down_delegate.dart';
 
 /// UI form for a character

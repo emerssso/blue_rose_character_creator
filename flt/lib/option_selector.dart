@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart' hide Focus;
 
-import 'character/ability.dart';
-import 'character/arcana.dart';
-import 'character/background.dart';
-import 'character/character.dart';
-import 'character/character_class.dart';
-import 'character/focus.dart';
-import 'character/race.dart';
-import 'character/rhydan.dart';
-import 'character/weapons_group.dart';
+import 'package:blue_rose_character/ability.dart';
+import 'package:blue_rose_character/arcana.dart';
+import 'package:blue_rose_character/background.dart';
+import 'package:blue_rose_character/character.dart';
+import 'package:blue_rose_character/character_class.dart';
+import 'package:blue_rose_character/focus.dart';
+import 'package:blue_rose_character/race.dart';
+import 'package:blue_rose_character/rhydan.dart';
+import 'package:blue_rose_character/weapons_group.dart';
 
 class CharacterOptionSelector extends StatefulWidget {
   @override
