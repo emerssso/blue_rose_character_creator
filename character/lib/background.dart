@@ -64,9 +64,7 @@ applyBackgroundToCharacter(Character character) {
   final focus =
       drawWhere(_getFocusesFor(character.background), character.hasnt);
 
-  if (focus != null) {
-    character.addFocus(focus);
-  }
+  if (focus != null) character.addFocus(focus);
 
   character.languages.addAll(_getLanguagesForBackground(character.background));
 
@@ -127,22 +125,20 @@ List<Language> _getLanguagesForBackground(Background bg) {
       return _aldinPlusOne();
 
     case Background.lartyan:
-      return [Language.aldin, Language.lartyan];
+      return const [Language.aldin, Language.lartyan];
 
     case Background.rezean:
-      return [Language.rezean, Language.aldin];
+      return const [Language.rezean, Language.aldin];
 
     case Background.roamer:
-      return [Language.faento, Language.aldin];
+      return const [Language.faento, Language.aldin];
 
     default:
-      return [];
+      return const [];
   }
 }
 
-List<Language> _aldinPlusOne() {
-  return [
+List<Language> _aldinPlusOne() => [
     Language.aldin,
     drawWhere(Language.values, (l) => l != Language.aldin)
   ];
-}

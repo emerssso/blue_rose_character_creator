@@ -81,23 +81,23 @@ class Weapon {
   final int dieSize;
   final int modifier;
 
-  const Weapon._internal(this.name, this.ability, this.dice, this.modifier,
-      {this.dieSize = 6});
+  const Weapon._(this.name, this.ability,
+      {this.dice = 1, this.modifier = 0, this.dieSize = 6});
 
   String toString() =>
       "$name (${abilityToString(ability)}) ${dice}d$dieSize" +
       (modifier > 0 ? "+$modifier" : "");
 }
 
-const _bite0 = Weapon._internal("Bite", Ability.accuracy, 1, 0);
-const _bite1 = Weapon._internal("Bite", Ability.accuracy, 1, 1);
-const _bite2 = Weapon._internal("Bite", Ability.accuracy, 2, 0);
-const _claw1 = Weapon._internal("Claw", Ability.fighting, 1, 0);
-const _claw2 = Weapon._internal("Claw", Ability.fighting, 2, 0);
-const _claw3 = Weapon._internal("Claw", Ability.fighting, 1, 0, dieSize: 3);
-const _gore = Weapon._internal("Gore", Ability.fighting, 2, 0);
-const _slam = Weapon._internal("Slam", Ability.accuracy, 1, 0);
-const _kick = Weapon._internal("Kick", Ability.accuracy, 1, 0);
+const _bite0 = Weapon._("Bite", Ability.accuracy);
+const _bite1 = Weapon._("Bite", Ability.accuracy, modifier: 1);
+const _bite2 = Weapon._("Bite", Ability.accuracy, dice: 2);
+const _claw1 = Weapon._("Claw", Ability.fighting);
+const _claw2 = Weapon._("Claw", Ability.fighting, dice: 2);
+const _claw3 = Weapon._("Claw", Ability.fighting, dieSize: 3);
+const _gore = Weapon._("Gore", Ability.fighting, dice: 2);
+const _slam = Weapon._("Slam", Ability.accuracy);
+const _kick = Weapon._("Kick", Ability.accuracy);
 
 void applyRhydanBonuses(Character character) {
   if (character.rhydanType == null) return;

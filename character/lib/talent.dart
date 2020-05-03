@@ -11,11 +11,11 @@ class Talent {
   final Degree degree;
   final List<Requirement> requirements;
 
-  const Talent._init(this.name,
+  const Talent._(this.name,
       {this.degree = Degree.novice, this.requirements = const []});
 
   Talent improve() {
-    return Talent._init(name,
+    return Talent._(name,
         degree: improveDegree(degree), requirements: requirements);
   }
 
@@ -23,104 +23,104 @@ class Talent {
   String toString() => '$name (${degreeToString(degree)})';
 }
 
-const animalTraining = Talent._init("Animal training");
-const animism = Talent._init("Animism", requirements: [
+const animalTraining = Talent._("Animal training");
+const animism = Talent._("Animism", requirements: [
   ClassRequirement([CharacterClass.adept])
 ]);
-const arcanePotential = Talent._init("Arcane potential", requirements: [
+const arcanePotential = Talent._("Arcane potential", requirements: [
   ClassRequirement([CharacterClass.expert, CharacterClass.warrior])
 ]);
-const arcaneTraining = Talent._init("Arcane training", requirements: [
+const arcaneTraining = Talent._("Arcane training", requirements: [
   ClassRequirement([CharacterClass.adept])
 ]);
-const armorTraining = Talent._init("Armor training", requirements: [
+const armorTraining = Talent._("Armor training", requirements: [
   ClassRequirement([CharacterClass.warrior])
 ]);
-const archeryStyle = Talent._init("Archery style", requirements: [
+const archeryStyle = Talent._("Archery style", requirements: [
   WeaponsGroupsRequirement([WeaponsGroup.bows])
 ]);
-const artificer = Talent._init("Artificer", requirements: [
+const artificer = Talent._("Artificer", requirements: [
   ClassRequirement([CharacterClass.adept]),
   AbilityRequirement(Ability.dexterity, 2),
   FocusRequirement([focus.artisan, focus.crafting])
 ]);
-const carousing = Talent._init("Carousing", requirements: [
+const carousing = Talent._("Carousing", requirements: [
   AbilityRequirement(Ability.communication, 1),
   AbilityRequirement(Ability.constitution, 1)
 ]);
-const command = Talent._init("Command", requirements: [
+const command = Talent._("Command", requirements: [
   ClassRequirement([CharacterClass.adept, CharacterClass.warrior]),
   AbilityRequirement(Ability.communication, 2)
 ]);
-const contacts = Talent._init("Contacts",
+const contacts = Talent._("Contacts",
     requirements: [AbilityRequirement(Ability.communication, 1)]);
-const dualWeaponStyle = Talent._init("Dual weapon style",
+const dualWeaponStyle = Talent._("Dual weapon style",
     requirements: [AbilityRequirement(Ability.dexterity, 2)]);
-const healing = Talent._init("Healing", requirements: [
+const healing = Talent._("Healing", requirements: [
   ClassRequirement([CharacterClass.adept])
 ]);
-const horsemanship = Talent._init("Horesemanship", requirements: [
+const horsemanship = Talent._("Horesemanship", requirements: [
   FocusRequirement([focus.riding])
 ]);
-const inspire = Talent._init("Inspire",
+const inspire = Talent._("Inspire",
     requirements: [AbilityRequirement(Ability.communication, 2)]);
-const intrigue = Talent._init("Intrigue",
+const intrigue = Talent._("Intrigue",
     requirements: [AbilityRequirement(Ability.communication, 2)]);
-const linguistics = Talent._init("Linguistics",
+const linguistics = Talent._("Linguistics",
     requirements: [AbilityRequirement(Ability.intelligence, 1)]);
-const lore = Talent._init("Lore",
+const lore = Talent._("Lore",
     requirements: [AbilityRequirement(Ability.intelligence, 2)]);
-const medicine = Talent._init("Medicine",
+const medicine = Talent._("Medicine",
     requirements: [AbilityRequirement(Ability.intelligence, 1)]);
-const meditative = Talent._init("Meditative", requirements: [
+const meditative = Talent._("Meditative", requirements: [
   ClassRequirement([CharacterClass.adept])
 ]);
-const mountedCombatStyle = Talent._init("Mounted combat style", requirements: [
+const mountedCombatStyle = Talent._("Mounted combat style", requirements: [
   ClassRequirement([CharacterClass.warrior])
 ]);
-const observation = Talent._init("Observation",
+const observation = Talent._("Observation",
     requirements: [AbilityRequirement(Ability.perception, 2)]);
-const oratory = Talent._init("Oratory", requirements: [
+const oratory = Talent._("Oratory", requirements: [
   FocusRequirement([focus.persuasion])
 ]);
-const performance = Talent._init("Performance", requirements: [
+const performance = Talent._("Performance", requirements: [
   FocusRequirement([focus.performance, focus.musicalLore])
 ]);
-const poleWeaponStyle = Talent._init("Pole weapon style", requirements: [
+const poleWeaponStyle = Talent._("Pole weapon style", requirements: [
   WeaponsGroupsRequirement([WeaponsGroup.polearms])
 ]);
-const psychic = Talent._init("Psychic", requirements: [
+const psychic = Talent._("Psychic", requirements: [
   ClassRequirement([CharacterClass.adept])
 ]);
-const purifyingLight = Talent._init("Purifying light", requirements: [
+const purifyingLight = Talent._("Purifying light", requirements: [
   AbilityRequirement(Ability.willpower, 2),
   FocusRequirement([focus.faith])
 ]);
-const quickReflexes = Talent._init("Quick reflexes",
+const quickReflexes = Talent._("Quick reflexes",
     requirements: [AbilityRequirement(Ability.dexterity, 2)]);
-const scouting = Talent._init("Scouting", requirements: [
+const scouting = Talent._("Scouting", requirements: [
   ClassRequirement([CharacterClass.expert]),
   AbilityRequirement(Ability.dexterity, 2)
 ]);
-const shaping = Talent._init("Shaping", requirements: [
+const shaping = Talent._("Shaping", requirements: [
   ClassRequirement([CharacterClass.adept])
 ]);
-const singleWeaponStyle = Talent._init("Single weapon style", requirements: [
+const singleWeaponStyle = Talent._("Single weapon style", requirements: [
   ClassRequirement([CharacterClass.expert, CharacterClass.warrior])
 ]);
-const thievery = Talent._init("Thievery", requirements: [
+const thievery = Talent._("Thievery", requirements: [
   ClassRequirement([CharacterClass.expert]),
   AbilityRequirement(Ability.dexterity, 2)
 ]);
-const thrownWeaponStyle = Talent._init("Thrown weapon style", requirements: [
+const thrownWeaponStyle = Talent._("Thrown weapon style", requirements: [
   ClassRequirement([CharacterClass.expert, CharacterClass.warrior]),
   WeaponsGroupsRequirement(
       [WeaponsGroup.axes, WeaponsGroup.lightBlades, WeaponsGroup.polearms])
 ]);
-const toothAndClaw = Talent._init("Tooth and claw", requirements: [
+const toothAndClaw = Talent._("Tooth and claw", requirements: [
   WeaponsGroupsRequirement([WeaponsGroup.naturalWeapons])
 ]);
-const twoHandedStyle = Talent._init("Two-handed style", requirements: [
+const twoHandedStyle = Talent._("Two-handed style", requirements: [
   ClassRequirement([CharacterClass.warrior]),
   AbilityRequirement(Ability.strength, 3),
   WeaponsGroupsRequirement([
@@ -130,20 +130,19 @@ const twoHandedStyle = Talent._init("Two-handed style", requirements: [
     WeaponsGroup.polearms
   ])
 ]);
-const unarmedStyle = Talent._init("Unarmed style", requirements: [
+const unarmedStyle = Talent._("Unarmed style", requirements: [
   WeaponsGroupsRequirement([WeaponsGroup.brawling])
 ]);
-const visionary = Talent._init("Visionary", requirements: [
+const visionary = Talent._("Visionary", requirements: [
   ClassRequirement([CharacterClass.adept])
 ]);
-const weaponAndShieldStyle =
-    Talent._init("Weapon and shield style", requirements: [
+const weaponAndShieldStyle = Talent._("Weapon and shield style", requirements: [
   ClassRequirement([CharacterClass.warrior]),
   AbilityRequirement(Ability.strength, 2)
 ]);
-const wildArcane = Talent._init("Wild arcane");
+const wildArcane = Talent._("Wild arcane");
 
-final arcaneTalents = List<Talent>.unmodifiable([
+const arcaneTalents = <Talent>[
   animism,
   arcaneTraining,
   healing,
@@ -152,7 +151,7 @@ final arcaneTalents = List<Talent>.unmodifiable([
   psychic,
   visionary,
   wildArcane,
-]);
+];
 
 String degreeToString(Degree degree) {
   switch (degree) {

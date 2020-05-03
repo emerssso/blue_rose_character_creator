@@ -38,27 +38,17 @@ void applyRacialBenefits(Character character) {
   firstBenefit(character);
   secondBenefit(character);
 
-  _applyFixedBenefits(character);
-}
-
-void _applyFixedBenefits(Character character) {
   _fixedBenefits[character.race](character);
 }
 
 //contains benefits that always apply to a character of a specific race.
-Map<Race, Benefit> _fixedBenefits = Map.unmodifiable(Map.fromIterables([
-  Race.human,
-  Race.nightPerson,
-  Race.rhydan,
-  Race.seaFolk,
-  Race.vata
-], [
-  _humanBenefits,
-  _nightPeopleBenefits,
-  _rhydanBenefits,
-  _seaFolkBenefits,
-  _vataBenefits
-]));
+const _fixedBenefits = {
+  Race.human: _humanBenefits,
+  Race.nightPerson: _nightPeopleBenefits,
+  Race.rhydan: _rhydanBenefits,
+  Race.seaFolk: _seaFolkBenefits,
+  Race.vata:  _vataBenefits,
+};
 
 void _humanBenefits(Character character) {
   character.increase(drawFrom(Ability.values));
