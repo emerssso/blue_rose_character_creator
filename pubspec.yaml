@@ -8,6 +8,8 @@ environment:
   sdk: '>=2.1.0'
 
 dependencies:
+  blue_rose_character:
+    path: character
   build_runner: ^1.0.0
   build_test: ^0.10.3
   build_web_compilers: ^0.4.4
