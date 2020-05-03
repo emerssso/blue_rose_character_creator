@@ -9,6 +9,9 @@
       <excludeFolder url="file://$MODULE_DIR$/brccf/.pub" />
       <excludeFolder url="file://$MODULE_DIR$/brccf/build" />
       <excludeFolder url="file://$MODULE_DIR$/build" />
+      <excludeFolder url="file://$MODULE_DIR$/character/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/character/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/character/build" />
       <excludeFolder url="file://$MODULE_DIR$/flt/.dart_tool" />
       <excludeFolder url="file://$MODULE_DIR$/flt/.pub" />
       <excludeFolder url="file://$MODULE_DIR$/flt/build" />

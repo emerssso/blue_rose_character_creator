@@ -2,18 +2,22 @@ import 'dart:math';
 
 final rng = Random();
 
+extension Dice on int {
+  /// Allows fancy `2.d(6)` notation.
+  int d(int sides) => List.generate(this, (i) => d(sides)).fold(0, (i, j) => i + j);
+
+  /// Fancy `2.d6` notation.
+  int get d6 => this.d(6);
+}
+
 ///Role a die with [x] sides
 int d(int x) => rng.nextInt(x) + 1;
 
 ///Role a d6 (primary die for Blue Rose)
-int d6() => d(6);
-
-///Role X d6
-int Xd6(int times) =>
-    List.generate(times, (i) => d6()).fold(0, (i, j) => i + j);
+int get d6 => d(6);
 
 ///flip a coin
-bool coinFlip() => rng.nextInt(2) == 1;
+bool get flipCoin => rng.nextInt(2) == 1;
 
 ///randomly select a T from passed list
 T drawFrom<T>(List<T> deck) {
@@ -38,13 +42,8 @@ T drawWithoutRepeats<T>(Iterable<T> deck, Iterable<T> repeats) {
 
 ///returns N unique draws from the deck, or the whole deck if N >= deck.length
 List<T> drawN<T>(int n, Iterable<T> deck) {
-  if (deck == null) {
-    return null;
-  }
-
-  if (n >= deck.length) {
-    return List.from(deck);
-  }
+  if (deck == null) return null;
+  if (n >= deck.length) return List.from(deck);
 
   List<T> returns = List();
 
@@ -56,20 +55,11 @@ List<T> drawN<T>(int n, Iterable<T> deck) {
 }
 
 List<T> drawNWithoutRepeats<T>(int n, Iterable<T> deck, Iterable<T> repeats) {
-  if (deck == null) {
-    return null;
-  }
+  if (deck == null) return null;
+  if (repeats == null) return drawN(n, deck);
+  if (n >= deck.length) return List.from(deck);
 
-  if (repeats == null) {
-    return drawN(n, deck);
-  }
-
-  if (n >= deck.length) {
-    return List.from(deck);
-  }
-
-  List<T> returns = List();
-
+  final returns = <T>[];
   final neitherContains = (t) => !repeats.contains(t) && !returns.contains(t);
 
   while (returns.length < n) {

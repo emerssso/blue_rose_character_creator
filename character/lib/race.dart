@@ -110,4 +110,4 @@ void _vataBenefits(Character character) {
 }
 
 void addRandomFocus(Focus first, Focus second, Character character) =>
-    character.addFocus(coinFlip() ? first : second);
+    character.addFocus(flipCoin ? first : second);

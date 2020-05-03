@@ -99,13 +99,13 @@ List<Ability> statPriorityListForClass(CharacterClass cc) {
 int getHealthFor(CharacterClass cc, int constitution) {
   switch (cc) {
     case CharacterClass.adept:
-      return constitution + 20 + d6();
+      return constitution + 20 + d6;
 
     case CharacterClass.expert:
-      return constitution + 15 + d6();
+      return constitution + 15 + d6;
 
     case CharacterClass.warrior:
-      return constitution + 30 + d6();
+      return constitution + 30 + d6;
 
     default:
       return 1;

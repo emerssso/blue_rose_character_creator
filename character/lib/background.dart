@@ -108,7 +108,6 @@ List<Focus> _getFocusesFor(Background bg) {
 }
 
 const _aldinFocuses = [persuasion, artisan, culturalLore, historicalLore];
-
 const _forestFolkFocuses = [running, crafting, naturalLore, tracking];
 const _jarzoniFocuses = [etiquette, historicalLore, religiousLore, faith];
 const _lartyanFocuses = [etiquette, crafting, heraldry, selfDiscipline];

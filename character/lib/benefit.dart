@@ -9,28 +9,22 @@ import 'weapons_group.dart';
 typedef Benefit = void Function(Character);
 
 ///Returns a random benefit for the passed race
-Benefit randomBenefitFor(Race race) => _randomBenefitFrom(_benefitsFor(race));
+Benefit randomBenefitFor(Race race) {
+  var benefits = _raceBenefits[race];
+  if(benefits == null) throw "Benefits requested for Unknown race";
+  return _randomBenefitFrom(benefits);
+}
 
 Benefit _randomBenefitFrom(Map<int, Benefit> benefits) =>
-    benefits[Xd6(2)] ?? _emptyBenefit;
+    benefits[2.d6] ?? _emptyBenefit;
 
-// ignore: missing_return
-Map<int, Benefit> _benefitsFor(Race race) {
-  switch (race) {
-    case Race.human:
-      return _humanBenefits;
-    case Race.nightPerson:
-      return _nightPeopleBenefits;
-    case Race.rhydan:
-      return _rhydanBenefits;
-    case Race.seaFolk:
-      return _seaFolkBenefits;
-    case Race.vata:
-      return _vataBenefits;
-    case Race.unknown:
-      throw "Benefits requested for Unknown race";
-  }
-}
+const _raceBenefits = {
+  Race.human: _humanBenefits,
+  Race.nightPerson: _nightPeopleBenefits,
+  Race.rhydan: _rhydanBenefits,
+  Race.seaFolk: _seaFolkBenefits,
+  Race.vata: _vataBenefits,
+};
 
 //Used if benefit goes wrong some how
 void _emptyBenefit(Character c) => throw "Empty Benefit applied!";
@@ -92,132 +86,72 @@ void _polearms(Character c) => c.weaponsGroups.add(WeaponsGroup.polearms);
 
 void _lightBlades(Character c) => c.weaponsGroups.add(WeaponsGroup.lightBlades);
 
-final _humanBenefits = Map<int, Benefit>.unmodifiable(Map.fromIterables([
-  2,
-  3,
-  4,
-  5,
-  6,
-  7,
-  8,
-  9,
-  10,
-  11,
-  12
-], [
-  _intelligence,
-  _stamina,
-  _stamina,
-  _searching,
-  _deception,
-  _constitution,
-  _constitution,
-  _persuasion,
-  _brawling,
-  _brawling,
-  _strength,
-]));
+const _humanBenefits = {
+  2: _intelligence,
+  3: _stamina,
+  4: _stamina,
+  5: _searching,
+  6: _deception,
+  7: _constitution,
+  8: _constitution,
+  9: _persuasion,
+  10: _brawling,
+  11: _brawling,
+  12: _strength,
+};
 
-final _nightPeopleBenefits = Map<int, Benefit>.unmodifiable(Map.fromIterables([
-  2,
-  3,
-  4,
-  5,
-  6,
-  7,
-  8,
-  9,
-  10,
-  11,
-  12
-], [
-  _constitution,
-  _smelling,
-  _smelling,
-  _stealth,
-  _intimidation,
-  _fighting,
-  _fighting,
-  _bludgeons,
-  _brawling,
-  _brawling,
-  _willpower,
-]));
+const _nightPeopleBenefits = {
+  2:  _constitution,
+  3: _smelling,
+  4: _smelling,
+  5: _stealth,
+  6: _intimidation,
+  7: _fighting,
+  8: _fighting,
+  9: _bludgeons,
+  10: _brawling,
+  11: _brawling,
+  12: _willpower,
+};
 
-final _rhydanBenefits = Map<int, Benefit>.unmodifiable(Map.fromIterables([
-  2,
-  3,
-  4,
-  5,
-  6,
-  7,
-  8,
-  9,
-  10,
-  11,
-  12
-], [
-  _dexterity,
-  _smelling,
-  _smelling,
-  _stealth,
-  _intimidation,
-  _perception,
-  _perception,
-  _psychic,
-  _naturalWeapon,
-  _naturalWeapon,
-  _willpower
-]));
+const _rhydanBenefits = {
+  2: _dexterity,
+  3: _smelling,
+  4: _smelling,
+  5: _stealth,
+  6: _intimidation,
+  7: _perception,
+  8: _perception,
+  9: _psychic,
+  10: _naturalWeapon,
+  11: _naturalWeapon,
+  12:  _willpower,
+};
 
-final _seaFolkBenefits = Map<int, Benefit>.unmodifiable(Map.fromIterables([
-  2,
-  3,
-  4,
-  5,
-  6,
-  7,
-  8,
-  9,
-  10,
-  11,
-  12
-], [
-  _accuracy,
-  _naturalLore,
-  _naturalLore,
-  _hearing,
-  _polearms,
-  _dexterity,
-  _dexterity,
-  _historicalLore,
-  _acrobatics,
-  _acrobatics,
-  _perception
-]));
+const _seaFolkBenefits = {
+  2: _accuracy,
+  3: _naturalLore,
+  4: _naturalLore,
+  5: _hearing,
+  6: _polearms,
+  7: _dexterity,
+  8: _dexterity,
+  9: _historicalLore,
+  10: _acrobatics,
+  11: _acrobatics,
+  12: _perception
+};
 
-final _vataBenefits = Map<int, Benefit>.unmodifiable(Map.fromIterables([
-  2,
-  3,
-  4,
-  5,
-  6,
-  7,
-  8,
-  9,
-  10,
-  11,
-  12
-], [
-  _communication,
-  _culturalLore,
-  _culturalLore,
-  _seeing,
-  _lightBlades,
-  _accuracy,
-  _accuracy,
-  _historicalLore,
-  _persuasion,
-  _persuasion,
-  _perception
-]));
+const _vataBenefits = {
+  2: _communication,
+  3: _culturalLore,
+  4: _culturalLore,
+  5: _seeing,
+  6: _lightBlades,
+  7: _accuracy,
+  8: _accuracy,
+  9: _historicalLore,
+  10: _persuasion,
+  11: _persuasion,
+  12: _perception,
+};

@@ -62,12 +62,16 @@ String rhyToString(Rhy rhy) {
   }
 }
 
-class RhydanBonuses {
+class _RhydanBonuses {
   final Map<Ability, int> abilityBonuses;
   final List<Weapon> attacks;
   final List<String> powers;
 
-  const RhydanBonuses._internal(this.abilityBonuses, this.attacks, this.powers);
+  const _RhydanBonuses({
+    this.abilityBonuses = const {},
+    this.attacks = const [],
+    this.powers = const [],
+  });
 }
 
 class Weapon {
@@ -96,11 +100,10 @@ const _slam = Weapon._internal("Slam", Ability.accuracy, 1, 0);
 const _kick = Weapon._internal("Kick", Ability.accuracy, 1, 0);
 
 void applyRhydanBonuses(Character character) {
-  if (character.rhydanType == null) {
-    return;
-  }
+  if (character.rhydanType == null) return;
 
-  var bonuses = _getBonusesForRhydan(character.rhydanType);
+  var bonuses = _rhydanBonuses[character.rhydanType];
+  if (bonuses == null) throw "Unrecognized rhy-type: ${character.rhydanType}";
 
   for (var ability in bonuses.abilityBonuses.keys) {
     character.abilities[ability] += bonuses.abilityBonuses[ability];
@@ -110,148 +113,129 @@ void applyRhydanBonuses(Character character) {
   character.powers.addAll(bonuses.powers);
 }
 
-RhydanBonuses _getBonusesForRhydan(Rhy type) {
-  switch (type) {
-    case Rhy.ape:
-      return RhydanBonuses._internal(
-          Map.unmodifiable(Map.fromIterables(
-              [Ability.constitution, Ability.dexterity, Ability.strength],
-              [1, 1, 2])),
-          [],
-          const ["Hands"]);
-
-    case Rhy.badger:
-      return RhydanBonuses._internal(
-          Map.unmodifiable(Map.fromIterables(
-              [Ability.constitution, Ability.perception, Ability.strength],
-              [2, 1, 1])),
-          List.from([_bite1, _claw1]),
-          const ["Tough (AR 1)"]);
-
-    case Rhy.bear:
-      return RhydanBonuses._internal(
-          Map.unmodifiable(Map.fromIterables(
-              [Ability.constitution, Ability.strength], [3, 3])),
-          const [_bite1, _claw2],
-          []);
-
-    case Rhy.boar:
-      return RhydanBonuses._internal(
-          Map.unmodifiable(Map.fromIterables(
-              [Ability.constitution, Ability.strength], [2, 2])),
-          const [_gore],
-          []);
-
-    case Rhy.cat:
-      return RhydanBonuses._internal(
-          Map.unmodifiable(Map.fromIterables(
-              [Ability.dexterity, Ability.perception], [2, 1])),
-          const [_bite1, _claw1],
-          const ["Nightvision"]);
-
-    case Rhy.crocodile:
-      return RhydanBonuses._internal(
-          Map.unmodifiable(Map.fromIterables(
-              [Ability.constitution, Ability.strength], [2, 2])),
-          const [_bite2],
-          const ["Tough hide (AR 2)", "Swimming speed 10"]);
-
-    case Rhy.dog:
-      return RhydanBonuses._internal(
-          Map.unmodifiable(Map.fromIterables(
-              [Ability.constitution, Ability.dexterity], [2, 1])),
-          const [_bite1, _claw1],
-          []);
-
-    case Rhy.dolphin:
-      return RhydanBonuses._internal(
-          Map.unmodifiable(Map.fromIterables(
-              [Ability.constitution, Ability.dexterity, Ability.strength],
-              [1, 1, 1])),
-          const [_slam],
-          const ["Echolocation", "Hold breath for Con x 10 minutes"]);
-
-    case Rhy.hawk:
-      return RhydanBonuses._internal(
-          Map.unmodifiable(Map.fromIterables(
-              [Ability.dexterity, Ability.perception, Ability.strength],
-              [2, 1, -1])),
-          const [_bite0, _claw1],
-          const ["Nightvision"]);
-
-    case Rhy.owl:
-      return RhydanBonuses._internal(
-          Map.unmodifiable(Map.fromIterables(
-              [Ability.dexterity, Ability.perception, Ability.strength],
-              [2, 1, -1])),
-          const [_bite0, _claw1],
-          const ["Nightvision"]);
-
-    case Rhy.horse:
-      return RhydanBonuses._internal(
-          Map.unmodifiable(Map.fromIterables(
-              [Ability.constitution, Ability.strength], [2, 2])),
-          const [_kick],
-          []);
-
-    case Rhy.lizard:
-      return RhydanBonuses._internal(
-          Map.unmodifiable(Map.fromIterables(
-              [Ability.constitution, Ability.strength], [2, 1])),
-          const [_bite2],
-          const ["Nightvision"]);
-
-    case Rhy.raccoon:
-      return RhydanBonuses._internal(
-          Map.unmodifiable(Map.fromIterables(
-              [Ability.dexterity, Ability.perception, Ability.strength],
-              [2, 1, -2])),
-          const [_bite0, _claw3],
-          const ["Nightvision"]);
-
-    case Rhy.raven:
-      return RhydanBonuses._internal(
-          Map.unmodifiable(Map.fromIterables(
-              [Ability.dexterity, Ability.perception, Ability.strength],
-              [3, 1, -2])),
-          const [_bite0, _claw1],
-          const ["Nightvision", "can speak"]);
-
-    case Rhy.snake:
-      return RhydanBonuses._internal(
-          Map.unmodifiable(Map.fromIterables(
-              [Ability.dexterity, Ability.perception, Ability.strength],
-              [2, 1, 1])),
-          const [_bite1],
-          const ["Nightvision"]);
-
-    case Rhy.weasel:
-      return RhydanBonuses._internal(
-          Map.unmodifiable(Map.fromIterables(
-              [Ability.dexterity, Ability.perception, Ability.strength],
-              [3, 1, -1])),
-          const [_bite0],
-          const ["Nightvision"]);
-
-    case Rhy.wolf:
-      return RhydanBonuses._internal(
-          Map.unmodifiable(Map.fromIterables([
-            Ability.constitution,
-            Ability.dexterity,
-            Ability.perception,
-            Ability.strength
-          ], [
-            1,
-            1,
-            1,
-            1
-          ])),
-          const [_bite1],
-          const ["Nightvision"]);
-    default:
-      throw "Unrecognized rhy-type: $type";
-  }
-}
+const _rhydanBonuses = {
+  Rhy.ape: _RhydanBonuses(
+    powers: ["Hands"],
+    abilityBonuses: {
+      Ability.constitution: 1,
+      Ability.dexterity: 1,
+      Ability.strength: 2
+    },
+  ),
+  Rhy.badger: _RhydanBonuses(
+    attacks: [_bite1, _claw1],
+    powers: ["Tough (AR 1)"],
+    abilityBonuses: {
+      Ability.constitution: 2,
+      Ability.perception: 1,
+      Ability.strength: 1
+    },
+  ),
+  Rhy.bear: _RhydanBonuses(
+    attacks: [_bite1, _claw2],
+    abilityBonuses: {Ability.constitution: 3, Ability.strength: 3},
+  ),
+  Rhy.boar: _RhydanBonuses(
+    attacks: [_gore],
+    abilityBonuses: {Ability.constitution: 2, Ability.strength: 2},
+  ),
+  Rhy.cat: _RhydanBonuses(
+    attacks: [_bite1, _claw1],
+    powers: ["Nightvision"],
+    abilityBonuses: {Ability.dexterity: 2, Ability.perception: 1},
+  ),
+  Rhy.crocodile: _RhydanBonuses(
+    attacks: [_bite2],
+    powers: ["Tough hide (AR 2)", "Swimming speed 10"],
+    abilityBonuses: {Ability.constitution: 2, Ability.strength: 2},
+  ),
+  Rhy.dog: _RhydanBonuses(
+    attacks: [_bite1, _claw1],
+    abilityBonuses: {Ability.constitution: 2, Ability.dexterity: 1},
+  ),
+  Rhy.dolphin: _RhydanBonuses(
+    attacks: [_slam],
+    powers: ["Echolocation", "Hold breath for Con x 10 minutes"],
+    abilityBonuses: {
+      Ability.constitution: 1,
+      Ability.dexterity: 1,
+      Ability.strength: 1
+    },
+  ),
+  Rhy.hawk: _RhydanBonuses(
+    attacks: [_bite0, _claw1],
+    powers: ["Nightvision"],
+    abilityBonuses: {
+      Ability.dexterity: 2,
+      Ability.perception: 1,
+      Ability.strength: -1
+    },
+  ),
+  Rhy.owl: _RhydanBonuses(
+    attacks: [_bite0, _claw1],
+    powers: ["Nightvision"],
+    abilityBonuses: {
+      Ability.dexterity: 2,
+      Ability.perception: 1,
+      Ability.strength: -1
+    },
+  ),
+  Rhy.horse: _RhydanBonuses(
+    attacks: [_kick],
+    abilityBonuses: {Ability.constitution: 2, Ability.strength: 2},
+  ),
+  Rhy.lizard: _RhydanBonuses(
+    attacks: [_bite2],
+    powers: ["Nightvision"],
+    abilityBonuses: {Ability.constitution: 2, Ability.strength: 1},
+  ),
+  Rhy.raccoon: _RhydanBonuses(
+    attacks: [_bite0, _claw3],
+    powers: ["Nightvision"],
+    abilityBonuses: {
+      Ability.dexterity: 2,
+      Ability.perception: 1,
+      Ability.strength: -2
+    },
+  ),
+  Rhy.raven: _RhydanBonuses(
+    attacks: [_bite0, _claw1],
+    powers: ["Nightvision", "can speak"],
+    abilityBonuses: {
+      Ability.dexterity: 3,
+      Ability.perception: 1,
+      Ability.strength: -2
+    },
+  ),
+  Rhy.snake: _RhydanBonuses(
+    attacks: [_bite1],
+    powers: ["Nightvision"],
+    abilityBonuses: {
+      Ability.dexterity: 2,
+      Ability.perception: 1,
+      Ability.strength: 1
+    },
+  ),
+  Rhy.weasel: _RhydanBonuses(
+    attacks: [_bite0],
+    powers: ["Nightvision"],
+    abilityBonuses: {
+      Ability.dexterity: 3,
+      Ability.perception: 1,
+      Ability.strength: -1
+    },
+  ),
+  Rhy.wolf: _RhydanBonuses(
+    attacks: [_bite1],
+    powers: ["Nightvision"],
+    abilityBonuses: {
+      Ability.constitution: 1,
+      Ability.dexterity: 1,
+      Ability.perception: 1,
+      Ability.strength: 1,
+    },
+  ),
+};
 
 int getBaseSpeed(Rhy type) {
   switch (type) {

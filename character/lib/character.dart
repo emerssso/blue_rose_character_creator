@@ -106,7 +106,7 @@ class Character {
       : calling = drawCalling(),
         destiny = drawDestiny(),
         fate = drawFate(),
-        destinyAscendant = coinFlip(),
+        destinyAscendant = flipCoin,
         abilities = _fillAbilities(characterClass),
         focuses = Map(),
         weaponsGroups = List(),
@@ -172,7 +172,7 @@ final rollToAbilityBonus = Map<int, int>.unmodifiable(Map.fromIterables(
 Map<Ability, int> _fillAbilities(CharacterClass characterClass) {
   Map<Ability, int> temp = Map();
 
-  List<int> bonuses = List.generate(9, (i) => Xd6(3))
+  List<int> bonuses = List.generate(9, (i) => 3.d6)
       .map((k) => rollToAbilityBonus[k])
       .toList();
 

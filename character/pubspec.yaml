@@ -5,4 +5,4 @@ homepage: https://github.com/emerssso/blue_rose_character_creator
 author: Conner Kasten <conner.kasten@emerssso.com>
 
 environment:
-  sdk: '>=2.1.0'
+  sdk: '>=2.7.0 <3.0.0'
