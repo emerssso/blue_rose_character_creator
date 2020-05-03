@@ -56,7 +56,11 @@ class Character {
 
   int _health;
 
-  int get health => _health ??= getHealthFor(characterClass, constitution);
+  int get health => _health ??= getHealthFor(
+        characterClass,
+        constitution: constitution,
+        level: level,
+      );
 
   factory Character(race, characterClass, {background, level, rhydanType}) {
     var mutable = Character._mutable(race, characterClass,
@@ -108,13 +112,13 @@ class Character {
         fate = drawFate(),
         destinyAscendant = flipCoin,
         abilities = _fillAbilities(characterClass),
-        focuses = Map(),
-        weaponsGroups = List(),
-        powers = List(),
-        talents = List(),
-        weapons = List(),
-        languages = List(),
-        arcana = List() {
+        focuses = {},
+        weaponsGroups = [],
+        powers = [],
+        talents = [],
+        weapons = [],
+        languages = [],
+        arcana = [] {
     if (race == Race.rhydan && rhydanType == null) {
       throw "Rhydan must have a type!";
     }
@@ -137,7 +141,7 @@ class Character {
   bool get isFilled => abilities.isNotEmpty;
 
   void addFocus(Focus focus) {
-    focuses[focus.ability] ??= List();
+    focuses[focus.ability] ??= [];
     focuses[focus.ability].add(focus);
   }
 
@@ -150,7 +154,6 @@ class Character {
   // the character meets minimum ability if any
   bool canTake(Talent talent) {
     final doesntHave = talents.every((has) => has.name != talent.name);
-
     final meets = talent.requirements.every(_meets);
 
     return doesntHave && meets;
@@ -170,15 +173,12 @@ final rollToAbilityBonus = Map<int, int>.unmodifiable(Map.fromIterables(
     [-2, -1, -1, 0, 0, 0, 1, 1, 1, 2, 2, 2, 3, 3, 3, 4]));
 
 Map<Ability, int> _fillAbilities(CharacterClass characterClass) {
-  Map<Ability, int> temp = Map();
-
-  List<int> bonuses = List.generate(9, (i) => 3.d6)
+  var temp = <Ability, int>{};
+  var statOrder = statPriorityListForClass(characterClass);
+  var bonuses = List.generate(9, (i) => 3.d6)
       .map((k) => rollToAbilityBonus[k])
-      .toList();
-
-  bonuses.sort((i, j) => j - i);
-
-  List<Ability> statOrder = statPriorityListForClass(characterClass);
+      .toList()
+        ..sort((i, j) => j - i);
 
   for (int i = 0; i < statOrder.length; i++) {
     temp[statOrder[i]] = bonuses[i];

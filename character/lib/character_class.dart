@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'ability.dart';
 import 'character.dart';
 import 'dice.dart';
@@ -5,7 +7,7 @@ import 'race.dart';
 import 'talent.dart';
 import 'weapons_group.dart';
 
-/// Models the three Blue Rose Classes as an enum
+/// The three Blue Rose character classes
 enum CharacterClass { warrior, expert, adept, unknown }
 
 String characterClassToString(CharacterClass cc) {
@@ -84,7 +86,7 @@ List<Ability> statPriorityListForClass(CharacterClass cc) {
       break;
 
     case CharacterClass.unknown:
-      primary = List<Ability>();
+      primary = [];
       secondary = primary;
   }
 
@@ -96,21 +98,14 @@ List<Ability> statPriorityListForClass(CharacterClass cc) {
   return primary;
 }
 
-int getHealthFor(CharacterClass cc, int constitution) {
-  switch (cc) {
-    case CharacterClass.adept:
-      return constitution + 20 + d6;
+int getHealthFor(CharacterClass cc, {int constitution = 0, int level = 1}) =>
+    (_baseHealth[cc] ?? 1) + (level * constitution) + max(level, 10).d6;
 
-    case CharacterClass.expert:
-      return constitution + 15 + d6;
-
-    case CharacterClass.warrior:
-      return constitution + 30 + d6;
-
-    default:
-      return 1;
-  }
-}
+const _baseHealth = {
+  CharacterClass.adept: 20,
+  CharacterClass.expert: 15,
+  CharacterClass.warrior: 30,
+};
 
 applyClassBenefits(Character character) {
   character.weaponsGroups.addAll(getWeaponsGroupsFor(character));
