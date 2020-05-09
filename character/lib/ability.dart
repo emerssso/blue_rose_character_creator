@@ -10,6 +10,10 @@ enum Ability {
   willpower
 }
 
+extension AbilityExt on Ability {
+  String get name => abilityToString(this);
+}
+
 String abilityToString(Ability a) {
   switch (a) {
     case Ability.accuracy:

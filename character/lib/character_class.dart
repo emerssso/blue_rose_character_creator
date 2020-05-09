@@ -10,6 +10,14 @@ import 'weapons_group.dart';
 /// The three Blue Rose character classes
 enum CharacterClass { warrior, expert, adept, unknown }
 
+extension CharacterClassExt on CharacterClass {
+  String get name => characterClassToString(this);
+
+  List<Ability> get primary => primaryFor(this);
+
+  List<Ability> get secondary => secondaryFor(this);
+}
+
 String characterClassToString(CharacterClass cc) {
   switch (cc) {
     case CharacterClass.warrior:
@@ -143,7 +151,7 @@ List<WeaponsGroup> getWeaponsGroupsFor(Character c) {
 
     case CharacterClass.warrior:
       return List.unmodifiable(
-          drawN(3, _warriorWeaponsGroups)..add(WeaponsGroup.brawling));
+          [...drawN(3, _warriorWeaponsGroups), WeaponsGroup.brawling]);
 
     default:
       return const [];
@@ -247,11 +255,4 @@ List<String> getPowersFor(CharacterClass cc) {
   }
 }
 
-List<T> _listOfNonNull<T>(List<T> ts) {
-  List<T> result = List();
-  for (var t in ts) {
-    if (t != null) result.add(t);
-  }
-
-  return List.unmodifiable(result);
-}
+List<T> _listOfNonNull<T>(List<T> ts) => ts.where((t) => t != null).toList();

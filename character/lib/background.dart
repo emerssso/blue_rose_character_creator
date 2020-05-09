@@ -14,7 +14,15 @@ enum Background {
   roamer
 }
 
+extension BackgroundExt on Background {
+  String get name => backgroundToString(this);
+}
+
 enum Language { aldin, faento, lartyan, rezean, oldAldin, oldVatazin }
+
+extension LanguageExt on Language {
+  String get name => languageToString(this);
+}
 
 String backgroundToString(Background bg) {
   switch (bg) {
@@ -122,7 +130,10 @@ List<Language> _getLanguagesForBackground(Background bg) {
     case Background.kernish:
     case Background.mariner:
     case Background.outcast:
-      return _aldinPlusOne();
+      return [
+        Language.aldin,
+        drawWhere(Language.values, (l) => l != Language.aldin)
+      ];
 
     case Background.lartyan:
       return const [Language.aldin, Language.lartyan];
@@ -137,8 +148,3 @@ List<Language> _getLanguagesForBackground(Background bg) {
       return const [];
   }
 }
-
-List<Language> _aldinPlusOne() => [
-    Language.aldin,
-    drawWhere(Language.values, (l) => l != Language.aldin)
-  ];

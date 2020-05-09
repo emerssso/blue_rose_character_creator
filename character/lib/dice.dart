@@ -50,6 +50,11 @@ List<T> drawN<T>(int n, Iterable<T> deck) {
   return returns;
 }
 
+List<T> drawNWhere<T>(int n, Iterable<T> deck, bool Function(T) predicate) {
+  if(deck == null) return null;
+  return drawN(n, deck.where(predicate));
+}
+
 List<T> drawNWithoutRepeats<T>(int n, Iterable<T> deck, Iterable<T> repeats) {
   if (deck == null) return null;
   if (repeats == null) return drawN(n, deck);

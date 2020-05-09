@@ -1,3 +1,5 @@
+import 'package:blue_rose_character/leveling.dart';
+
 import 'ability.dart';
 import 'arcana.dart';
 import 'background.dart';
@@ -135,6 +137,12 @@ class Character {
       applyRhydanBonuses(this);
     }
 
+    if(level > 1) {
+      var leveledFocuses = levelFocuses(focuses, characterClass, level: level);
+      focuses.removeWhere((_, __) => true);
+      focuses.addAll(leveledFocuses);
+    }
+
     arcana.addAll(getArcanaFor(talents));
   }
 
@@ -187,26 +195,32 @@ Map<Ability, int> fillAbilities(CharacterClass characterClass, int level) {
 
   if (level > 1) {
     // 1 primary point received on even levels, 1 secondary on odd.
-    var primaryPoints = ((level - 1) / 2.0).ceil();
-    var secondaryPoints = ((level - 1) / 2.0).floor();
+    var primaryPoints = oddLevels(level);
+    var secondaryPoints = evenLevels(level);
 
-    var primaries = primaryFor(characterClass);
-    while(primaryPoints > 0) {
-      var primary = drawFrom(primaries);
-      var current = abilities[primary] ?? 0;
-      var cost = _pointsPerAbility(current);
-
-      if(current == -1 || cost > primaryPoints) {
-        primaries.remove(primary);
-        continue;
-      }
-
-      primaryPoints -= cost;
-      abilities[primary] = current + 1;
-    }
+    abilities = _levelAbilities(primaryPoints, primaryFor(characterClass), abilities);
+    abilities = _levelAbilities(secondaryPoints, secondaryFor(characterClass), abilities);
   }
 
   return abilities;
+}
+
+Map<Ability, int> _levelAbilities(int points, List<Ability> increasables, Map<Ability, int> abilities) {
+  var result = Map.from(abilities);
+  while(points > 0) {
+    var primary = drawFrom(increasables);
+    var current = result[primary] ?? 0;
+    var cost = _pointsPerAbility(current);
+
+    if(current == -1 || cost > points) {
+      increasables.remove(primary);
+      continue;
+    }
+
+    points -= cost;
+    result[primary] = current + 1;
+  }
+  return result;
 }
 
 int _pointsPerAbility(int ability) {

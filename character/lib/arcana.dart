@@ -42,6 +42,10 @@ enum Arcana {
   windWalking
 }
 
+extension ArcanaExt on Arcana {
+  String get name => arcanaToString(this);
+}
+
 String arcanaToString(Arcana arcana) {
   switch (arcana) {
     case Arcana.animalMessenger:

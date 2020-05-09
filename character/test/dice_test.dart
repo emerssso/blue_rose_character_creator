@@ -108,6 +108,16 @@ void main() {
       expect(drawN(1, ['a', 'b', 'c']), equals(['b']));
     });
   });
+
+  group('drawNWhere', () {
+    test('returns random members if found', () {
+      when(rng.nextInt(2)).thenReturn(1);
+      expect(
+        drawNWhere(2, ['a', 'b', 'bc'], (String c) => c.contains('b')),
+        equals(['b', 'bc']),
+      );
+    });
+  });
 }
 
 class _MockRandom extends Mock implements Random {}
