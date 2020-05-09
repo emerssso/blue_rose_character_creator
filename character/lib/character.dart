@@ -110,7 +110,7 @@ class Character {
       : calling = drawCalling(),
         destiny = drawDestiny(),
         fate = drawFate(),
-        destinyAscendant = flipCoin,
+        destinyAscendant = flipCoin(),
         abilities = fillAbilities(characterClass, level),
         focuses = {},
         weaponsGroups = [],

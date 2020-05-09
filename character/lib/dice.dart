@@ -1,7 +1,9 @@
 import 'dart:math';
 
-final rng = Random();
+/// Random number generator used throughout the app.
+Random rng = Random();
 
+/// Allows familiar XdY notation for getting dice rolls.
 extension Dice on int {
   /// Allows fancy `2.d(6)` notation.
   int d(int sides) => List.generate(this, (i) => rng.nextInt(sides) + 1)
@@ -11,16 +13,10 @@ extension Dice on int {
   int get d6 => this.d(6);
 }
 
-///Role a die with [x] sides
-int d(int x) => rng.nextInt(x) + 1;
+/// Randomly get a bool.
+bool flipCoin() => rng.nextInt(2) == 1;
 
-///Role a d6 (primary die for Blue Rose)
-int get d6 => d(6);
-
-///flip a coin
-bool get flipCoin => rng.nextInt(2) == 1;
-
-///randomly select a T from passed list
+/// Randomly select a [T] from passed [deck].
 T drawFrom<T>(List<T> deck) {
   if (deck == null) return null;
   if (deck.length == 0) return null;
@@ -30,7 +26,7 @@ T drawFrom<T>(List<T> deck) {
 }
 
 /// Returns a random element of T that meets the passed predicate,
-/// or null if none can
+/// or null if none can.
 T drawWhere<T>(Iterable<T> deck, bool Function(T) predicate) {
   if (deck == null) return null;
   return drawFrom(deck.where(predicate).toList());
@@ -45,8 +41,7 @@ T drawWithoutRepeats<T>(Iterable<T> deck, Iterable<T> repeats) {
 List<T> drawN<T>(int n, Iterable<T> deck) {
   if (deck == null) return null;
   if (n >= deck.length) return List.from(deck);
-
-  List<T> returns = List();
+  var returns = <T>[];
 
   while (returns.length < n) {
     returns.add(drawWithoutRepeats(deck, returns));
